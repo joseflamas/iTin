@@ -9,10 +9,17 @@
 #import "WelcomeViewController.h"
 #import "AppDelegate.h"
 
-@interface WelcomeViewController ()
+
+@interface WelcomeViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CLLocationManagerDelegate>
+//View Properties J.S.
 @property (strong, nonatomic) IBOutlet UITextField *nameTextField;
 @property (strong, nonatomic) IBOutlet UIPickerView *agePickerView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *genderControl;
+//CLLocation Properties J.S.
+//@property (strong, nonatomic) CLLocationManager *locationManager;
+//@property (nonatomic)  CLLocation2D *location;
+@property (nonatomic)float latitude, longitude;
+
 
 //Delegate
 @property ( nonatomic, strong ) AppDelegate *delegate;
@@ -21,7 +28,11 @@
 @property ( nonatomic, strong ) NSString *documentsPreferencesPath;     // ../Documents/preferences/
 @property ( nonatomic, strong ) NSString *documentsPreferencesPlistPath;// ../Documents/preferences/userPreferences.plist
 
-@property (nonatomic,strong)NSMutableArray  *userData;
+
+//Local Properties J.S.
+@property (nonatomic,strong)NSMutableArray  *userData, *age;
+@property (nonatomic,strong)NSNumber *ageNumber;
+@property (nonatomic,strong) NSString *userName, *userAge , *userGender;
 @end
 
 
@@ -44,37 +55,108 @@
     self.documentsPreferencesPlistPath  = self.delegate.documentsPreferencesPlistPath;
     BOOL userHasPreferences             = [[NSFileManager defaultManager] fileExistsAtPath:self.documentsPreferencesPlistPath];
     
-    
-    
+  
+//get user location J.S.
+  locationManager = [CLLocationManager new];
+    if([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+{
+    [locationManager requestWhenInUseAuthorization];
+}
+locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+locationManager.delegate = self;
+[locationManager startUpdatingLocation];
 
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"userPreferences" ofType:@"plist"];
-    
-    // Load the file content and read the data into arrays
-    NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
-    _userData = [dict objectForKey:@"RecipeName"];
+currentLocation =[locationManager location];
     
     
-    // TO DO
-    // Say hello nicely while in the background search for the phone location ( firstPointofUse ).
-    // Ask for his or her name   ( userName )
-    // Ask for his or her age    ( userAge  )
-    // Ask for his or her gender ( userGender )
-    // Save the User Data in /Documents/preferences/userPreferences.plist if the file doesn't exist create it.
+    
+    
+    
+    
+    
+    //set default age to 18 J.S.
+    _ageNumber = [NSNumber numberWithInt:18];
+    _age = [[NSMutableArray alloc] init];
+    for (int i=18; i<=100; i++)
+    {
+        [_age addObject:[NSString stringWithFormat:@"%d",i]];
+        
+    }
+    
+    [_agePickerView reloadAllComponents];
+
+ //   NSString *path = [[NSBundle mainBundle] pathForResource:@"userPreferences" ofType:@"plist"];
+    
+    // Load the file content and read the data into arrays J.S.
+ //   NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
+    
+   // Save the User Data in /Documents/preferences/userPreferences.plist if the file doesn't exist create it.
     // ...
-    
+
    
 }
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
-}
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-
+    
 }
 
+
+
+
+
+
+//Prepares user for next view by storing values J.S.
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    _userName = _nameTextField.text;
+    _userAge =[NSString stringWithFormat:@"%@",_ageNumber];
+    
+    NSInteger selectedIndex = (NSInteger)_genderControl.selectedSegmentIndex;
+    if (selectedIndex == 0)
+        _userGender = @"Male";
+    else
+        _userGender =@"Female";
+    
+
+    NSLog(@"User Name: %@, Age: %@ Gender: %@",_userName,_userAge,_userGender);
+}
+//Dismisses keyboard J.S.
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Picker View Methods J.S.
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView
+{
+    return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)thePickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [_age count];
+}
+- (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+   return [_age objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    _ageNumber  = [_age objectAtIndex:row];
+    
+}
 @end

@@ -9,6 +9,6 @@
 	<key>userGender</key>
 	<string>Male</string>
 	<key>userPointofLocation</key>
-	<integer>1234</integer>
+	<string>1234</string>
 </dict>
 </plist>

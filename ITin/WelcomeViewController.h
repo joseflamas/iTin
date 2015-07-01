@@ -16,9 +16,13 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface WelcomeViewController : UIViewController
 
-
+{
+    CLLocation * currentLocation;
+    CLLocationManager * locationManager;
+}
 @end
 

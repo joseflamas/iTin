@@ -44,12 +44,19 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="74" y="117" width="244" height="30"/>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="iRg-5O-moc"/>
+                                </connections>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJl-KC-axt">
                                 <rect key="frame" x="0.0" y="-162" width="320" height="162"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="94" y="203" width="213" height="136"/>
                                 </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="mv5-9V-cUz"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="ltg-on-3vY"/>
+                                </connections>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p94-UZ-Lei">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
