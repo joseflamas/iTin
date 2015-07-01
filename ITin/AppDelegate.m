@@ -12,12 +12,31 @@
 
 @end
 
-@implementation AppDelegate
 
+
+
+@implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    
+    
+    //If is the first time the person uses the app show the inital Survey if not load the menu.
+    
+
+    
+    if ( TRUE )
+    {
+        self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
+
+    } else {
+        
+        self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+    }
+    
+    
+    
+
     return YES;
 }
 

@@ -10,18 +10,44 @@
 
 @interface WelcomeViewController ()
 
+
+@property ( nonatomic, strong ) NSString *documentsDirectoryPath;
+@property ( nonatomic, strong ) NSString *documentsPreferencesPath;
+@property ( nonatomic, strong ) NSString *documentsPreferencesPlistPath;
+
+
 @end
+
+
 
 @implementation WelcomeViewController
 
-- (void)viewDidLoad {
+
+
+- (void)viewDidLoad
+{
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    self.documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    
+    
+    
+    
+    // Say hello nicely while in the background search for the phone location ( firstPointofUse ).
+    // Ask for his or her name   ( userName )
+    // Ask for his or her age    ( userAge  )
+    // Ask for his or her gender ( userGender )
+    // Save the User Data in /Documents/preferences/userPreferences.plist
+
 }
 
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
 @end
