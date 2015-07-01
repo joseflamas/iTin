@@ -136,7 +136,7 @@
                                     <rect key="frame" x="177" y="414" width="47" height="30"/>
                                 </variation>
                                 <connections>
-                                    <segue destination="0Dj-jI-2ma" kind="show" id="to5-GE-ys9"/>
+                                    <segue destination="tfz-gf-4f2" kind="show" id="to5-GE-ys9"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -157,10 +157,10 @@
             </objects>
             <point key="canvasLocation" x="267" y="52"/>
         </scene>
-        <!--View Controller-->
+        <!--|||||-->
         <scene sceneID="6Q6-sO-zJm">
             <objects>
-                <viewController storyboardIdentifier="MenuViewController" id="0Dj-jI-2ma" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" id="0Dj-jI-2ma" customClass="MenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Kls-xH-LZ3"/>
                         <viewControllerLayoutGuide type="bottom" id="4oU-yI-2qb"/>
@@ -168,11 +168,138 @@
                     <view key="view" contentMode="scaleToFill" id="wBW-Xn-OjZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Jqa-B3-ZhS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="0qj-WQ-3ju">
+                                    <size key="itemSize" width="200" height="200"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MCCell" id="l3u-hu-5y3" customClass="MenuCollectionCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPN-MX-IfD">
+                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                    <state key="normal" title="Type of Day Button">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <variation key="widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                    </variation>
+                                                    <connections>
+                                                        <segue destination="LL3-zh-66H" kind="show" id="nDZ-mY-7Bk"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="KPN-MX-IfD"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="subviews">
+                                                <include reference="KPN-MX-IfD"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <outlet property="btnMCCell" destination="KPN-MX-IfD" id="EwJ-f7-aoT"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="0Dj-jI-2ma" id="ElD-je-tTt"/>
+                                    <outlet property="delegate" destination="0Dj-jI-2ma" id="HLM-GO-ATr"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Jqa-B3-ZhS" firstAttribute="top" secondItem="wBW-Xn-OjZ" secondAttribute="top" id="Gbl-9W-7D4"/>
+                            <constraint firstAttribute="trailing" secondItem="Jqa-B3-ZhS" secondAttribute="trailing" id="NR7-0m-W1F"/>
+                            <constraint firstItem="Jqa-B3-ZhS" firstAttribute="bottom" secondItem="4oU-yI-2qb" secondAttribute="top" id="cdm-T6-8mL"/>
+                            <constraint firstItem="Jqa-B3-ZhS" firstAttribute="leading" secondItem="wBW-Xn-OjZ" secondAttribute="leading" id="zXu-o0-KhT"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Jqa-B3-ZhS"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Gbl-9W-7D4"/>
+                                <exclude reference="NR7-0m-W1F"/>
+                                <exclude reference="cdm-T6-8mL"/>
+                                <exclude reference="zXu-o0-KhT"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Jqa-B3-ZhS"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Gbl-9W-7D4"/>
+                                <include reference="NR7-0m-W1F"/>
+                                <include reference="cdm-T6-8mL"/>
+                                <include reference="zXu-o0-KhT"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="HeP-ft-aLD"/>
+                    <navigationItem key="navigationItem" title="|||||" id="HeP-ft-aLD"/>
+                    <connections>
+                        <outlet property="cvTypeofDayMenu" destination="Jqa-B3-ZhS" id="VFY-t6-Sr6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EQs-B5-2TA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="267" y="800"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="3e1-eg-8Da">
+            <objects>
+                <tableViewController id="LL3-zh-66H" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="144" sectionHeaderHeight="22" sectionFooterHeight="22" id="R2W-GU-ljm">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ITCell" rowHeight="144" id="RIC-7B-nIg">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RIC-7B-nIg" id="vak-a3-xmz">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="LL3-zh-66H" id="8YT-RL-z2n"/>
+                            <outlet property="delegate" destination="LL3-zh-66H" id="G2f-Zm-MzL"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ytY-as-ssS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="993" y="800"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rQx-Xl-Zap">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tfz-gf-4f2" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ciD-Zb-huL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0Dj-jI-2ma" kind="relationship" relationship="rootViewController" id="wev-0M-gP7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Am0-YL-h3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-468" y="800"/>
         </scene>
