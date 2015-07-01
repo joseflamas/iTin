@@ -14,7 +14,6 @@
 		04AEA8E41B436FC500FB7D0F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AEA8E31B436FC500FB7D0F /* Images.xcassets */; };
 		04AEA8E71B436FC500FB7D0F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AEA8E51B436FC500FB7D0F /* LaunchScreen.xib */; };
 		04AEA8F31B436FC500FB7D0F /* ITinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8F21B436FC500FB7D0F /* ITinTests.m */; };
-		04DAF2061B4379BF00E43703 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DAF2051B4379BF00E43703 /* Test.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +40,6 @@
 		04AEA8EC1B436FC500FB7D0F /* ITinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AEA8F11B436FC500FB7D0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04AEA8F21B436FC500FB7D0F /* ITinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITinTests.m; sourceTree = "<group>"; };
-		04DAF2041B4379BF00E43703 /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
-		04DAF2051B4379BF00E43703 /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +89,6 @@
 				04AEA8E31B436FC500FB7D0F /* Images.xcassets */,
 				04AEA8E51B436FC500FB7D0F /* LaunchScreen.xib */,
 				04AEA8D61B436FC400FB7D0F /* Supporting Files */,
-				04DAF2041B4379BF00E43703 /* Test.h */,
-				04DAF2051B4379BF00E43703 /* Test.m */,
 			);
 			path = ITin;
 			sourceTree = "<group>";
@@ -225,7 +220,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				04AEA8DF1B436FC500FB7D0F /* WelcomeViewController.m in Sources */,
-				04DAF2061B4379BF00E43703 /* Test.m in Sources */,
 				04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */,
 				04AEA8D91B436FC400FB7D0F /* main.m in Sources */,
 			);
