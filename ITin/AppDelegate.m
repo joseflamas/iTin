@@ -10,6 +10,7 @@
 
 @interface AppDelegate ()
 
+
 @end
 
 
@@ -20,23 +21,25 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    //set some useful paths for convenience
+    self.documentsDirectoryPath         = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    self.documentsPreferencesPath       = [self.documentsDirectoryPath stringByAppendingPathComponent:@"preferences"];
+    self.documentsPreferencesPlistPath  = [self.documentsPreferencesPath stringByAppendingPathComponent:@"userPreferences.plist"];
+    BOOL userHavePreferences            = [[NSFileManager defaultManager] fileExistsAtPath:self.documentsPreferencesPlistPath];
     
-    //If is the first time the person uses the app show the inital Survey if not load the menu.
     
-
-    
-    if ( TRUE )
+    //If the user doesn't have preferences go the inital Survey.
+    if ( !userHavePreferences )
     {
-        self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
+        self.window.rootViewController  = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
 
+    //If we found user preferencesshow go to the menu view.
     } else {
         
-        self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+        self.window.rootViewController  = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
     }
     
     
-    
-
     return YES;
 }
 

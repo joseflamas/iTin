@@ -10,7 +10,14 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
+
 @property (strong, nonatomic) UIWindow *window;
+
+
+//Paths
+@property ( nonatomic, strong ) NSString *documentsDirectoryPath;       // ../Documents/
+@property ( nonatomic, strong ) NSString *documentsPreferencesPath;     // ../Documents/preferences/
+@property ( nonatomic, strong ) NSString *documentsPreferencesPlistPath;// ../Documents/preferences/userPreferences.plist
 
 
 @end

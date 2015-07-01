@@ -83,11 +83,10 @@
 			children = (
 				04AEA8DA1B436FC400FB7D0F /* AppDelegate.h */,
 				04AEA8DB1B436FC500FB7D0F /* AppDelegate.m */,
-				04AEA8DD1B436FC500FB7D0F /* WelcomeViewController.h */,
-				04AEA8DE1B436FC500FB7D0F /* WelcomeViewController.m */,
-				04AEA8E01B436FC500FB7D0F /* Main.storyboard */,
+				04AEA8FE1B439DB100FB7D0F /* Models */,
+				04AEA8FF1B439DBB00FB7D0F /* Views */,
+				04AEA8FD1B439D0700FB7D0F /* Controllers */,
 				04AEA8E31B436FC500FB7D0F /* Images.xcassets */,
-				04AEA8E51B436FC500FB7D0F /* LaunchScreen.xib */,
 				04AEA8D61B436FC400FB7D0F /* Supporting Files */,
 			);
 			path = ITin;
@@ -117,6 +116,31 @@
 				04AEA8F11B436FC500FB7D0F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04AEA8FD1B439D0700FB7D0F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				04AEA8DD1B436FC500FB7D0F /* WelcomeViewController.h */,
+				04AEA8DE1B436FC500FB7D0F /* WelcomeViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		04AEA8FE1B439DB100FB7D0F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		04AEA8FF1B439DBB00FB7D0F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				04AEA8E51B436FC500FB7D0F /* LaunchScreen.xib */,
+				04AEA8E01B436FC500FB7D0F /* Main.storyboard */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
