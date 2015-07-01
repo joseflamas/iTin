@@ -14,6 +14,7 @@
 		04AEA8E41B436FC500FB7D0F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AEA8E31B436FC500FB7D0F /* Images.xcassets */; };
 		04AEA8E71B436FC500FB7D0F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AEA8E51B436FC500FB7D0F /* LaunchScreen.xib */; };
 		04AEA8F31B436FC500FB7D0F /* ITinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8F21B436FC500FB7D0F /* ITinTests.m */; };
+		04AEA9051B43AE8300FB7D0F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA9041B43AE8300FB7D0F /* MenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		04AEA8EC1B436FC500FB7D0F /* ITinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AEA8F11B436FC500FB7D0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04AEA8F21B436FC500FB7D0F /* ITinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITinTests.m; sourceTree = "<group>"; };
+		04AEA9031B43AE8300FB7D0F /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		04AEA9041B43AE8300FB7D0F /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,7 @@
 			children = (
 				04AEA8DD1B436FC500FB7D0F /* WelcomeViewController.h */,
 				04AEA8DE1B436FC500FB7D0F /* WelcomeViewController.m */,
+				04AEA9061B43B31800FB7D0F /* Menu */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -141,6 +145,15 @@
 				04AEA8E01B436FC500FB7D0F /* Main.storyboard */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		04AEA9061B43B31800FB7D0F /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				04AEA9031B43AE8300FB7D0F /* MenuViewController.h */,
+				04AEA9041B43AE8300FB7D0F /* MenuViewController.m */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +259,7 @@
 				04AEA8DF1B436FC500FB7D0F /* WelcomeViewController.m in Sources */,
 				04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */,
 				04AEA8D91B436FC400FB7D0F /* main.m in Sources */,
+				04AEA9051B43AE8300FB7D0F /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
