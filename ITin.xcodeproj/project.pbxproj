@@ -14,6 +14,8 @@
 		04AEA8E41B436FC500FB7D0F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AEA8E31B436FC500FB7D0F /* Images.xcassets */; };
 		04AEA8E71B436FC500FB7D0F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AEA8E51B436FC500FB7D0F /* LaunchScreen.xib */; };
 		04AEA8F31B436FC500FB7D0F /* ITinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8F21B436FC500FB7D0F /* ITinTests.m */; };
+		04DAF20B1B43A40A00E43703 /* userPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04DAF20A1B43A40A00E43703 /* userPreferences.plist */; };
+		04DAF20D1B43A76B00E43703 /* fullPreferenceList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04DAF20C1B43A76B00E43703 /* fullPreferenceList.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		04AEA8EC1B436FC500FB7D0F /* ITinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AEA8F11B436FC500FB7D0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04AEA8F21B436FC500FB7D0F /* ITinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITinTests.m; sourceTree = "<group>"; };
+		04DAF20A1B43A40A00E43703 /* userPreferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userPreferences.plist; sourceTree = "<group>"; };
+		04DAF20C1B43A76B00E43703 /* fullPreferenceList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fullPreferenceList.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 		04AEA8CA1B436FC400FB7D0F = {
 			isa = PBXGroup;
 			children = (
+				04DAF20A1B43A40A00E43703 /* userPreferences.plist */,
+				04DAF20C1B43A76B00E43703 /* fullPreferenceList.plist */,
 				04AEA8D51B436FC400FB7D0F /* ITin */,
 				04AEA8EF1B436FC500FB7D0F /* ITinTests */,
 				04AEA8D41B436FC400FB7D0F /* Products */,
@@ -225,6 +231,8 @@
 			files = (
 				04AEA8E21B436FC500FB7D0F /* Main.storyboard in Resources */,
 				04AEA8E71B436FC500FB7D0F /* LaunchScreen.xib in Resources */,
+				04DAF20B1B43A40A00E43703 /* userPreferences.plist in Resources */,
+				04DAF20D1B43A76B00E43703 /* fullPreferenceList.plist in Resources */,
 				04AEA8E41B436FC500FB7D0F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
