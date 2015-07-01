@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044BA55D1B4443DC00C87125 /* ItineraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BA55C1B4443DC00C87125 /* ItineraryTableViewController.m */; };
 		04AEA8D91B436FC400FB7D0F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8D81B436FC400FB7D0F /* main.m */; };
 		04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8DB1B436FC500FB7D0F /* AppDelegate.m */; };
 		04AEA8DF1B436FC500FB7D0F /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8DE1B436FC500FB7D0F /* WelcomeViewController.m */; };
@@ -31,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		044BA55B1B4443DC00C87125 /* ItineraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryTableViewController.h; sourceTree = "<group>"; };
+		044BA55C1B4443DC00C87125 /* ItineraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryTableViewController.m; sourceTree = "<group>"; };
 		04AEA8D31B436FC400FB7D0F /* ITin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AEA8D71B436FC400FB7D0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04AEA8D81B436FC400FB7D0F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -70,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044BA55E1B4444C800C87125 /* Itinerary */ = {
+			isa = PBXGroup;
+			children = (
+				044BA55B1B4443DC00C87125 /* ItineraryTableViewController.h */,
+				044BA55C1B4443DC00C87125 /* ItineraryTableViewController.m */,
+			);
+			name = Itinerary;
+			sourceTree = "<group>";
+		};
 		04AEA8CA1B436FC400FB7D0F = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +149,8 @@
 			children = (
 				04AEA8DD1B436FC500FB7D0F /* WelcomeViewController.h */,
 				04AEA8DE1B436FC500FB7D0F /* WelcomeViewController.m */,
+				04AEA9061B43B31800FB7D0F /* Menu */,
+				044BA55E1B4444C800C87125 /* Itinerary */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -155,6 +169,17 @@
 				04AEA8E01B436FC500FB7D0F /* Main.storyboard */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		04AEA9061B43B31800FB7D0F /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				04AEA9031B43AE8300FB7D0F /* MenuViewController.h */,
+				04AEA9041B43AE8300FB7D0F /* MenuViewController.m */,
+				04AEA9071B43B8DA00FB7D0F /* MenuCollectionCell.h */,
+				04AEA9081B43B8DA00FB7D0F /* MenuCollectionCell.m */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,8 +264,6 @@
 			files = (
 				04AEA8E21B436FC500FB7D0F /* Main.storyboard in Resources */,
 				04AEA8E71B436FC500FB7D0F /* LaunchScreen.xib in Resources */,
-				04DAF20B1B43A40A00E43703 /* userPreferences.plist in Resources */,
-				04DAF20D1B43A76B00E43703 /* fullPreferenceList.plist in Resources */,
 				04AEA8E41B436FC500FB7D0F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,8 +283,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				04AEA8DF1B436FC500FB7D0F /* WelcomeViewController.m in Sources */,
+				044BA55D1B4443DC00C87125 /* ItineraryTableViewController.m in Sources */,
+				04AEA9091B43B8DA00FB7D0F /* MenuCollectionCell.m in Sources */,
 				04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */,
 				04AEA8D91B436FC400FB7D0F /* main.m in Sources */,
+				04AEA9051B43AE8300FB7D0F /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
