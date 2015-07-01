@@ -15,8 +15,8 @@
 		04AEA8E41B436FC500FB7D0F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AEA8E31B436FC500FB7D0F /* Images.xcassets */; };
 		04AEA8E71B436FC500FB7D0F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AEA8E51B436FC500FB7D0F /* LaunchScreen.xib */; };
 		04AEA8F31B436FC500FB7D0F /* ITinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8F21B436FC500FB7D0F /* ITinTests.m */; };
-		04DAF20B1B43A40A00E43703 /* userPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04DAF20A1B43A40A00E43703 /* userPreferences.plist */; };
-		04DAF20D1B43A76B00E43703 /* fullPreferenceList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04DAF20C1B43A76B00E43703 /* fullPreferenceList.plist */; };
+		04CFB0701B444ED2009911DC /* MenuCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CFB06D1B444ED2009911DC /* MenuCollectionCell.m */; };
+		04CFB0711B444ED2009911DC /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CFB06F1B444ED2009911DC /* MenuViewController.m */; };
 		04DAF20F1B43DF3600E43703 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF20E1B43DF3600E43703 /* MapKit.framework */; };
 		04DAF2111B43DF3C00E43703 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF2101B43DF3C00E43703 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
@@ -47,6 +47,10 @@
 		04AEA8EC1B436FC500FB7D0F /* ITinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AEA8F11B436FC500FB7D0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04AEA8F21B436FC500FB7D0F /* ITinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITinTests.m; sourceTree = "<group>"; };
+		04CFB06C1B444ED2009911DC /* MenuCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCollectionCell.h; sourceTree = "<group>"; };
+		04CFB06D1B444ED2009911DC /* MenuCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCollectionCell.m; sourceTree = "<group>"; };
+		04CFB06E1B444ED2009911DC /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		04CFB06F1B444ED2009911DC /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		04DAF20A1B43A40A00E43703 /* userPreferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userPreferences.plist; sourceTree = "<group>"; };
 		04DAF20C1B43A76B00E43703 /* fullPreferenceList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fullPreferenceList.plist; sourceTree = "<group>"; };
 		04DAF20E1B43DF3600E43703 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -174,10 +178,10 @@
 		04AEA9061B43B31800FB7D0F /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				04AEA9031B43AE8300FB7D0F /* MenuViewController.h */,
-				04AEA9041B43AE8300FB7D0F /* MenuViewController.m */,
-				04AEA9071B43B8DA00FB7D0F /* MenuCollectionCell.h */,
-				04AEA9081B43B8DA00FB7D0F /* MenuCollectionCell.m */,
+				04CFB06C1B444ED2009911DC /* MenuCollectionCell.h */,
+				04CFB06D1B444ED2009911DC /* MenuCollectionCell.m */,
+				04CFB06E1B444ED2009911DC /* MenuViewController.h */,
+				04CFB06F1B444ED2009911DC /* MenuViewController.m */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -283,11 +287,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				04AEA8DF1B436FC500FB7D0F /* WelcomeViewController.m in Sources */,
+				04CFB0711B444ED2009911DC /* MenuViewController.m in Sources */,
+				04CFB0701B444ED2009911DC /* MenuCollectionCell.m in Sources */,
 				044BA55D1B4443DC00C87125 /* ItineraryTableViewController.m in Sources */,
-				04AEA9091B43B8DA00FB7D0F /* MenuCollectionCell.m in Sources */,
 				04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */,
 				04AEA8D91B436FC400FB7D0F /* main.m in Sources */,
-				04AEA9051B43AE8300FB7D0F /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
