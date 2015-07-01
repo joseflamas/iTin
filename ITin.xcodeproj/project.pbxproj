@@ -66,6 +66,8 @@
 		04AEA8CA1B436FC400FB7D0F = {
 			isa = PBXGroup;
 			children = (
+				04DAF20A1B43A40A00E43703 /* userPreferences.plist */,
+				04DAF20C1B43A76B00E43703 /* fullPreferenceList.plist */,
 				04AEA8D51B436FC400FB7D0F /* ITin */,
 				04AEA8EF1B436FC500FB7D0F /* ITinTests */,
 				04AEA8D41B436FC400FB7D0F /* Products */,
@@ -238,6 +240,8 @@
 			files = (
 				04AEA8E21B436FC500FB7D0F /* Main.storyboard in Resources */,
 				04AEA8E71B436FC500FB7D0F /* LaunchScreen.xib in Resources */,
+				04DAF20B1B43A40A00E43703 /* userPreferences.plist in Resources */,
+				04DAF20D1B43A76B00E43703 /* fullPreferenceList.plist in Resources */,
 				04AEA8E41B436FC500FB7D0F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
