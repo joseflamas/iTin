@@ -327,10 +327,10 @@
             </objects>
             <point key="canvasLocation" x="1032" y="800"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Menu Navigation Controller-->
         <scene sceneID="rQx-Xl-Zap">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tfz-gf-4f2" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MenuNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="tfz-gf-4f2" customClass="MenuNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ciD-Zb-huL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

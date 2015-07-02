@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		046490041B44C65A007A01DC /* ItineraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490031B44C65A007A01DC /* ItineraryTableViewController.m */; };
 		046490071B44C67C007A01DC /* ItineraryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490061B44C67C007A01DC /* ItineraryTableViewCell.m */; };
+		0464900A1B44FA03007A01DC /* MenuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490091B44FA03007A01DC /* MenuNavigationController.m */; };
 		04AEA8D91B436FC400FB7D0F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8D81B436FC400FB7D0F /* main.m */; };
 		04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8DB1B436FC500FB7D0F /* AppDelegate.m */; };
 		04AEA8DF1B436FC500FB7D0F /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8DE1B436FC500FB7D0F /* WelcomeViewController.m */; };
@@ -40,6 +41,8 @@
 		046490031B44C65A007A01DC /* ItineraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryTableViewController.m; sourceTree = "<group>"; };
 		046490051B44C67C007A01DC /* ItineraryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryTableViewCell.h; sourceTree = "<group>"; };
 		046490061B44C67C007A01DC /* ItineraryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryTableViewCell.m; sourceTree = "<group>"; };
+		046490081B44FA03007A01DC /* MenuNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuNavigationController.h; sourceTree = "<group>"; };
+		046490091B44FA03007A01DC /* MenuNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuNavigationController.m; sourceTree = "<group>"; };
 		04AEA8D31B436FC400FB7D0F /* ITin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AEA8D71B436FC400FB7D0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04AEA8D81B436FC400FB7D0F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 		04AEA9061B43B31800FB7D0F /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				046490081B44FA03007A01DC /* MenuNavigationController.h */,
+				046490091B44FA03007A01DC /* MenuNavigationController.m */,
 				04CFB06E1B444ED2009911DC /* MenuViewController.h */,
 				04CFB06F1B444ED2009911DC /* MenuViewController.m */,
 				04CFB06C1B444ED2009911DC /* MenuCollectionCell.h */,
@@ -323,6 +328,7 @@
 				04CFB0741B445464009911DC /* DayActivity.m in Sources */,
 				04CFB0701B444ED2009911DC /* MenuCollectionCell.m in Sources */,
 				04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */,
+				0464900A1B44FA03007A01DC /* MenuNavigationController.m in Sources */,
 				04AEA8D91B436FC400FB7D0F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
