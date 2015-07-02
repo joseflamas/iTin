@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		044BA55D1B4443DC00C87125 /* ItineraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BA55C1B4443DC00C87125 /* ItineraryTableViewController.m */; };
+		046490041B44C65A007A01DC /* ItineraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490031B44C65A007A01DC /* ItineraryTableViewController.m */; };
+		046490071B44C67C007A01DC /* ItineraryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490061B44C67C007A01DC /* ItineraryTableViewCell.m */; };
 		04AEA8D91B436FC400FB7D0F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8D81B436FC400FB7D0F /* main.m */; };
 		04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8DB1B436FC500FB7D0F /* AppDelegate.m */; };
 		04AEA8DF1B436FC500FB7D0F /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8DE1B436FC500FB7D0F /* WelcomeViewController.m */; };
@@ -17,6 +18,9 @@
 		04AEA8F31B436FC500FB7D0F /* ITinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8F21B436FC500FB7D0F /* ITinTests.m */; };
 		04CFB0701B444ED2009911DC /* MenuCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CFB06D1B444ED2009911DC /* MenuCollectionCell.m */; };
 		04CFB0711B444ED2009911DC /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CFB06F1B444ED2009911DC /* MenuViewController.m */; };
+		04CFB0741B445464009911DC /* DayActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CFB0731B445464009911DC /* DayActivity.m */; };
+		04CFB0791B445544009911DC /* FourSquareVenueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CFB0761B445544009911DC /* FourSquareVenueHandler.m */; };
+		04CFB07A1B445544009911DC /* FourSquareVenueParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CFB0781B445544009911DC /* FourSquareVenueParser.m */; };
 		04DAF20F1B43DF3600E43703 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF20E1B43DF3600E43703 /* MapKit.framework */; };
 		04DAF2111B43DF3C00E43703 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF2101B43DF3C00E43703 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
@@ -32,8 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		044BA55B1B4443DC00C87125 /* ItineraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryTableViewController.h; sourceTree = "<group>"; };
-		044BA55C1B4443DC00C87125 /* ItineraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryTableViewController.m; sourceTree = "<group>"; };
+		046490021B44C65A007A01DC /* ItineraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryTableViewController.h; sourceTree = "<group>"; };
+		046490031B44C65A007A01DC /* ItineraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryTableViewController.m; sourceTree = "<group>"; };
+		046490051B44C67C007A01DC /* ItineraryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryTableViewCell.h; sourceTree = "<group>"; };
+		046490061B44C67C007A01DC /* ItineraryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryTableViewCell.m; sourceTree = "<group>"; };
 		04AEA8D31B436FC400FB7D0F /* ITin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AEA8D71B436FC400FB7D0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04AEA8D81B436FC400FB7D0F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -51,6 +57,12 @@
 		04CFB06D1B444ED2009911DC /* MenuCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCollectionCell.m; sourceTree = "<group>"; };
 		04CFB06E1B444ED2009911DC /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		04CFB06F1B444ED2009911DC /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		04CFB0721B445464009911DC /* DayActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayActivity.h; sourceTree = "<group>"; };
+		04CFB0731B445464009911DC /* DayActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayActivity.m; sourceTree = "<group>"; };
+		04CFB0751B445544009911DC /* FourSquareVenueHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourSquareVenueHandler.h; sourceTree = "<group>"; };
+		04CFB0761B445544009911DC /* FourSquareVenueHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourSquareVenueHandler.m; sourceTree = "<group>"; };
+		04CFB0771B445544009911DC /* FourSquareVenueParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourSquareVenueParser.h; sourceTree = "<group>"; };
+		04CFB0781B445544009911DC /* FourSquareVenueParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourSquareVenueParser.m; sourceTree = "<group>"; };
 		04DAF20A1B43A40A00E43703 /* userPreferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userPreferences.plist; sourceTree = "<group>"; };
 		04DAF20C1B43A76B00E43703 /* fullPreferenceList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fullPreferenceList.plist; sourceTree = "<group>"; };
 		04DAF20E1B43DF3600E43703 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -80,8 +92,11 @@
 		044BA55E1B4444C800C87125 /* Itinerary */ = {
 			isa = PBXGroup;
 			children = (
-				044BA55B1B4443DC00C87125 /* ItineraryTableViewController.h */,
-				044BA55C1B4443DC00C87125 /* ItineraryTableViewController.m */,
+				046490021B44C65A007A01DC /* ItineraryTableViewController.h */,
+				046490031B44C65A007A01DC /* ItineraryTableViewController.m */,
+				046490051B44C67C007A01DC /* ItineraryTableViewCell.h */,
+				046490061B44C67C007A01DC /* ItineraryTableViewCell.m */,
+				04CFB07B1B44557E009911DC /* FourSquare */,
 			);
 			name = Itinerary;
 			sourceTree = "<group>";
@@ -162,6 +177,8 @@
 		04AEA8FE1B439DB100FB7D0F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				04CFB0721B445464009911DC /* DayActivity.h */,
+				04CFB0731B445464009911DC /* DayActivity.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -178,12 +195,23 @@
 		04AEA9061B43B31800FB7D0F /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				04CFB06C1B444ED2009911DC /* MenuCollectionCell.h */,
-				04CFB06D1B444ED2009911DC /* MenuCollectionCell.m */,
 				04CFB06E1B444ED2009911DC /* MenuViewController.h */,
 				04CFB06F1B444ED2009911DC /* MenuViewController.m */,
+				04CFB06C1B444ED2009911DC /* MenuCollectionCell.h */,
+				04CFB06D1B444ED2009911DC /* MenuCollectionCell.m */,
 			);
 			name = Menu;
+			sourceTree = "<group>";
+		};
+		04CFB07B1B44557E009911DC /* FourSquare */ = {
+			isa = PBXGroup;
+			children = (
+				04CFB0751B445544009911DC /* FourSquareVenueHandler.h */,
+				04CFB0761B445544009911DC /* FourSquareVenueHandler.m */,
+				04CFB0771B445544009911DC /* FourSquareVenueParser.h */,
+				04CFB0781B445544009911DC /* FourSquareVenueParser.m */,
+			);
+			name = FourSquare;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,10 +314,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04CFB07A1B445544009911DC /* FourSquareVenueParser.m in Sources */,
 				04AEA8DF1B436FC500FB7D0F /* WelcomeViewController.m in Sources */,
+				04CFB0791B445544009911DC /* FourSquareVenueHandler.m in Sources */,
+				046490071B44C67C007A01DC /* ItineraryTableViewCell.m in Sources */,
 				04CFB0711B444ED2009911DC /* MenuViewController.m in Sources */,
+				046490041B44C65A007A01DC /* ItineraryTableViewController.m in Sources */,
+				04CFB0741B445464009911DC /* DayActivity.m in Sources */,
 				04CFB0701B444ED2009911DC /* MenuCollectionCell.m in Sources */,
-				044BA55D1B4443DC00C87125 /* ItineraryTableViewController.m in Sources */,
 				04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */,
 				04AEA8D91B436FC400FB7D0F /* main.m in Sources */,
 			);

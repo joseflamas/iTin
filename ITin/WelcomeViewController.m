@@ -53,7 +53,7 @@
     self.documentsDirectoryPath         = self.delegate.documentsDirectoryPath;
     self.documentsPreferencesPath       = self.delegate.documentsPreferencesPath;
     self.documentsPreferencesPlistPath  = self.delegate.documentsPreferencesPlistPath;
-    BOOL userHasPreferences             = [[NSFileManager defaultManager] fileExistsAtPath:self.documentsPreferencesPlistPath];
+//    BOOL userHavePreferences             = [[NSFileManager defaultManager] fileExistsAtPath:self.documentsPreferencesPlistPath];
     
   
 //get user location J.S.

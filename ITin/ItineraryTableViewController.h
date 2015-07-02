@@ -10,4 +10,8 @@
 
 @interface ItineraryTableViewController : UITableViewController
 
+
+@property (strong, nonatomic) NSString *strTypeofDay;
+
+
 @end

@@ -6,9 +6,12 @@
 //  Copyright (c) 2015 Mac. All rights reserved.
 //
 
-#import "MenuViewController.h"
+
 #import "AppDelegate.h"
+#import "MenuViewController.h"
 #import "MenuCollectionCell.h"
+#import "ItineraryTableViewController.h"
+
 
 @interface MenuViewController() <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -52,13 +55,16 @@
     return self.arrTypesofDay.count;
 }
 
-
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MenuCollectionCell *MCCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MCCell" forIndexPath:indexPath];
     
     
-    [MCCell.btnMCCell setFrame:CGRectMake(0, 0, self.view.frame.size.width , 200)];
+    
+    [MCCell.btnMCCell setFrame:CGRectMake(0,
+                                          0,
+                                          self.view.frame.size.width,
+                                          200)];
     [MCCell.btnMCCell setTitle:self.arrTypesofDay[indexPath.row]
                       forState:UIControlStateNormal];
     [MCCell.btnMCCell setBackgroundColor:[UIColor colorWithRed:(arc4random() % 256 / 256.0)
@@ -67,11 +73,8 @@
                                                          alpha:1]];
     
     
-    //NSLog(@"%@",self.arrTypesofDay[indexPath.row]);
-    
     return MCCell;
 }
-
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
@@ -80,13 +83,16 @@
     return CGSizeMake(self.view.frame.size.width/2, self.view.frame.size.width/2);
 }
 
+
+
+
+#pragma mark - Prepare Segue Method
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+    UIButton *senderButton = (UIButton *)sender;
+    ItineraryTableViewController *itvc = [segue destinationViewController];
+    [itvc setStrTypeofDay:senderButton.titleLabel.text];
 }
-
-
-
 
 
 
