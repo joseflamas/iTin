@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042142481B4518F200063E36 /* PreferencesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042142471B4518F200063E36 /* PreferencesView.m */; };
 		046490041B44C65A007A01DC /* ItineraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490031B44C65A007A01DC /* ItineraryTableViewController.m */; };
 		046490071B44C67C007A01DC /* ItineraryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490061B44C67C007A01DC /* ItineraryTableViewCell.m */; };
 		0464900A1B44FA03007A01DC /* MenuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490091B44FA03007A01DC /* MenuNavigationController.m */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		042142461B4518F200063E36 /* PreferencesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesView.h; sourceTree = "<group>"; };
+		042142471B4518F200063E36 /* PreferencesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesView.m; sourceTree = "<group>"; };
 		046490021B44C65A007A01DC /* ItineraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryTableViewController.h; sourceTree = "<group>"; };
 		046490031B44C65A007A01DC /* ItineraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryTableViewController.m; sourceTree = "<group>"; };
 		046490051B44C67C007A01DC /* ItineraryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryTableViewCell.h; sourceTree = "<group>"; };
@@ -92,6 +95,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042142451B45105D00063E36 /* FirstTimeUser */ = {
+			isa = PBXGroup;
+			children = (
+				04AEA8DD1B436FC500FB7D0F /* WelcomeViewController.h */,
+				04AEA8DE1B436FC500FB7D0F /* WelcomeViewController.m */,
+				042142461B4518F200063E36 /* PreferencesView.h */,
+				042142471B4518F200063E36 /* PreferencesView.m */,
+			);
+			name = FirstTimeUser;
+			sourceTree = "<group>";
+		};
 		044BA55E1B4444C800C87125 /* Itinerary */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,8 +183,7 @@
 		04AEA8FD1B439D0700FB7D0F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				04AEA8DD1B436FC500FB7D0F /* WelcomeViewController.h */,
-				04AEA8DE1B436FC500FB7D0F /* WelcomeViewController.m */,
+				042142451B45105D00063E36 /* FirstTimeUser */,
 				04AEA9061B43B31800FB7D0F /* Menu */,
 				044BA55E1B4444C800C87125 /* Itinerary */,
 			);
@@ -324,6 +337,7 @@
 				04CFB0791B445544009911DC /* FourSquareVenueHandler.m in Sources */,
 				046490071B44C67C007A01DC /* ItineraryTableViewCell.m in Sources */,
 				04CFB0711B444ED2009911DC /* MenuViewController.m in Sources */,
+				042142481B4518F200063E36 /* PreferencesView.m in Sources */,
 				046490041B44C65A007A01DC /* ItineraryTableViewController.m in Sources */,
 				04CFB0741B445464009911DC /* DayActivity.m in Sources */,
 				04CFB0701B444ED2009911DC /* MenuCollectionCell.m in Sources */,
