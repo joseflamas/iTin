@@ -2,13 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>userName</key>
-	<string>Jamaal Sands</string>
-	<key>userAge</key>
-	<integer>34</integer>
-	<key>userGender</key>
-	<string>Male</string>
-	<key>userPointofLocation</key>
-	<string>1234</string>
+	<key>UserName</key>
+	<string></string>
+	<key>UserAge</key>
+	<integer>0</integer>
+	<key>UserGender</key>
+	<string></string>
+	<key>UserLat</key>
+	<string></string>
+	<key>UserLong</key>
+	<string></string>
+	<key>UserPreferences</key>
+	<dict>
+		<key>TimeOfDay</key>
+		<string></string>
+		<key>SearchWords</key>
+		<array/>
+	</dict>
 </dict>
 </plist>

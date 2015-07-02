@@ -20,9 +20,5 @@
 
 @interface WelcomeViewController : UIViewController
 
-{
-    CLLocation * currentLocation;
-    CLLocationManager * locationManager;
-}
 @end
 

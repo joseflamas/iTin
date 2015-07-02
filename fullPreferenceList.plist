@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>Breakfast</key>
-	<string></string>
-	<key>New item</key>
-	<string></string>
+	<string>fruit, morning walk, scrambled eggs, dogs, </string>
+	<key>MorningActivity</key>
+	<string>run, meditate</string>
 </dict>
 </plist>

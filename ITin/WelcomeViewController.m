@@ -16,19 +16,15 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *agePickerView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *genderControl;
 //CLLocation Properties J.S.
-//@property (strong, nonatomic) CLLocationManager *locationManager;
-//@property (nonatomic)  CLLocation2D *location;
-@property (nonatomic)float latitude, longitude;
-
-
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (nonatomic, strong) NSString *userLattitude;
+@property (nonatomic, strong) NSString *userLongitude;
 //Delegate
 @property ( nonatomic, strong ) AppDelegate *delegate;
 //Paths
 @property ( nonatomic, strong ) NSString *documentsDirectoryPath;       // ../Documents/
 @property ( nonatomic, strong ) NSString *documentsPreferencesPath;     // ../Documents/preferences/
 @property ( nonatomic, strong ) NSString *documentsPreferencesPlistPath;// ../Documents/preferences/userPreferences.plist
-
-
 //Local Properties J.S.
 @property (nonatomic,strong)NSMutableArray  *userData, *age;
 @property (nonatomic,strong)NSNumber *ageNumber;
@@ -57,17 +53,15 @@
     
   
 //get user location J.S.
-  locationManager = [CLLocationManager new];
-    if([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+  _locationManager = [CLLocationManager new];
+    if([_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
 {
-    [locationManager requestWhenInUseAuthorization];
+    [_locationManager requestWhenInUseAuthorization];
 }
-locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
-locationManager.delegate = self;
-[locationManager startUpdatingLocation];
+_locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+_locationManager.delegate = self;
+[_locationManager startUpdatingLocation];
 
-currentLocation =[locationManager location];
-    
     
     
     
@@ -85,7 +79,7 @@ currentLocation =[locationManager location];
     
     [_agePickerView reloadAllComponents];
 
- //   NSString *path = [[NSBundle mainBundle] pathForResource:@"userPreferences" ofType:@"plist"];
+ NSString *path = [[NSBundle mainBundle] pathForResource:@"userPreferences" ofType:@"plist"];
     
     // Load the file content and read the data into arrays J.S.
  //   NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
@@ -121,8 +115,10 @@ currentLocation =[locationManager location];
     else
         _userGender =@"Female";
     
+    
+    
 
-    NSLog(@"User Name: %@, Age: %@ Gender: %@",_userName,_userAge,_userGender);
+    NSLog(@"User Name: %@, Age: %@ Gender: %@ Lat: %@ Long: %@",_userName,_userAge,_userGender,_userLattitude, _userLongitude);
 }
 //Dismisses keyboard J.S.
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -132,6 +128,14 @@ currentLocation =[locationManager location];
 }
 
 
+- (void)locationManager:(CLLocationManager *)locationManager didUpdateLocations:(NSArray *)locations
+{
+    NSLog(@"latitude: %f longitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude);
+    self.userLattitude  = [[NSString alloc] initWithFormat:@"%6f", locationManager.location.coordinate.latitude];
+    self.userLongitude  = [[NSString alloc] initWithFormat:@"%6f", locationManager.location.coordinate.longitude];
+    [self.locationManager stopUpdatingLocation];
+   
+}
 
 
 
