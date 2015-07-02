@@ -36,7 +36,7 @@
     //If we found user preferencesshow go to the menu view.
     } else {
         
-        self.window.rootViewController  = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+        self.window.rootViewController  = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"MenuNavigationController"];
     }
     
     

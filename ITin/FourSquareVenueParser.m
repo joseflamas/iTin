@@ -15,6 +15,8 @@
     NSMutableArray *arrayofPlaces = [NSMutableArray new];
     NSDictionary *JSONresponse = [NSJSONSerialization JSONObjectWithData:dataItems options:NSJSONReadingAllowFragments error:nil];
     
+    //NSLog( @"%@", JSONresponse );
+    
     for(NSDictionary *place in JSONresponse[@"response"][@"venues"])
     {
         

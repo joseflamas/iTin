@@ -23,7 +23,7 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
 
 @implementation FourSquareVenueHandler
 
-
+//Only Lat and Lon
 +(void)getDataforLatitude:(NSString *)latitude andLongitude:(NSString *)longitude andReturn:( void(^)(NSData * data) )complete
 {
     
@@ -47,7 +47,7 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
                    });
 }
 
-
+//Lat, Lon and Query
 +(void)getDataforLatitude:(NSString *)latitude andLongitude:(NSString *)longitude andQuery:(NSString *)query andReturn:( void(^)(NSData * data) )complete
 {
     NSString *strLatLon   = [NSString stringWithFormat:@"&ll=%@,%@", latitude, longitude ];
@@ -72,7 +72,7 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
                    });
 }
 
-
+//Lat, Lon, Query and Section
 +(void)getDataforLatitude:(NSString *)latitude andLongitude:(NSString *)longitude andQuery:(NSString *)query andSection:(NSString *)section andReturn:( void(^)(NSData * data) )complete
 {
     NSString *strLatLon   = [NSString stringWithFormat:@"&ll=%@,%@", latitude, longitude ];

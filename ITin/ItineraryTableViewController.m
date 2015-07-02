@@ -23,18 +23,12 @@
 
 
 @property (nonatomic, strong) NSDictionary *dictTypeofDay;
+@property (nonatomic, strong) NSDictionary *dictPartsofDay;
 @property (nonatomic, strong) NSMutableArray *arrUserSelectedActivities;
 
 
 //Arrays for Balanced Day
-@property (nonatomic, strong) NSMutableArray *arrSuggestionsBreakfast;
-@property (nonatomic, strong) NSMutableArray *arrSuggestionsMorningActivity;
-@property (nonatomic, strong) NSMutableArray *arrSuggestionsLunch;
-@property (nonatomic, strong) NSMutableArray *arrSuggestionsAfternoonActivity;
-@property (nonatomic, strong) NSMutableArray *arrSuggestionsDinner;
-@property (nonatomic, strong) NSMutableArray *arrSuggestionsNightActivity;
-@property (nonatomic, strong) NSMutableArray *arrSuggestionsSnack;
-@property (nonatomic, strong) NSMutableArray *arrSuggestionsLateNighActivity;
+
 
 
 @end
@@ -52,27 +46,31 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSLog(@"%@", self.strTypeofDay);
+    //NSLog(@"%@", self.strTypeofDay);
     [self startTrackingPosition];
     
-    
-    self.dictTypeofDay = @{ @"Balanced Day" : @{ @"Breakfast"          : @[@"Fruits", @"Juice"   , @"Eggs"],
-                                                 @"Morning Activity"   : @[@"Run"   , @"Meditate", @"Excercise"],
-                                                 @"Lunch"              : @[@"Wraps" , @"Muffins" , @"sandwiches"],
-                                                 @"Afternoon Activity" : @[@"Picnic", @"Museums" , @"Sports"],
+    self.dictTypeofDay = @{ @"Balanced Day" : @{ @"Breakfast"          : @[@"Fruits", @"Juice"     , @"Eggs"],
+                                                 @"Morning Activity"   : @[@"Run"   , @"Meditate"  , @"Excercise"],
+                                                 @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"sandwiches"],
+                                                 @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"],
                                                  @"Dinner"             : @[@"Pasta" , @"Sea%20food", @"Turkey"],
-                                                 @"Night Activity"     : @[@"Movies", @"Camping" , @"Bowling"],
-                                                 @"Snack"              : @[@"Chocolate%20Chips ", @"Hummus", @"Yogurt"],
-                                                 @"Late Night Activity": @[@"Bars"  , @"Clubs" , @"Entertainment"]
+                                                 @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"],
+                                                 @"Snack"              : @[@"Chocolate%20Chips"    , @"Hummus", @"Yogurt"],
+                                                 @"Late Night Activity": @[@"Bars"  , @"Clubs"     , @"Entertainment"]
                                                },
-                            @"Active Day"   : @{},
-                            @"One Activity" : @{},
-                            @"Extreme Day"  : @{},
-                            @"Relaxed Day"  : @{},
-                            @"Funny Day"    : @{},
-                            @"More ..."     : @{}
+                            
+                            @"Active Day"   : @{ @"Morning Activity"   : @[@"Run"   , @"Meditate"  , @"Excercise"]  },
+                            @"One Activity" : @{ @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"sandwiches"] },
+                            @"Extreme Day"  : @{ @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"] },
+                            @"Relaxed Day"  : @{ @"Dinner"             : @[@"Pasta" , @"Sea%20food", @"Turkey"] },
+                            @"Funny Day"    : @{ @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"]},
+                            @"More ..."     : @{ @"Snack"              : @[@"Chocolate%20Chips"    , @"Hummus", @"Yogurt"]}
                             
                             };
+    
+    self.dictPartsofDay = [ self.dictTypeofDay objectForKey:self.strTypeofDay ];
+    
+    NSLog(@"%lu", (unsigned long)[[self.dictPartsofDay allKeys] count]);
     
 }
 
@@ -93,7 +91,7 @@
 
 - (void)locationManager:(CLLocationManager *)locationManager didUpdateLocations:(NSArray *)locations
 {
-    NSLog(@"latitude: %f longitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude);
+    //NSLog(@"latitude: %f longitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude);
     self.userLattitude  = [[NSString alloc] initWithFormat:@"%6f", locationManager.location.coordinate.latitude];
     self.userLongitude  = [[NSString alloc] initWithFormat:@"%6f", locationManager.location.coordinate.longitude];
     [self.locationManager stopUpdatingLocation];
@@ -105,7 +103,11 @@
 #pragma mark - Helper Methods
 -(void)startSearchingSuggestionsWithLatitude:(NSString *)lat andLongitude:(NSString *)log
 {
-    [FourSquareVenueHandler getDataforLatitude:lat andLongitude:log andReturn:^(NSData *data)
+    NSArray *keys                     = [self.dictPartsofDay allKeys];
+    NSArray *preferences              = [self.dictPartsofDay objectForKey:[keys objectAtIndex:(arc4random() % keys.count)]];
+    NSString *queryWithUserPreference = [preferences objectAtIndex:(arc4random() % preferences.count )];
+    
+    [FourSquareVenueHandler getDataforLatitude:lat andLongitude:log andQuery:queryWithUserPreference andReturn:^(NSData *data)
      {
          
          [FourSquareVenueParser parsearInformaciondelosItems:data alCompletar:^(NSArray *arrayItems)
@@ -136,7 +138,7 @@
 {
 
     // Return the number of rows in the section.
-    return 1;
+    return (unsigned long)[[self.dictPartsofDay allKeys] count];
 }
 
 
