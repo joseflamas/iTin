@@ -81,7 +81,7 @@
                             @"Extreme Day"  : @{ @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"] },
                             @"Relaxed Day"  : @{ @"Dinner"             : @[@"Pasta" , @"Sea"       , @"Turkey"] },
                             @"Funny Day"    : @{ @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"]},
-                            @"More ..."     : @{ @"Snack"              : @[@"Chocolate"    , @"Hummus", @"Yogurt"]}
+                            @"More ..."     : @{ @"Snack"              : @[@"Chocolate%20chips"    , @"Hummus", @"Yogurt"]}
                             
                             };
     

@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		042142481B4518F200063E36 /* PreferencesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042142471B4518F200063E36 /* PreferencesView.m */; };
+		042142BC1B4896F000063E36 /* TestList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 042142BB1B4896F000063E36 /* TestList.plist */; };
+		042142BE1B48A8C500063E36 /* PreferencesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042142BD1B48A8C500063E36 /* PreferencesView.m */; };
 		046490041B44C65A007A01DC /* ItineraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490031B44C65A007A01DC /* ItineraryTableViewController.m */; };
 		046490071B44C67C007A01DC /* ItineraryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490061B44C67C007A01DC /* ItineraryTableViewCell.m */; };
 		0464900A1B44FA03007A01DC /* MenuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490091B44FA03007A01DC /* MenuNavigationController.m */; };
@@ -44,7 +45,8 @@
 
 /* Begin PBXFileReference section */
 		042142461B4518F200063E36 /* PreferencesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesView.h; sourceTree = "<group>"; };
-		042142471B4518F200063E36 /* PreferencesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesView.m; sourceTree = "<group>"; };
+		042142BB1B4896F000063E36 /* TestList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = TestList.plist; path = ITin/TestList.plist; sourceTree = "<group>"; };
+		042142BD1B48A8C500063E36 /* PreferencesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesView.m; sourceTree = "<group>"; };
 		046490021B44C65A007A01DC /* ItineraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryTableViewController.h; sourceTree = "<group>"; };
 		046490031B44C65A007A01DC /* ItineraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryTableViewController.m; sourceTree = "<group>"; };
 		046490051B44C67C007A01DC /* ItineraryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryTableViewCell.h; sourceTree = "<group>"; };
@@ -112,7 +114,7 @@
 				04AEA8DD1B436FC500FB7D0F /* WelcomeViewController.h */,
 				04AEA8DE1B436FC500FB7D0F /* WelcomeViewController.m */,
 				042142461B4518F200063E36 /* PreferencesView.h */,
-				042142471B4518F200063E36 /* PreferencesView.m */,
+				042142BD1B48A8C500063E36 /* PreferencesView.m */,
 			);
 			name = FirstTimeUser;
 			sourceTree = "<group>";
@@ -145,6 +147,7 @@
 				04DAF20E1B43DF3600E43703 /* MapKit.framework */,
 				04DAF20A1B43A40A00E43703 /* userPreferences.plist */,
 				04DAF20C1B43A76B00E43703 /* fullPreferenceList.plist */,
+				042142BB1B4896F000063E36 /* TestList.plist */,
 				04AEA8D51B436FC400FB7D0F /* ITin */,
 				04AEA8EF1B436FC500FB7D0F /* ITinTests */,
 				04AEA8D41B436FC400FB7D0F /* Products */,
@@ -349,6 +352,7 @@
 				04FFCD351B47ABCB00C4266E /* pier-bold.otf in Resources */,
 				04FFCD361B47ABCB00C4266E /* pier-italic.otf in Resources */,
 				04FFCD371B47ABCB00C4266E /* pier-regular.otf in Resources */,
+				042142BC1B4896F000063E36 /* TestList.plist in Resources */,
 				04AEA8E21B436FC500FB7D0F /* Main.storyboard in Resources */,
 				04AEA8E71B436FC500FB7D0F /* LaunchScreen.xib in Resources */,
 				04AEA8E41B436FC500FB7D0F /* Images.xcassets in Resources */,
@@ -374,8 +378,8 @@
 				04CFB0791B445544009911DC /* FourSquareVenueHandler.m in Sources */,
 				046490071B44C67C007A01DC /* ItineraryTableViewCell.m in Sources */,
 				04CFB0711B444ED2009911DC /* MenuViewController.m in Sources */,
-				042142481B4518F200063E36 /* PreferencesView.m in Sources */,
 				0479F1C81B47514600D2F8DC /* DayTrackViewController.m in Sources */,
+				042142BE1B48A8C500063E36 /* PreferencesView.m in Sources */,
 				046490041B44C65A007A01DC /* ItineraryTableViewController.m in Sources */,
 				04CFB0741B445464009911DC /* DayActivity.m in Sources */,
 				04CFB0701B444ED2009911DC /* MenuCollectionCell.m in Sources */,
@@ -507,6 +511,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ITin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -517,6 +522,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ITin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

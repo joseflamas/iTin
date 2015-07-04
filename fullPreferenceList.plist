@@ -3,8 +3,36 @@
 <plist version="1.0">
 <dict>
 	<key>Breakfast</key>
-	<string>fruit, morning walk, scrambled eggs, dogs, </string>
+	<array>
+		<string>bacon, bagels, cereal, eggs, granola, hash browns, honey, jam, juice, milk, muffins, oatmeal, omelets, pancakes, porridge, sausges, toast waffles, yogurt, coffee</string>
+	</array>
 	<key>MorningActivity</key>
-	<string>run, meditate</string>
+	<array>
+		<string>run, yoga, breakfast, tours, park, beach</string>
+	</array>
+	<key>Lunch</key>
+	<array>
+		<string>wraps, chicken, burgers, subs, sandwiches, soups, sushi, pasta, grill, bbq, vegan, tours</string>
+	</array>
+	<key>AfternoonActivity</key>
+	<array>
+		<string>museum, parks, mountain bike, hiking, canoe, kayak, tours</string>
+	</array>
+	<key>Dinner</key>
+	<array>
+		<string>pasta, steak, chicken, beef, sushi, vegan, rice, vegetables, salads, food trucks</string>
+	</array>
+	<key>NightActivity</key>
+	<array>
+		<string>concert, nightclub, theater, movie, bar, gentlemen&apos;s club</string>
+	</array>
+	<key>Snack</key>
+	<array>
+		<string>fried, grilled</string>
+	</array>
+	<key>LateNiteActivity</key>
+	<array>
+		<string>bar, bathhouse, gentlemen&apos;s club, nightclub</string>
+	</array>
 </dict>
 </plist>
