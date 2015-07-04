@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ItineraryTableViewController : UITableViewController
 
+@protocol ItineraryTableViewControllerDelegate <NSObject>
+
+@optional
+-(void)suggestionsAdquired:(NSString*)key withObject:(NSArray *)arrSugestions;
+
+@end
+
+
+@interface ItineraryTableViewController : UITableViewController <ItineraryTableViewControllerDelegate>
+
+@property (weak, nonatomic) id <ItineraryTableViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) NSString *strTypeofDay;
 

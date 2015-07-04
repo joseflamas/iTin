@@ -12,6 +12,7 @@
 #import "FourSquareVenueHandler.h"
 #import "FourSquareVenueParser.h"
 #import "DayActivity.h"
+#import "DayTrackViewController.h"
 
 
 @interface ItineraryTableViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
@@ -21,13 +22,17 @@
 @property (nonatomic, strong) NSString *userLattitude;
 @property (nonatomic, strong) NSString *userLongitude;
 
-
 @property (nonatomic, strong) NSDictionary *dictTypeofDay;
 @property (nonatomic, strong) NSDictionary *dictPartsofDay;
+@property (nonatomic, strong) NSDictionary *dictOrderofParts;
+@property (nonatomic, strong) NSString *part;
+@property (nonatomic, strong) NSString *selectedPref;
+@property (nonatomic, strong) NSMutableDictionary *dictDaySuggestions;
+
+@property (nonatomic, strong) NSMutableDictionary *dictActivitiesSuggestions;
 @property (nonatomic, strong) NSMutableArray *arrUserSelectedActivities;
 
 
-//Arrays for Balanced Day
 
 
 
@@ -46,8 +51,21 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    UIBarButtonItem *commitDay = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(commitDayNow)];
+    self.navigationItem.rightBarButtonItem = commitDay;
+    
     //NSLog(@"%@", self.strTypeofDay);
     [self startTrackingPosition];
+    
+    self.dictOrderofParts  = @{ [NSNumber numberWithInt:1] : @"Breakfast",
+                                [NSNumber numberWithInt:2] : @"Morning Activity",
+                                [NSNumber numberWithInt:3] : @"Lunch",
+                                [NSNumber numberWithInt:4] : @"Afternoon Activity",
+                                [NSNumber numberWithInt:5] : @"Dinner",
+                                [NSNumber numberWithInt:6] : @"Night Activity",
+                                [NSNumber numberWithInt:7] : @"Snack",
+                                [NSNumber numberWithInt:8] : @"Late Night Activity",
+                               };
     
     self.dictTypeofDay = @{ @"Balanced Day" : @{ @"Breakfast"          : @[@"Fruits", @"Juice"     , @"Eggs"],
                                                  @"Morning Activity"   : @[@"Run"   , @"Meditate"  , @"Excercise"],
@@ -58,19 +76,18 @@
                                                  @"Snack"              : @[@"Chocolate%20Chips"    , @"Hummus", @"Yogurt"],
                                                  @"Late Night Activity": @[@"Bars"  , @"Clubs"     , @"Entertainment"]
                                                },
-                            
                             @"Active Day"   : @{ @"Morning Activity"   : @[@"Run"   , @"Meditate"  , @"Excercise"]  },
                             @"One Activity" : @{ @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"sandwiches"] },
                             @"Extreme Day"  : @{ @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"] },
-                            @"Relaxed Day"  : @{ @"Dinner"             : @[@"Pasta" , @"Sea%20food", @"Turkey"] },
+                            @"Relaxed Day"  : @{ @"Dinner"             : @[@"Pasta" , @"Sea"       , @"Turkey"] },
                             @"Funny Day"    : @{ @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"]},
                             @"More ..."     : @{ @"Snack"              : @[@"Chocolate%20Chips"    , @"Hummus", @"Yogurt"]}
                             
                             };
     
-    self.dictPartsofDay = [ self.dictTypeofDay objectForKey:self.strTypeofDay ];
     
-    NSLog(@"%lu", (unsigned long)[[self.dictPartsofDay allKeys] count]);
+    self.dictPartsofDay = [ self.dictTypeofDay objectForKey:self.strTypeofDay ];
+    self.dictDaySuggestions = [NSMutableDictionary new];
     
 }
 
@@ -104,6 +121,16 @@
 -(void)startSearchingSuggestionsWithLatitude:(NSString *)lat andLongitude:(NSString *)log
 {
     NSArray *keys                     = [self.dictPartsofDay allKeys];
+    NSUInteger numofDayParts          = keys.count;
+    
+    for (int i = 1; i <= numofDayParts ; i ++ )
+    {
+        self.part = [self.dictOrderofParts objectForKey:[NSNumber numberWithInt:i]];
+        self.selectedPref = [[self.dictPartsofDay objectForKey:self.part] objectAtIndex:(arc4random() % [[self.dictPartsofDay objectForKey:self.part]count] )];
+        [self.dictDaySuggestions setObject:self.selectedPref forKey:self.part];
+        NSLog(@"%@",self.dictDaySuggestions);
+    }
+    
     NSArray *preferences              = [self.dictPartsofDay objectForKey:[keys objectAtIndex:(arc4random() % keys.count)]];
     NSString *queryWithUserPreference = [preferences objectAtIndex:(arc4random() % preferences.count )];
     
@@ -119,12 +146,15 @@
               });
               
           }];
-         
-         
+    
      }];
 }
 
-
+-(void)commitDayNow
+{
+    DayTrackViewController *dtvc = [[DayTrackViewController alloc] init];
+    [self.navigationController pushViewController:dtvc animated:YES];
+}
 
 
 #pragma mark - Table view data source
@@ -146,8 +176,79 @@
     
     ItineraryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ITCell" forIndexPath:indexPath];
     
+    for(int p = 0; p<self.arrUserSelectedActivities.count; p++)
+    {
+        UIView *pagina = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width*p,
+                                                                  0,
+                                                                  self.view.frame.size.width,
+                                                                  180)];
+        
+        [pagina setBackgroundColor:[UIColor colorWithRed:drand48()
+                                                   green:drand48()
+                                                    blue:drand48()
+                                                   alpha:1.0]];
+        
+        UILabel *etiquetaPagina = [[UILabel alloc] initWithFrame:CGRectMake(10,
+                                                                            10,
+                                                                            100,
+                                                                            100)];
+        
+        [etiquetaPagina setText:[NSString stringWithFormat:@"Pagina %d", p+1]];
+        [pagina addSubview:etiquetaPagina];
+        pagina.tag = p+1;
+        
+        UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight:)];
+        swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
+        UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveLeft:)];
+        swipeLeft.direction = UISwipeGestureRecognizerDirectionRight;
+        
+        [pagina addGestureRecognizer:swipeRight];
+        [pagina addGestureRecognizer:swipeLeft];
+        
+        
+        [cell.scrollView addSubview:pagina];
+       
+    }
+    
+    cell.pageControl.numberOfPages = self.arrUserSelectedActivities.count;
+    
     return cell;
 }
+
+
+
+#pragma mark - Swipes Methods
+-(void)moveRight:(UISwipeGestureRecognizer *)sender
+{
+    //NSLog(@"MoveRight");
+    
+    UIView *sView = sender.view;
+    UIScrollView *ssView = (UIScrollView*)sView.superview;
+    
+    if (sView.tag >= 1 && sView.tag < self.arrUserSelectedActivities.count)
+        [ssView setContentOffset:CGPointMake(self.view.frame.size.width * sView.tag,0)];
+
+    
+}
+
+-(void)moveLeft:(UISwipeGestureRecognizer *)sender
+{
+    //NSLog(@"MoveLeft");
+    
+    UIView *sView = sender.view;
+    UIScrollView *ssView = (UIScrollView*)sView.superview;
+
+    if (sView.tag >= 2)
+        [ssView setContentOffset:CGPointMake(self.view.frame.size.width * (sView.tag-2),0)];
+    
+    
+}
+
+
+
+
+
+
 
 
 

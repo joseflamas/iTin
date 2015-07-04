@@ -327,9 +327,81 @@
             </objects>
             <point key="canvasLocation" x="1032" y="800"/>
         </scene>
+        <!--Day Track View Controller-->
+        <scene sceneID="TV0-sS-8dD">
+            <objects>
+                <viewController id="4qb-l1-qYu" customClass="DayTrackViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ivX-zA-A2k"/>
+                        <viewControllerLayoutGuide type="bottom" id="aCj-6b-rHq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="x4y-aS-2kl">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pgU-Ph-bOl">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="536"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="4qb-l1-qYu" id="B0C-y4-rSV"/>
+                                </connections>
+                            </mapView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QTA-8f-J0S">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3Yg-Ei-wKt">
+                                    <size key="itemSize" width="147" height="183"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DTCell" id="BV8-KX-e9I">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="147" height="183"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="417" width="400" height="183"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="4qb-l1-qYu" id="ZGA-x7-gTR"/>
+                                    <outlet property="delegate" destination="4qb-l1-qYu" id="XYo-3t-iSW"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="pgU-Ph-bOl"/>
+                                <exclude reference="QTA-8f-J0S"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="pgU-Ph-bOl"/>
+                                <include reference="QTA-8f-J0S"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="collection" destination="QTA-8f-J0S" id="jCl-vA-TBT"/>
+                        <outlet property="mapView" destination="pgU-Ph-bOl" id="euy-gG-kYi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bQX-WE-fpf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1779" y="800"/>
+        </scene>
         <!--Menu Navigation Controller-->
         <scene sceneID="rQx-Xl-Zap">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Am0-YL-h3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="MenuNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="tfz-gf-4f2" customClass="MenuNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ciD-Zb-huL">
@@ -341,7 +413,6 @@
                         <segue destination="0Dj-jI-2ma" kind="relationship" relationship="rootViewController" id="wev-0M-gP7"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Am0-YL-h3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-468" y="800"/>
         </scene>
