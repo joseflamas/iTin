@@ -15,15 +15,19 @@
 
 @interface MenuViewController() <UICollectionViewDataSource, UICollectionViewDelegate>
 
+//plist and persistent data
 @property ( nonatomic, strong ) AppDelegate *delegate;
+//UI
 @property ( nonatomic, strong ) NSArray *butonColors;
 @property ( nonatomic, strong ) UIColor *red;
 @property ( nonatomic, strong ) UIColor *purple;
 @property ( nonatomic, strong ) UIColor *blue;
 @property ( nonatomic, strong ) UIColor *yellow;
-
-@property ( nonatomic, strong ) NSArray *arrTypesofDay;
 @property ( nonatomic, weak ) IBOutlet UICollectionView *cvTypeofDayMenu;
+
+//logic
+@property ( nonatomic, strong ) NSArray *arrTypesofDay;
+
 
 @end
 
@@ -34,12 +38,12 @@
 {
     [super viewDidLoad];
     
-    self.red    = [UIColor colorWithRed:(.193) green:(.45)  blue:(.47) alpha:1];
-    self.purple = [UIColor colorWithRed:(.67)  green:(.76)  blue:(.115)alpha:1];
-    self.blue   = [UIColor colorWithRed:(.37)  green:(.56)  blue:(.83) alpha:1];
-    self.yellow = [UIColor colorWithRed:(.207) green:(.178) blue:(.0)  alpha:1];
     //[UIColor colorWithRed:(arc4random() % 256 / 256.0) green:(arc4random() % 256 / 256.0) blue:(arc4random() % 256 / 256.0) alpha:1]];
-    self.butonColors = [[NSArray alloc] initWithObjects:self.red,self.purple,self.blue,self.yellow,nil];
+    self.red    = [UIColor colorWithRed:(193/255.0f) green:(45/255.0f)  blue:(47/255.0f) alpha:1];
+    self.purple = [UIColor colorWithRed:(67/255.0f)  green:(76/255.0f)  blue:(115/255.0f)alpha:1];
+    self.blue   = [UIColor colorWithRed:(37/255.0f)  green:(56/255.0f)  blue:(83/255.0f) alpha:1];
+    self.yellow = [UIColor colorWithRed:(207/255.0f) green:(178/255.0f) blue:(0/255.0f)  alpha:1];
+    self.butonColors = @[self.red,self.purple,self.blue,self.yellow];
     
     
     [self getandSetTypesofActivities];
