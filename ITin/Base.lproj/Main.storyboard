@@ -3,6 +3,11 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="pier-regular.otf">
+            <string>PierSans</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Welcome View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -31,7 +36,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to iTin! Please tell us your name:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6K-GK-bgm">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="74" y="43" width="244" height="61"/>
@@ -61,7 +66,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p94-UZ-Lei">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="179" y="180" width="42" height="21"/>
@@ -70,7 +75,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTA-fN-I33">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="163" y="368" width="75" height="21"/>
@@ -164,7 +169,7 @@
             </objects>
             <point key="canvasLocation" x="267" y="52"/>
         </scene>
-        <!--|||||-->
+        <!--Choose your day-->
         <scene sceneID="6Q6-sO-zJm">
             <objects>
                 <viewController storyboardIdentifier="MenuViewController" id="0Dj-jI-2ma" customClass="MenuViewController" sceneMemberID="viewController">
@@ -194,7 +199,9 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPN-MX-IfD">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                    <fontDescription key="fontDescription" name="PierSans" family="Pier Sans" pointSize="15"/>
                                                     <state key="normal" title="Type of Day Button">
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <variation key="widthClass=compact" fixedFrame="YES">
@@ -258,7 +265,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="|||||" id="HeP-ft-aLD"/>
+                    <navigationItem key="navigationItem" title="Choose your day" id="HeP-ft-aLD"/>
                     <connections>
                         <outlet property="cvTypeofDayMenu" destination="Jqa-B3-ZhS" id="VFY-t6-Sr6"/>
                     </connections>
@@ -336,6 +343,7 @@
                         <viewControllerLayoutGuide type="bottom" id="aCj-6b-rHq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="x4y-aS-2kl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pgU-Ph-bOl">
@@ -401,7 +409,6 @@
         <!--Menu Navigation Controller-->
         <scene sceneID="rQx-Xl-Zap">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Am0-YL-h3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="MenuNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="tfz-gf-4f2" customClass="MenuNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ciD-Zb-huL">
@@ -413,6 +420,7 @@
                         <segue destination="0Dj-jI-2ma" kind="relationship" relationship="rootViewController" id="wev-0M-gP7"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Am0-YL-h3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-468" y="800"/>
         </scene>

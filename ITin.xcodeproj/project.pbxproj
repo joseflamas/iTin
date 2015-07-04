@@ -26,6 +26,10 @@
 		04CFB07A1B445544009911DC /* FourSquareVenueParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CFB0781B445544009911DC /* FourSquareVenueParser.m */; };
 		04DAF20F1B43DF3600E43703 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF20E1B43DF3600E43703 /* MapKit.framework */; };
 		04DAF2111B43DF3C00E43703 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF2101B43DF3C00E43703 /* CoreLocation.framework */; };
+		04FFCD341B47ABCB00C4266E /* pier-bold-italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04FFCD301B47AB3700C4266E /* pier-bold-italic.otf */; };
+		04FFCD351B47ABCB00C4266E /* pier-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04FFCD311B47AB3700C4266E /* pier-bold.otf */; };
+		04FFCD361B47ABCB00C4266E /* pier-italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04FFCD321B47AB3700C4266E /* pier-italic.otf */; };
+		04FFCD371B47ABCB00C4266E /* pier-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04FFCD331B47AB3700C4266E /* pier-regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +80,10 @@
 		04DAF20C1B43A76B00E43703 /* fullPreferenceList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fullPreferenceList.plist; sourceTree = "<group>"; };
 		04DAF20E1B43DF3600E43703 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		04DAF2101B43DF3C00E43703 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		04FFCD301B47AB3700C4266E /* pier-bold-italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pier-bold-italic.otf"; sourceTree = "<group>"; };
+		04FFCD311B47AB3700C4266E /* pier-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pier-bold.otf"; sourceTree = "<group>"; };
+		04FFCD321B47AB3700C4266E /* pier-italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pier-italic.otf"; sourceTree = "<group>"; };
+		04FFCD331B47AB3700C4266E /* pier-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pier-regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +168,7 @@
 				04AEA8FE1B439DB100FB7D0F /* Models */,
 				04AEA8FF1B439DBB00FB7D0F /* Views */,
 				04AEA8FD1B439D0700FB7D0F /* Controllers */,
+				04FFCD2F1B47AB2200C4266E /* Fonts */,
 				04AEA8E31B436FC500FB7D0F /* Images.xcassets */,
 				04AEA8D61B436FC400FB7D0F /* Supporting Files */,
 			);
@@ -245,6 +254,17 @@
 			name = FourSquare;
 			sourceTree = "<group>";
 		};
+		04FFCD2F1B47AB2200C4266E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				04FFCD301B47AB3700C4266E /* pier-bold-italic.otf */,
+				04FFCD311B47AB3700C4266E /* pier-bold.otf */,
+				04FFCD321B47AB3700C4266E /* pier-italic.otf */,
+				04FFCD331B47AB3700C4266E /* pier-regular.otf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -325,6 +345,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FFCD341B47ABCB00C4266E /* pier-bold-italic.otf in Resources */,
+				04FFCD351B47ABCB00C4266E /* pier-bold.otf in Resources */,
+				04FFCD361B47ABCB00C4266E /* pier-italic.otf in Resources */,
+				04FFCD371B47ABCB00C4266E /* pier-regular.otf in Resources */,
 				04AEA8E21B436FC500FB7D0F /* Main.storyboard in Resources */,
 				04AEA8E71B436FC500FB7D0F /* LaunchScreen.xib in Resources */,
 				04AEA8E41B436FC500FB7D0F /* Images.xcassets in Resources */,
