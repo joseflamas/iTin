@@ -28,8 +28,8 @@
 @property (nonatomic, strong) NSString *part;
 @property (nonatomic, strong) NSString *selectedPref;
 @property (nonatomic, strong) NSMutableDictionary *dictDaySuggestions;
-
 @property (nonatomic, strong) NSMutableDictionary *dictActivitiesSuggestions;
+
 @property (nonatomic, strong) NSMutableArray *arrUserSelectedActivities;
 
 
@@ -71,9 +71,9 @@
                                                  @"Morning Activity"   : @[@"Run"   , @"Meditate"  , @"Excercise"],
                                                  @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"sandwiches"],
                                                  @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"],
-                                                 @"Dinner"             : @[@"Pasta" , @"Sea%20food", @"Turkey"],
+                                                 @"Dinner"             : @[@"Pasta" , @"Sea", @"Turkey"],
                                                  @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"],
-                                                 @"Snack"              : @[@"Chocolate%20Chips"    , @"Hummus", @"Yogurt"],
+                                                 @"Snack"              : @[@"Chocolate"    , @"Hummus", @"Yogurt"],
                                                  @"Late Night Activity": @[@"Bars"  , @"Clubs"     , @"Entertainment"]
                                                },
                             @"Active Day"   : @{ @"Morning Activity"   : @[@"Run"   , @"Meditate"  , @"Excercise"]  },
@@ -81,13 +81,14 @@
                             @"Extreme Day"  : @{ @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"] },
                             @"Relaxed Day"  : @{ @"Dinner"             : @[@"Pasta" , @"Sea"       , @"Turkey"] },
                             @"Funny Day"    : @{ @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"]},
-                            @"More ..."     : @{ @"Snack"              : @[@"Chocolate%20Chips"    , @"Hummus", @"Yogurt"]}
+                            @"More ..."     : @{ @"Snack"              : @[@"Chocolate"    , @"Hummus", @"Yogurt"]}
                             
                             };
     
     
     self.dictPartsofDay = [ self.dictTypeofDay objectForKey:self.strTypeofDay ];
     self.dictDaySuggestions = [NSMutableDictionary new];
+    self.dictActivitiesSuggestions = [NSMutableDictionary new];
     
 }
 
@@ -108,7 +109,7 @@
 
 - (void)locationManager:(CLLocationManager *)locationManager didUpdateLocations:(NSArray *)locations
 {
-    //NSLog(@"latitude: %f longitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude);
+//    NSLog(@"latitude: %f longitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude);
     self.userLattitude  = [[NSString alloc] initWithFormat:@"%6f", locationManager.location.coordinate.latitude];
     self.userLongitude  = [[NSString alloc] initWithFormat:@"%6f", locationManager.location.coordinate.longitude];
     [self.locationManager stopUpdatingLocation];
@@ -126,28 +127,21 @@
     for (int i = 1; i <= numofDayParts ; i ++ )
     {
         self.part = [self.dictOrderofParts objectForKey:[NSNumber numberWithInt:i]];
-        self.selectedPref = [[self.dictPartsofDay objectForKey:self.part] objectAtIndex:(arc4random() % [[self.dictPartsofDay objectForKey:self.part]count] )];
+        self.selectedPref = [[self.dictPartsofDay objectForKey:self.part] objectAtIndex:(arc4random()%[[self.dictPartsofDay objectForKey:self.part]count])];
         [self.dictDaySuggestions setObject:self.selectedPref forKey:self.part];
-        NSLog(@"%@",self.dictDaySuggestions);
-    }
-    
-    NSArray *preferences              = [self.dictPartsofDay objectForKey:[keys objectAtIndex:(arc4random() % keys.count)]];
-    NSString *queryWithUserPreference = [preferences objectAtIndex:(arc4random() % preferences.count )];
-    
-    [FourSquareVenueHandler getDataforLatitude:lat andLongitude:log andQuery:queryWithUserPreference andReturn:^(NSData *data)
-     {
-         
-         [FourSquareVenueParser parsearInformaciondelosItems:data alCompletar:^(NSArray *arrayItems)
-          {
-              dispatch_async(dispatch_get_main_queue(),
-              ^{
-                  self.arrUserSelectedActivities = [NSMutableArray arrayWithArray:arrayItems];
+//        NSLog(@"%@",self.dictDaySuggestions);
+        
+        [FourSquareVenueHandler getDataforLatitude:lat andLongitude:log andQuery:self.selectedPref andReturn:^(NSData *data)
+         {
+             [FourSquareVenueParser parsearInformaciondelosItems:data alCompletar:^(NSArray *arrayItems)
+              {
+                  [self.dictActivitiesSuggestions setObject:arrayItems forKey:self.dictOrderofParts[[NSNumber numberWithInt:i]]];
                   [self.tableView reloadData];
-              });
-              
-          }];
-    
-     }];
+              }];
+             
+         }];
+    }
+    [self.tableView reloadData];
 }
 
 -(void)commitDayNow
@@ -172,13 +166,28 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
     ItineraryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ITCell" forIndexPath:indexPath];
     
-    for(int p = 0; p<self.arrUserSelectedActivities.count; p++)
+    NSNumber *numActivity = [NSNumber numberWithInteger:indexPath.row+1];
+    NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
+    NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
+    NSUInteger numActivitiesinPart = [activitiesPart count];
+    
+    NSLog(@"%@",numActivity);
+    NSLog(@"%@",namePart);
+    NSLog(@"%@",activitiesPart);
+    NSLog(@"%lu",(unsigned long)numActivitiesinPart);
+    
+    
+    
+    for(int a = 0; a < numActivitiesinPart; a++)
     {
-        UIView *pagina = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width*p,
+        
+        DayActivity *anActivity = activitiesPart[a];
+        UIView *pagina = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width*a,
                                                                   0,
                                                                   self.view.frame.size.width,
                                                                   180)];
@@ -190,12 +199,12 @@
         
         UILabel *etiquetaPagina = [[UILabel alloc] initWithFrame:CGRectMake(10,
                                                                             10,
-                                                                            100,
+                                                                            self.view.frame.size.width,
                                                                             100)];
         
-        [etiquetaPagina setText:[NSString stringWithFormat:@"Pagina %d", p+1]];
+        [etiquetaPagina setText: anActivity.strActivityCategoryName];
         [pagina addSubview:etiquetaPagina];
-        pagina.tag = p+1;
+        pagina.tag = a+1;
         
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight:)];
         swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -210,7 +219,7 @@
        
     }
     
-    cell.pageControl.numberOfPages = self.arrUserSelectedActivities.count;
+    cell.pageControl.numberOfPages = numActivitiesinPart;
     
     return cell;
 }
@@ -220,7 +229,7 @@
 #pragma mark - Swipes Methods
 -(void)moveRight:(UISwipeGestureRecognizer *)sender
 {
-    //NSLog(@"MoveRight");
+    NSLog(@"MoveRight");
     
     UIView *sView = sender.view;
     UIScrollView *ssView = (UIScrollView*)sView.superview;
@@ -233,7 +242,7 @@
 
 -(void)moveLeft:(UISwipeGestureRecognizer *)sender
 {
-    //NSLog(@"MoveLeft");
+    NSLog(@"MoveLeft");
     
     UIView *sView = sender.view;
     UIScrollView *ssView = (UIScrollView*)sView.superview;
