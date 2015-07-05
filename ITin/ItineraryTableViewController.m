@@ -6,40 +6,22 @@
 //  Copyright (c) 2015 Mac. All rights reserved.
 //
 
-#import <CoreLocation/CoreLocation.h>
 #import "ItineraryTableViewController.h"
 #import "ItineraryTableViewCell.h"
-#import "FourSquareVenueHandler.h"
-#import "FourSquareVenueParser.h"
 #import "DayActivity.h"
 #import "DayTrackViewController.h"
 
 
-@interface ItineraryTableViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
-
-
-@property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, strong) NSString *userLattitude;
-@property (nonatomic, strong) NSString *userLongitude;
-
-@property (nonatomic, strong) NSDictionary *dictTypeofDay;
-@property (nonatomic, strong) NSDictionary *dictPartsofDay;
-@property (nonatomic, strong) NSDictionary *dictOrderofParts;
-@property (nonatomic, strong) NSString *part;
-@property (nonatomic, strong) NSString *selectedPref;
-@property (nonatomic, strong) NSMutableDictionary *dictDaySuggestions;
-@property (nonatomic, strong) NSMutableDictionary *dictActivitiesSuggestions;
-
-@property (nonatomic, strong) NSMutableArray *arrUserSelectedActivities;
-
-
-
+@interface ItineraryTableViewController () <UITableViewDataSource, UITableViewDelegate >
 
 
 @end
 
 
 @implementation ItineraryTableViewController
+
+
+
 
 - (void)viewDidLoad
 {
@@ -51,178 +33,142 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    UIBarButtonItem *commitDay = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(commitDayNow)];
-    self.navigationItem.rightBarButtonItem = commitDay;
     
-    //NSLog(@"%@", self.strTypeofDay);
-    [self startTrackingPosition];
-    
-    self.dictOrderofParts  = @{ [NSNumber numberWithInt:1] : @"Breakfast",
-                                [NSNumber numberWithInt:2] : @"Morning Activity",
-                                [NSNumber numberWithInt:3] : @"Lunch",
-                                [NSNumber numberWithInt:4] : @"Afternoon Activity",
-                                [NSNumber numberWithInt:5] : @"Dinner",
-                                [NSNumber numberWithInt:6] : @"Night Activity",
-                                [NSNumber numberWithInt:7] : @"Snack",
-                                [NSNumber numberWithInt:8] : @"Late Night Activity",
-                               };
-    
-    self.dictTypeofDay = @{ @"Balanced Day" : @{ @"Breakfast"          : @[@"Fruits", @"Juice"     , @"Eggs"],
-                                                 @"Morning Activity"   : @[@"Run"   , @"Meditate"  , @"Excercise"],
-                                                 @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"sandwiches"],
-                                                 @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"],
-                                                 @"Dinner"             : @[@"Pasta" , @"Sea", @"Turkey"],
-                                                 @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"],
-                                                 @"Snack"              : @[@"Chocolate"    , @"Hummus", @"Yogurt"],
-                                                 @"Late Night Activity": @[@"Bars"  , @"Clubs"     , @"Entertainment"]
-                                               },
-                            @"Active Day"   : @{ @"Morning Activity"   : @[@"Run"   , @"Meditate"  , @"Excercise"]  },
-                            @"One Activity" : @{ @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"sandwiches"] },
-                            @"Extreme Day"  : @{ @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"] },
-                            @"Relaxed Day"  : @{ @"Dinner"             : @[@"Pasta" , @"Sea"       , @"Turkey"] },
-                            @"Funny Day"    : @{ @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"]},
-                            @"More ..."     : @{ @"Snack"              : @[@"Chocolate%20chips"    , @"Hummus", @"Yogurt"]}
-                            
-                            };
-    
-    
-    self.dictPartsofDay = [ self.dictTypeofDay objectForKey:self.strTypeofDay ];
-    self.dictDaySuggestions = [NSMutableDictionary new];
-    self.dictActivitiesSuggestions = [NSMutableDictionary new];
     
 }
 
 
 
-#pragma mark - Core Location Methods
--(void)startTrackingPosition
-{
-    self.locationManager = [CLLocationManager new];
-    if([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-    {
-        [self.locationManager requestWhenInUseAuthorization];
-    }
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-    self.locationManager.delegate = self;
-    [self.locationManager startUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)locationManager didUpdateLocations:(NSArray *)locations
-{
-//    NSLog(@"latitude: %f longitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude);
-    self.userLattitude  = [[NSString alloc] initWithFormat:@"%6f", locationManager.location.coordinate.latitude];
-    self.userLongitude  = [[NSString alloc] initWithFormat:@"%6f", locationManager.location.coordinate.longitude];
-    [self.locationManager stopUpdatingLocation];
-    [self startSearchingSuggestionsWithLatitude:self.userLattitude andLongitude:self.userLongitude];
-}
-
-
-
-#pragma mark - Helper Methods
--(void)startSearchingSuggestionsWithLatitude:(NSString *)lat andLongitude:(NSString *)log
-{
-    NSArray *keys                     = [self.dictPartsofDay allKeys];
-    NSUInteger numofDayParts          = keys.count;
-    
-    for (int i = 1; i <= numofDayParts ; i ++ )
-    {
-        self.part = [self.dictOrderofParts objectForKey:[NSNumber numberWithInt:i]];
-        self.selectedPref = [[self.dictPartsofDay objectForKey:self.part] objectAtIndex:(arc4random()%[[self.dictPartsofDay objectForKey:self.part]count])];
-        [self.dictDaySuggestions setObject:self.selectedPref forKey:self.part];
-//        NSLog(@"%@",self.dictDaySuggestions);
-        
-        [FourSquareVenueHandler getDataforLatitude:lat andLongitude:log andQuery:self.selectedPref andReturn:^(NSData *data)
-         {
-             [FourSquareVenueParser parsearInformaciondelosItems:data alCompletar:^(NSArray *arrayItems)
-              {
-                  [self.dictActivitiesSuggestions setObject:arrayItems forKey:self.dictOrderofParts[[NSNumber numberWithInt:i]]];
-                  [self.tableView reloadData];
-              }];
-             
-         }];
-    }
-    [self.tableView reloadData];
-}
-
--(void)commitDayNow
-{
-    DayTrackViewController *dtvc = [[DayTrackViewController alloc] init];
-    [self.navigationController pushViewController:dtvc animated:YES];
-}
 
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return [[self.dictPartsofDay allKeys]count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    // Return the number of rows in the section.
-    return (unsigned long)[[self.dictPartsofDay allKeys] count];
+    return 1;
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *title = [NSString stringWithFormat:@"%@ : %@",[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]], self.dictDaySuggestions[[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]]] ];
+    return title;//[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     ItineraryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ITCell" forIndexPath:indexPath];
     
-    NSNumber *numActivity = [NSNumber numberWithInteger:indexPath.row+1];
+    NSNumber *numActivity = [NSNumber numberWithInteger:indexPath.section+1];
     NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
     NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
     NSUInteger numActivitiesinPart = [activitiesPart count];
     
-    NSLog(@"%@",numActivity);
-    NSLog(@"%@",namePart);
-    NSLog(@"%@",activitiesPart);
-    NSLog(@"%lu",(unsigned long)numActivitiesinPart);
-    
-    
-    
     for(int a = 0; a < numActivitiesinPart; a++)
     {
+//        @property (nonatomic, strong) NSString *strActivityId;
+//        @property (nonatomic, strong) NSString *strActivityName; <----------------
+//        @property (nonatomic, strong) NSString *strActivityReferralId;
+//        @property (nonatomic, strong) NSString *strActivityPhone;
+//        @property (nonatomic, strong) NSString *strActivityFormattedPhone;
+//        @property (nonatomic, strong) NSNumber *numActivityLatitude;<-------------
+//        @property (nonatomic, strong) NSNumber *numActivityLongitude;<------------
+//        @property (nonatomic, strong) NSNumber *numActivityDistance;<-------------
+//        @property (nonatomic, strong) NSNumber *numActivityPostalCode;<-----------
+//        @property (nonatomic, strong) NSString *strActivityAddress;
+//        @property (nonatomic, strong) NSString *strActivityAddresscrossStreet;
+//        @property (nonatomic, strong) NSString *strActivityCc;
+//        @property (nonatomic, strong) NSString *strActivityCity;
+//        @property (nonatomic, strong) NSString *strActivityState;
+//        @property (nonatomic, strong) NSString *strActivityCountry;
+//        @property (nonatomic, strong) NSArray  *arrActivityFormattedAddress;<----- [] array
+//        @property (nonatomic, strong) NSString *strActivityCategoryId;
+//        @property (nonatomic, strong) NSString *strActivityCategoryName;<---------
+//        @property (nonatomic, strong) NSString *strActivityCategoryPluralName;
+//        @property (nonatomic, strong) NSString *strActivityCategoryShortName;
+        
+//        int X = 0;
+        int Y = 0;
+        int W = self.view.frame.size.width;
+//        int H = self.view.frame.size.height;
+        int vH = 180;
+        
+        UIFont *pier = [UIFont fontWithName:@"Pier Sans" size:10];
+        UIFont *pierB = [UIFont fontWithName:@"Pier Sans" size:12];
+        UIFont *pierC = [UIFont fontWithName:@"Pier Sans" size:14];
+        UIFont *pierD = [UIFont fontWithName:@"Pier Sans" size:16];
         
         DayActivity *anActivity = activitiesPart[a];
-        UIView *pagina = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width*a,
-                                                                  0,
-                                                                  self.view.frame.size.width,
-                                                                  180)];
-        
-        [pagina setBackgroundColor:[UIColor colorWithRed:drand48()
-                                                   green:drand48()
-                                                    blue:drand48()
-                                                   alpha:1.0]];
-        
-        UILabel *etiquetaPagina = [[UILabel alloc] initWithFrame:CGRectMake(10,
-                                                                            10,
-                                                                            self.view.frame.size.width,
-                                                                            100)];
-        
-        [etiquetaPagina setText: anActivity.strActivityCategoryName];
-        [pagina addSubview:etiquetaPagina];
+        UIView *pagina = [[UIView alloc] initWithFrame:CGRectMake(W*a, Y, W, vH)];
         pagina.tag = a+1;
+        [pagina setBackgroundColor:[UIColor colorWithRed:drand48() green:drand48() blue:drand48() alpha:1.0]];
+        
+        UILabel *etiquetaPagina = [[UILabel alloc] initWithFrame:CGRectMake(10, Y, W,250)];
+        [etiquetaPagina setText: anActivity.strActivityName];
+        [etiquetaPagina setFont:pierC];
+        [pagina addSubview:etiquetaPagina];
+        
+        
+        UILabel *etiquetaLat = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y-20,W,70)];
+        [etiquetaLat setText: anActivity.numActivityLatitude.description];
+        [pagina addSubview:etiquetaLat];
+        [etiquetaLat setFont:pier];
+        UILabel *etiquetaLng = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y-10,W,70)];
+        [etiquetaLng setText: anActivity.numActivityLongitude.description];
+        [pagina addSubview:etiquetaLng];
+        [etiquetaLng setFont:pier];
+        UILabel *etiquetaDistance = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y,W,70)];
+        [etiquetaDistance setText:[NSString stringWithFormat:@"%@ km", anActivity.numActivityDistance.description
+                                   ]];
+        [etiquetaDistance setFont:pier];
+        [pagina addSubview:etiquetaDistance];
+        
+        
+        UILabel *etiquetaAddress = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+5,W,70)];
+        [etiquetaAddress setText: anActivity.strActivityAddress];
+        [etiquetaAddress setFont:pierB];
+        [pagina addSubview:etiquetaAddress];
+        UILabel *etiquetaAddress1 = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+25,W,70)];
+        [etiquetaAddress1 setText: anActivity.strActivityCity];
+        [etiquetaAddress1 setFont:pierB];
+        [pagina addSubview:etiquetaAddress1];
+        UILabel *etiquetaAddress2 = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+45,W,70)];
+        [etiquetaAddress2 setText: anActivity.strActivityState];
+        [etiquetaAddress2 setFont:pierB];
+        [pagina addSubview:etiquetaAddress2];
+        
+        UILabel *etiquetaCategory = [[UILabel alloc] initWithFrame:CGRectMake(10,Y-20,W,70)];
+        [etiquetaCategory setText: anActivity.strActivityCategoryName];
+        [etiquetaCategory setFont:pierD];
+        [pagina addSubview:etiquetaCategory];
+        
+        
         
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight:)];
         swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
         UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveLeft:)];
         swipeLeft.direction = UISwipeGestureRecognizerDirectionRight;
-        
         [pagina addGestureRecognizer:swipeRight];
         [pagina addGestureRecognizer:swipeLeft];
         
-        
         [cell.scrollView addSubview:pagina];
-       
     }
     
     cell.pageControl.numberOfPages = numActivitiesinPart;
     
     return cell;
 }
+
 
 
 
@@ -234,9 +180,13 @@
     UIView *sView = sender.view;
     UIScrollView *ssView = (UIScrollView*)sView.superview;
     
-    if (sView.tag >= 1 && sView.tag < self.arrUserSelectedActivities.count)
-        [ssView setContentOffset:CGPointMake(self.view.frame.size.width * sView.tag,0)];
-
+    NSLog(@"tag : %ld", (long)sView.tag);
+    
+    if (sView.tag >= 1 && sView.tag < 10)
+        [UIView animateWithDuration:.5 animations:
+         ^{
+            [ssView setContentOffset:CGPointMake(self.view.frame.size.width * sView.tag,0)];
+        }];
     
 }
 
@@ -247,9 +197,13 @@
     UIView *sView = sender.view;
     UIScrollView *ssView = (UIScrollView*)sView.superview;
 
-    if (sView.tag >= 2)
-        [ssView setContentOffset:CGPointMake(self.view.frame.size.width * (sView.tag-2),0)];
+     NSLog(@"tag : %ld", (long)sView.tag);
     
+    if (sView.tag >= 2)
+        [UIView animateWithDuration:.5 animations:
+         ^{
+             [ssView setContentOffset:CGPointMake(self.view.frame.size.width * (sView.tag-2),0)];
+         }];
     
 }
 
@@ -299,15 +253,16 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
 
 
 

@@ -8,7 +8,7 @@
 
 #import "DayTrackViewController.h"
 
-@interface DayTrackViewController ()
+@interface DayTrackViewController () <MKMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @end
 
@@ -20,11 +20,41 @@
     // Do any additional setup after loading the view.
 }
 
+
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *MCCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DCell" forIndexPath:indexPath];
+    return MCCell;
+}
+
+
+
+
+
+
+
+
+
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+
+
+
+
 
 /*
 #pragma mark - Navigation
