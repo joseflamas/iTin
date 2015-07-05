@@ -24,7 +24,7 @@
     //set some useful paths for convenience
     self.documentsDirectoryPath         = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     self.documentsPreferencesPath       = [self.documentsDirectoryPath stringByAppendingPathComponent:@"preferences"];
-    self.documentsPreferencesPlistPath  = [self.documentsPreferencesPath stringByAppendingPathComponent:@"userPreferences.plist"];
+    self.documentsPreferencesPlistPath  = [self.documentsDirectoryPath stringByAppendingPathComponent:@"userPreferences.plist"];
     BOOL userHavePreferences            = [[NSFileManager defaultManager] fileExistsAtPath:self.documentsPreferencesPlistPath];
     
     

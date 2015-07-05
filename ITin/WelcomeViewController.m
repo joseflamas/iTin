@@ -39,17 +39,55 @@
 
 - (void)viewDidLoad
 {
+    self.delegate = [[UIApplication sharedApplication] delegate];
+    
+    //    //paths for convenience
+    //    self.documentsDirectoryPath         = self.delegate.documentsDirectoryPath;
+    self.documentsPreferencesPath       = self.delegate.documentsPreferencesPath;
+    //    self.documentsPreferencesPlistPath  = self.delegate.documentsPreferencesPlistPath;
+    //  BOOL userHavePreferences             = [[NSFileManager defaultManager] fileExistsAtPath:self.documentsPreferencesPlistPath];
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [self.documentsPreferencesPath stringByAppendingPathComponent:@"userPreferences.plist"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if (![fileManager fileExistsAtPath: path]) {
+        
+        path = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat:@"userPreferences.plist"] ];
+    }
+    
+    NSMutableDictionary *data;
+    
+    if ([fileManager fileExistsAtPath: path]) {
+        
+        data = [[NSMutableDictionary alloc] initWithContentsOfFile: path];
+    }
+    else {
+        // If the file doesn’t exist, create an empty dictionary
+        data = [[NSMutableDictionary alloc] init];
+    }
+    
+    //To insert the data into the plist
+    [data setObject:@"" forKey:@"UserName"];
+    [data writeToFile:path atomically:YES];
+    
+    [data setObject:@"" forKey:@"UserAge"];
+    [data writeToFile:path atomically:YES];
+    
+    [data setObject:@"" forKey:@"UserGender"];
+    [data writeToFile:path atomically:YES];
+    
+    [data setObject:@"" forKey:@"UserLat"];
+    [data writeToFile:path atomically:YES];
+    
+    [data setObject:@"" forKey:@"UserLong"];
+    [data writeToFile:path atomically:YES];
+
     
     [super viewDidLoad];
     
-    //get the delegate SharedInstance for retrieving paths
-    self.delegate = [[UIApplication sharedApplication] delegate];
-    
-    //paths for convenience
-    self.documentsDirectoryPath         = self.delegate.documentsDirectoryPath;
-    self.documentsPreferencesPath       = self.delegate.documentsPreferencesPath;
-    self.documentsPreferencesPlistPath  = self.delegate.documentsPreferencesPlistPath;
-//    BOOL userHavePreferences             = [[NSFileManager defaultManager] fileExistsAtPath:self.documentsPreferencesPlistPath];
+//    //get the delegate SharedInstance for retrieving paths
     
   
 //get user location J.S.
@@ -79,7 +117,7 @@ _locationManager.delegate = self;
     
     [_agePickerView reloadAllComponents];
 
- NSString *path = [[NSBundle mainBundle] pathForResource:@"userPreferences" ofType:@"plist"];
+// NSString *path = [[NSBundle mainBundle] pathForResource:@"userPreferences" ofType:@"plist"];
 
 
    
@@ -90,11 +128,47 @@ _locationManager.delegate = self;
     [super didReceiveMemoryWarning];
     
 }
+-(void)createPlist
+{
 
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [self.documentsPreferencesPath stringByAppendingPathComponent:@"userPreferences.plist"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if (![fileManager fileExistsAtPath: path]) {
+        
+        path = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat:@"userPreferences.plist"] ];
+    }
+    
+    NSMutableDictionary *data;
+    
+    if ([fileManager fileExistsAtPath: path]) {
+        
+        data = [[NSMutableDictionary alloc] initWithContentsOfFile: path];
+    }
+    else {
+        // If the file doesn’t exist, create an empty dictionary
+        data = [[NSMutableDictionary alloc] init];
+    }
+    
+    //To insert the data into the plist
+    [data setObject:_userName forKey:@"UserName"];
+    [data writeToFile:path atomically:YES];
+    
+    [data setObject:_userAge forKey:@"UserAge"];
+    [data writeToFile:path atomically:YES];
+    
+    [data setObject:_userGender forKey:@"UserGender"];
+    [data writeToFile:path atomically:YES];
+    
+    [data setObject:_userLattitude forKey:@"UserLat"];
+    [data writeToFile:path atomically:YES];
+    
+    [data setObject:_userLongitude forKey:@"UserLong"];
+    [data writeToFile:path atomically:YES];
 
-
-
-
+}
 
 //Prepares user for next view by storing values J.S.
 
@@ -109,10 +183,11 @@ _locationManager.delegate = self;
     else
         _userGender =@"Female";
     
-    
+    [self createPlist];
     
 
     NSLog(@"User Name: %@, Age: %@ Gender: %@ Lat: %@ Long: %@",_userName,_userAge,_userGender,_userLattitude, _userLongitude);
+    
 }
 //Dismisses keyboard J.S.
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
