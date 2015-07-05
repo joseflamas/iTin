@@ -73,6 +73,11 @@
     
     ItineraryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ITCell" forIndexPath:indexPath];
     
+    if(cell == nil)
+    {
+        cell = [[ItineraryTableViewCell alloc] init];
+    }
+    
     NSNumber *numActivity = [NSNumber numberWithInteger:indexPath.section+1];
     NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
     NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];

@@ -1,14 +1,14 @@
 //
-//  CellItineraryView.m
+//  ItineraryActivityView.m
 //  ITin
 //
-//  Created by Mac on 7/4/15.
+//  Created by Mac on 7/5/15.
 //  Copyright (c) 2015 Mac. All rights reserved.
 //
 
-#import "CellItineraryView.h"
+#import "ItineraryActivityView.h"
 
-@implementation CellItineraryView
+@implementation ItineraryActivityView
 
 /*
 // Only override drawRect: if you perform custom drawing.
