@@ -20,6 +20,9 @@
 
 @implementation ItineraryTableViewController
 
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -73,11 +76,6 @@
     
     ItineraryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ITCell" forIndexPath:indexPath];
     
-    if(cell == nil)
-    {
-        cell = [[ItineraryTableViewCell alloc] init];
-    }
-    
     NSNumber *numActivity = [NSNumber numberWithInteger:indexPath.section+1];
     NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
     NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
@@ -85,38 +83,90 @@
     
     for(int a = 0; a < numActivitiesinPart; a++)
     {
+//        @property (nonatomic, strong) NSString *strActivityId;
+//        @property (nonatomic, strong) NSString *strActivityName; <----------------
+//        @property (nonatomic, strong) NSString *strActivityReferralId;
+//        @property (nonatomic, strong) NSString *strActivityPhone;
+//        @property (nonatomic, strong) NSString *strActivityFormattedPhone;
+//        @property (nonatomic, strong) NSNumber *numActivityLatitude;<-------------
+//        @property (nonatomic, strong) NSNumber *numActivityLongitude;<------------
+//        @property (nonatomic, strong) NSNumber *numActivityDistance;<-------------
+//        @property (nonatomic, strong) NSNumber *numActivityPostalCode;<-----------
+//        @property (nonatomic, strong) NSString *strActivityAddress;
+//        @property (nonatomic, strong) NSString *strActivityAddresscrossStreet;
+//        @property (nonatomic, strong) NSString *strActivityCc;
+//        @property (nonatomic, strong) NSString *strActivityCity;
+//        @property (nonatomic, strong) NSString *strActivityState;
+//        @property (nonatomic, strong) NSString *strActivityCountry;
+//        @property (nonatomic, strong) NSArray  *arrActivityFormattedAddress;<----- [] array
+//        @property (nonatomic, strong) NSString *strActivityCategoryId;
+//        @property (nonatomic, strong) NSString *strActivityCategoryName;<---------
+//        @property (nonatomic, strong) NSString *strActivityCategoryPluralName;
+//        @property (nonatomic, strong) NSString *strActivityCategoryShortName;
+        
+        int X = 0;
+        int Y = 0;
+        int W = self.view.frame.size.width;
+        int H = self.view.frame.size.height;
+        int vH = 180;
+        
+        UIFont *pier = [UIFont fontWithName:@"Pier Sans" size:10];
+        UIFont *pierB = [UIFont fontWithName:@"Pier Sans" size:16];
+
         
         DayActivity *anActivity = activitiesPart[a];
-        UIView *pagina = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width*a,
-                                                                  0,
-                                                                  self.view.frame.size.width,
-                                                                  180)];
-        
-        [pagina setBackgroundColor:[UIColor colorWithRed:drand48()
-                                                   green:drand48()
-                                                    blue:drand48()
-                                                   alpha:1.0]];
-        
-        UILabel *etiquetaPagina = [[UILabel alloc] initWithFrame:CGRectMake(10,
-                                                                            10,
-                                                                            self.view.frame.size.width,
-                                                                            100)];
-        
-        [etiquetaPagina setText: anActivity.strActivityName];
-        [pagina addSubview:etiquetaPagina];
+        UIView *pagina = [[UIView alloc] initWithFrame:CGRectMake(W*a, Y, W, vH)];
         pagina.tag = a+1;
+        [pagina setBackgroundColor:[UIColor colorWithRed:drand48() green:drand48() blue:drand48() alpha:1.0]];
+        
+        UILabel *etiquetaPagina = [[UILabel alloc] initWithFrame:CGRectMake(10, Y, W,250)];
+        [etiquetaPagina setText: anActivity.strActivityName];
+        [etiquetaPagina setFont:[UIFont fontWithName:@"Pier Sans" size:12.0]];
+        [pagina addSubview:etiquetaPagina];
+        
+        
+        UILabel *etiquetaLat = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+5,W,70)];
+        [etiquetaLat setText: anActivity.numActivityLatitude.description];
+        [pagina addSubview:etiquetaLat];
+        [etiquetaLat setFont:pier];
+        UILabel *etiquetaLng = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+25,W,70)];
+        [etiquetaLng setText: anActivity.numActivityLongitude.description];
+        [pagina addSubview:etiquetaLng];
+        [etiquetaLng setFont:pier];
+        UILabel *etiquetaDistance = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+45,W,70)];
+        [etiquetaDistance setText: anActivity.numActivityDistance.description];
+        [etiquetaDistance setFont:pier];
+        [pagina addSubview:etiquetaDistance];
+        
+        
+        UILabel *etiquetaAddress = [[UILabel alloc] initWithFrame:CGRectMake(W-150, Y+5,W,70)];
+        [etiquetaAddress setText: anActivity.strActivityAddress];
+        [etiquetaAddress setFont:pier];
+        [pagina addSubview:etiquetaAddress];
+        UILabel *etiquetaAddress1 = [[UILabel alloc] initWithFrame:CGRectMake(W-150, Y+25,W,70)];
+        [etiquetaAddress1 setText: anActivity.strActivityCity];
+        [etiquetaAddress1 setFont:pier];
+        [pagina addSubview:etiquetaAddress1];
+        UILabel *etiquetaAddress2 = [[UILabel alloc] initWithFrame:CGRectMake(W-150, Y+45,W,70)];
+        [etiquetaAddress2 setText: anActivity.strActivityState];
+        [etiquetaAddress2 setFont:pier];
+        [pagina addSubview:etiquetaAddress2];
+        
+        UILabel *etiquetaCategory = [[UILabel alloc] initWithFrame:CGRectMake(10,Y-20,W,70)];
+        [etiquetaCategory setText: anActivity.strActivityCategoryName];
+        [etiquetaCategory setFont:pierB];
+        [pagina addSubview:etiquetaCategory];
+        
+        
         
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight:)];
         swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
         UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveLeft:)];
         swipeLeft.direction = UISwipeGestureRecognizerDirectionRight;
-        
         [pagina addGestureRecognizer:swipeRight];
         [pagina addGestureRecognizer:swipeLeft];
         
-        
         [cell.scrollView addSubview:pagina];
-       
     }
     
     cell.pageControl.numberOfPages = numActivitiesinPart;
@@ -137,7 +187,7 @@
     
     NSLog(@"tag : %ld", (long)sView.tag);
     
-    if (sView.tag >= 1)// && sView.tag < self.arrUserSelectedActivities.count)
+    if (sView.tag >= 1 && sView.tag < 10)
         [ssView setContentOffset:CGPointMake(self.view.frame.size.width * sView.tag,0)];
 
     
