@@ -25,10 +25,24 @@ UIScrollView *scrollView;
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
   
-    NSArray *tempArray = [[dict objectForKey:@"Preferences"]objectForKey:@"Breakfast"];
-  //  [_arrStuff addObject:tempArray];
+    NSArray *tempArray = [dict objectForKey:@"Breakfast"];
+    [_arrStuff addObjectsFromArray:tempArray];
+    tempArray = [dict objectForKey:@"Morning Activity"];
+    [_arrStuff addObjectsFromArray:tempArray];
+    tempArray = [dict objectForKey:@"Lunch"];
+    [_arrStuff addObjectsFromArray:tempArray];
+    tempArray = [dict objectForKey:@"Afternoon Activity"];
+    [_arrStuff addObjectsFromArray:tempArray];
+    tempArray = [dict objectForKey:@"Dinner"];
+    [_arrStuff addObjectsFromArray:tempArray];
+    tempArray = [dict objectForKey:@"Night Activity"];
+    [_arrStuff addObjectsFromArray:tempArray];
+    tempArray = [dict objectForKey:@"Snack"];
+    [_arrStuff addObjectsFromArray:tempArray];
+    tempArray = [dict objectForKey:@"Late Night Activity"];
+    [_arrStuff addObjectsFromArray:tempArray];
 
-    _arrStuff = [dict objectForKey:@"Preferences"];//objectForKey:@"Morning Activity"];
+ //   _arrStuff = [dict objectForKey:@"Preferences"];//objectForKey:@"Morning Activity"];
 //   _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Lunch"];
 //    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Afternoon Activity"];
 //    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Dinner"];
@@ -70,7 +84,7 @@ UIScrollView *scrollView;
     {
         NSString *preferenceText = _arrStuff[i];
      
-        UIButton *aButton = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 150, 50)];
+        UIButton *aButton = [[UIButton alloc] initWithFrame:CGRectMake(arc4random()%800+i,arc4random()%800,150,50)];
         [aButton addTarget:self action:@selector(alertMe:) forControlEvents:UIControlEventTouchUpInside];
         [aButton setTitle:[NSString stringWithFormat:@"%@",preferenceText] forState:UIControlStateNormal];
         [aButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
