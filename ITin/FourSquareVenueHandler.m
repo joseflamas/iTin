@@ -28,7 +28,7 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
 {
     
     NSString *strLatLon = [NSString stringWithFormat:@"&ll=%@,%@", latitude, longitude ];
-    dispatch_async(dispatch_queue_create("FSJSONData", nil),
+    dispatch_sync(dispatch_queue_create("FSJSONData", nil),
                    ^{
                        
                        NSString *queryString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",
@@ -45,6 +45,9 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
                        complete(data);
                        
                    });
+    
+    //Send notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dataReceived" object:nil userInfo:nil];
 }
 
 //Lat, Lon and Query
@@ -52,7 +55,7 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
 {
     NSString *strLatLon   = [NSString stringWithFormat:@"&ll=%@,%@", latitude, longitude ];
     NSString *strQuery    = [NSString stringWithFormat:@"&query=%@", query ];
-    dispatch_async(dispatch_queue_create("FSJSONData", nil),
+    dispatch_sync(dispatch_queue_create("FSJSONData", nil),
                    ^{
                        
                        NSString *queryString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@",
@@ -70,6 +73,9 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
                        complete(data);
                        
                    });
+    
+    //Send notification 
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dataReceived" object:nil userInfo:nil];
 }
 
 //Lat, Lon, Query and Section
@@ -78,7 +84,7 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
     NSString *strLatLon   = [NSString stringWithFormat:@"&ll=%@,%@", latitude, longitude ];
     NSString *strQuery    = [NSString stringWithFormat:@"&query=%@", query ];
     NSString *strSection  = [NSString stringWithFormat:@"&section=%@", section ];
-    dispatch_async(dispatch_queue_create("FSJSONData", nil),
+    dispatch_sync(dispatch_queue_create("FSJSONData", nil),
                    ^{
                        
                        NSString *queryString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",
@@ -97,6 +103,9 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
                        complete(data);
                        
                    });
+    
+    //Send notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dataReceived" object:nil userInfo:nil];
 }
 
 

@@ -199,7 +199,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPN-MX-IfD">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                                    <fontDescription key="fontDescription" name="PierSans" family="Pier Sans" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="PierSans" family="Pier Sans" pointSize="18"/>
                                                     <state key="normal" title="Type of Day Button">
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -208,7 +208,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                                     </variation>
                                                     <connections>
-                                                        <segue destination="LL3-zh-66H" kind="show" id="nDZ-mY-7Bk"/>
+                                                        <segue destination="LL3-zh-66H" kind="show" id="ai3-sx-bUg"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

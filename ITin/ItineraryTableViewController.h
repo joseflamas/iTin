@@ -9,19 +9,17 @@
 #import <UIKit/UIKit.h>
 
 
-@protocol ItineraryTableViewControllerDelegate <NSObject>
 
-@optional
--(void)suggestionsAdquired:(NSString*)key withObject:(NSArray *)arrSugestions;
-
-@end
+@interface ItineraryTableViewController : UITableViewController
 
 
-@interface ItineraryTableViewController : UITableViewController <ItineraryTableViewControllerDelegate>
+@property (nonatomic, strong) NSString *strTypeofDay;
+@property (nonatomic, strong) NSDictionary *dictTypeofDay;
+@property (nonatomic, strong) NSDictionary *dictPartsofDay;
+@property (nonatomic, strong) NSDictionary *dictOrderofParts;
+@property (nonatomic, strong) NSMutableDictionary *dictDaySuggestions;
+@property (nonatomic, strong) NSMutableDictionary *dictActivitiesSuggestions;
 
-@property (weak, nonatomic) id <ItineraryTableViewControllerDelegate> delegate;
-
-@property (strong, nonatomic) NSString *strTypeofDay;
-
+@property (nonatomic, strong) NSMutableArray *arrUserSelectedActivities;
 
 @end
