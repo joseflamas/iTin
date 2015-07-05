@@ -10,7 +10,7 @@
 
 @interface PreferencesView () <UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *myButton;
-@property (nonatomic,strong) NSArray *arrStuff;
+@property (nonatomic,strong) NSMutableArray *arrStuff;
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
 @end
 
@@ -21,21 +21,27 @@ UIScrollView *scrollView;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-  
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TestList" ofType:@"plist"]];
-    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TestList" ofType:@"plist"];
     
-    self.arrStuff = [NSArray arrayWithContentsOfFile:path];
-    [NSArray arrayWithContentsOfFile:path];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+    for (NSMutableDictionary *pref in dict)
+    {
+        NSDictionary *mypref = pref[@"Morning Activity"];
+        [_arrStuff addObject:mypref];
+        
+    }
+   _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Breakfast"];
+
+   _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Morning Activity"];
+   _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Lunch"];
+    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Afternoon Activity"];
+    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Dinner"];
+    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Night Activity"];
+    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Snack"];
+    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Late Night Activity"];
     
     
-    
-    // Load the file content and read the data into arrays
-    NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
-  //  tableData = [dict objectForKey:@"RecipeName"];
-    
-    _arrStuff = @[@"Bike",@"Bed and Breakfast",@"Running",@"Beer",@"Nightclubs",@"Brunch",@"Fribee",@"Bars",@"Movies",@"Shopping"];
+//_arrStuff = @[@"Bike",@"Bed and Breakfast",@"Running",@"Beer",@"Nightclubs",@"Brunch",@"Fribee",@"Bars",@"Movies",@"Shopping"];
     
     
   //  _myScrollView.delegate = self;
