@@ -20,25 +20,21 @@ UIScrollView *scrollView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _arrStuff = [NSMutableArray new];
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TestList" ofType:@"plist"];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
-    for (NSMutableDictionary *pref in dict)
-    {
-        NSDictionary *mypref = pref[@"Morning Activity"];
-        [_arrStuff addObject:mypref];
-        
-    }
-   _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Breakfast"];
+  
+    NSArray *tempArray = [[dict objectForKey:@"Preferences"]objectForKey:@"Breakfast"];
+  //  [_arrStuff addObject:tempArray];
 
-   _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Morning Activity"];
-   _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Lunch"];
-    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Afternoon Activity"];
-    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Dinner"];
-    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Night Activity"];
-    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Snack"];
-    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Late Night Activity"];
+    _arrStuff = [dict objectForKey:@"Preferences"];//objectForKey:@"Morning Activity"];
+//   _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Lunch"];
+//    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Afternoon Activity"];
+//    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Dinner"];
+//    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Night Activity"];
+//    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Snack"];
+//    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Late Night Activity"];
     
     
 //_arrStuff = @[@"Bike",@"Bed and Breakfast",@"Running",@"Beer",@"Nightclubs",@"Brunch",@"Fribee",@"Bars",@"Movies",@"Shopping"];
@@ -70,7 +66,7 @@ UIScrollView *scrollView;
     bool atEnd = NO;
     int y = 0, x=0;
     
-    for (int i=0; i < _arrStuff.count; i++)
+    for (int i=0; i < _arrStuff.count ; i++)
     {
         NSString *preferenceText = _arrStuff[i];
      
