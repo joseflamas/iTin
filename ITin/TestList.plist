@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Breakfast</key>
+	<array>
+		<string>cereal</string>
+		<string>eggs</string>
+		<string>toast</string>
+		<string>hashbrowns</string>
+		<string>pancakes</string>
+	</array>
+	<key>Morning Activity</key>
+	<array>
+		<string>yoga</string>
+		<string>pilates</string>
+		<string>running</string>
+		<string>hiking</string>
+		<string>walking</string>
+	</array>
+	<key>Lunch</key>
+	<array>
+		<string>soup</string>
+		<string>subs</string>
+		<string>sandwiches</string>
+		<string>sweets</string>
+		<string>wraps</string>
+		<string>salad</string>
+		<string>ice cream</string>
+	</array>
+	<key>Afternoon Activity</key>
+	<array>
+		<string>mountain bike</string>
+		<string>theme park</string>
+		<string>theater</string>
+		<string>museum</string>
+		<string>zoo </string>
+		<string>shopping</string>
+		<string>points of interest</string>
+	</array>
+	<key>Dinner</key>
+	<array>
+		<string>steak </string>
+		<string>seafood</string>
+		<string>ribs</string>
+		<string>food truck</string>
+		<string>grilled</string>
+		<string>baked</string>
+		<string>steamed</string>
+	</array>
+	<key>Night Activity</key>
+	<array>
+		<string>events</string>
+		<string>food trucks</string>
+		<string>theater</string>
+		<string>oprea</string>
+		<string>movies</string>
+		<string>nightclubs</string>
+		<string>bars</string>
+		<string>parties</string>
+	</array>
+	<key>Snack</key>
+	<array>
+		<string>chips</string>
+		<string>soda</string>
+		<string>sweets</string>
+		<string>burrito</string>
+	</array>
+	<key>Late Night Activity</key>
+	<array>
+		<string>after party</string>
+		<string>bars</string>
+		<string>gentlemen clubs</string>
+		<string>lounges</string>
+	</array>
+</dict>
+</plist>

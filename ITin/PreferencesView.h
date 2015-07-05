@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PreferencesView : UIScrollView
+@interface PreferencesView : UIViewController
 
 @end
