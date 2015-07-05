@@ -127,7 +127,7 @@
 
 -(void)stopWaiting
 {
-    
+    NSLog(@"Tenemos info ...");
 }
 
 
@@ -194,6 +194,8 @@
     NSArray *keys                     = [self.dictPartsofDay allKeys];
     NSUInteger numofDayParts          = keys.count;
     
+//    NSLog(@"%lu",(unsigned long)numofDayParts);
+    
     for (int i = 1; i <= numofDayParts ; i ++ )
     {
         self.part = [self.dictOrderofParts objectForKey:[NSNumber numberWithInt:i]];
@@ -201,7 +203,7 @@
         self.selectedPref = [[self.dictPartsofDay objectForKey:self.part] objectAtIndex:(arc4random()%[[self.dictPartsofDay objectForKey:self.part]count])];
 //        NSLog(@"%@", self.selectedPref);
         [self.dictDaySuggestions setObject:self.selectedPref forKey:self.part];
-//        NSLog(@"%@",self.dictDaySuggestions);
+        NSLog(@"%@",self.dictDaySuggestions);
         
         [FourSquareVenueHandler getDataforLatitude:self.userLattitude andLongitude:self.userLongitude andQuery:self.selectedPref andReturn:^(NSData *data)
          {
@@ -214,7 +216,7 @@
     }
     
     
-    //NSLog(@"%@", self.dictActivitiesSuggestions);
+//    NSLog(@"%@", self.dictActivitiesSuggestions);
     
     ItineraryTableViewController *itvc = [segue destinationViewController];
     [itvc setStrTypeofDay:self.strTypeofDay];

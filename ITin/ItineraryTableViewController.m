@@ -43,13 +43,8 @@
     [self.navigationController pushViewController:dtvc animated:YES];
 }
 
-//@property (nonatomic, strong) NSString *strTypeofDay;
-//@property (nonatomic, strong) NSDictionary *dictTypeofDay;
-//@property (nonatomic, strong) NSDictionary *dictPartsofDay;
-//@property (nonatomic, strong) NSDictionary *dictOrderofParts;
-//@property (nonatomic, strong) NSMutableDictionary *dictDaySuggestions;
-//@property (nonatomic, strong) NSMutableDictionary *dictActivitiesSuggestions;
-//@property (nonatomic, strong) NSMutableArray *arrUserSelectedActivities;
+
+
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -60,14 +55,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return [[self.dictActivitiesSuggestions objectForKey:[self.dictOrderofParts objectForKey:[NSNumber numberWithInt:(int)section]]] count];
+    return 1;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSLog(@"%@",[self.dictPartsofDay objectForKey:[NSNumber  numberWithInt:(int)section]]);
-    return [self.dictPartsofDay objectForKey:[NSNumber  numberWithInt:(int)section]];
+    return [self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -75,16 +73,10 @@
     
     ItineraryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ITCell" forIndexPath:indexPath];
     
-    NSNumber *numActivity = [NSNumber numberWithInteger:indexPath.row+1];
+    NSNumber *numActivity = [NSNumber numberWithInteger:indexPath.section+1];
     NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
     NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
     NSUInteger numActivitiesinPart = [activitiesPart count];
-    
-//    NSLog(@"%@",numActivity);
-//    NSLog(@"%@",namePart);
-//    NSLog(@"%@",activitiesPart);
-//    NSLog(@"%lu",(unsigned long)numActivitiesinPart);
-    
     
     for(int a = 0; a < numActivitiesinPart; a++)
     {
