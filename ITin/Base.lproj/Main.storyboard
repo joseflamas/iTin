@@ -324,6 +324,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="3iO-gk-JOj">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <items>
+                                <barButtonItem systemItem="play" id="z5p-3x-mif">
+                                    <connections>
+                                        <segue destination="4qb-l1-qYu" kind="show" id="Pcm-gJ-Dr1"/>
+                                    </connections>
+                                </barButtonItem>
+                            </items>
+                        </toolbar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ITCell" rowHeight="180" id="RIC-7B-nIg" customClass="ItineraryTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -368,6 +379,8 @@
                             <outlet property="delegate" destination="LL3-zh-66H" id="G2f-Zm-MzL"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="R2W-GU-ljm" id="xNQ-Xa-Cef"/>
                     </connections>
@@ -390,15 +403,15 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pgU-Ph-bOl">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="536"/>
-                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="4qb-l1-qYu" id="B0C-y4-rSV"/>
                                 </connections>
                             </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QTA-8f-J0S">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="183" id="QXa-Qz-sff"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3Yg-Ei-wKt">
                                     <size key="itemSize" width="147" height="183"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -406,7 +419,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DTCell" id="BV8-KX-e9I">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DCell" id="BV8-KX-e9I">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -416,29 +429,83 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="417" width="400" height="183"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="QXa-Qz-sff"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="QXa-Qz-sff"/>
+                                    </mask>
                                 </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="4qb-l1-qYu" id="ZGA-x7-gTR"/>
                                     <outlet property="delegate" destination="4qb-l1-qYu" id="XYo-3t-iSW"/>
                                 </connections>
                             </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJw-bm-G8L">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="save" id="pdp-J9-HdA"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="7WI-16-ptg"/>
+                                    <barButtonItem systemItem="action" id="RYZ-kr-5vu"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="pgU-Ph-bOl" secondAttribute="bottom" id="DnH-8I-Ea2"/>
+                            <constraint firstAttribute="trailing" secondItem="QTA-8f-J0S" secondAttribute="trailing" id="Kvo-8F-77L"/>
+                            <constraint firstItem="pgU-Ph-bOl" firstAttribute="top" secondItem="cJw-bm-G8L" secondAttribute="top" id="N7G-xR-3t7"/>
+                            <constraint firstItem="QTA-8f-J0S" firstAttribute="leading" secondItem="pgU-Ph-bOl" secondAttribute="leading" id="ZUw-TS-Pnv"/>
+                            <constraint firstItem="cJw-bm-G8L" firstAttribute="trailing" secondItem="pgU-Ph-bOl" secondAttribute="trailing" id="fTD-eu-MVr"/>
+                            <constraint firstItem="QTA-8f-J0S" firstAttribute="trailing" secondItem="pgU-Ph-bOl" secondAttribute="trailing" id="fs4-tb-PS2"/>
+                            <constraint firstItem="pgU-Ph-bOl" firstAttribute="top" secondItem="ivX-zA-A2k" secondAttribute="bottom" id="ld9-Qv-P3O"/>
+                            <constraint firstItem="QTA-8f-J0S" firstAttribute="bottom" secondItem="pgU-Ph-bOl" secondAttribute="bottom" id="nAH-Qp-JXD"/>
+                            <constraint firstItem="QTA-8f-J0S" firstAttribute="leading" secondItem="x4y-aS-2kl" secondAttribute="leading" id="t8k-dv-FFq"/>
+                            <constraint firstItem="cJw-bm-G8L" firstAttribute="leading" secondItem="pgU-Ph-bOl" secondAttribute="leading" id="uYt-gD-UPK"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="pgU-Ph-bOl"/>
                                 <exclude reference="QTA-8f-J0S"/>
+                                <exclude reference="cJw-bm-G8L"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="fTD-eu-MVr"/>
+                                <exclude reference="uYt-gD-UPK"/>
+                                <exclude reference="DnH-8I-Ea2"/>
+                                <exclude reference="N7G-xR-3t7"/>
+                                <exclude reference="ld9-Qv-P3O"/>
+                                <exclude reference="Kvo-8F-77L"/>
+                                <exclude reference="ZUw-TS-Pnv"/>
+                                <exclude reference="fs4-tb-PS2"/>
+                                <exclude reference="nAH-Qp-JXD"/>
+                                <exclude reference="t8k-dv-FFq"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="pgU-Ph-bOl"/>
                                 <include reference="QTA-8f-J0S"/>
+                                <include reference="cJw-bm-G8L"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="fTD-eu-MVr"/>
+                                <include reference="uYt-gD-UPK"/>
+                                <include reference="DnH-8I-Ea2"/>
+                                <include reference="N7G-xR-3t7"/>
+                                <include reference="ld9-Qv-P3O"/>
+                                <include reference="Kvo-8F-77L"/>
+                                <include reference="ZUw-TS-Pnv"/>
+                                <include reference="fs4-tb-PS2"/>
+                                <include reference="nAH-Qp-JXD"/>
+                                <include reference="t8k-dv-FFq"/>
                             </mask>
                         </variation>
                     </view>
+                    <toolbarItems/>
                     <connections>
                         <outlet property="collection" destination="QTA-8f-J0S" id="jCl-vA-TBT"/>
                         <outlet property="mapView" destination="pgU-Ph-bOl" id="euy-gG-kYi"/>

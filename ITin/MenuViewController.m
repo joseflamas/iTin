@@ -100,20 +100,68 @@
                                 };
     
     self.dictTypeofDay = @{ @"Balanced Day" : @{ @"Breakfast"          : @[@"Fruits", @"Juice"     , @"Eggs"],
-                                                 @"Morning Activity"   : @[@"Run"   , @"Meditate"  , @"Excercise"],
-                                                 @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"sandwiches"],
+                                                 @"Morning Activity"   : @[@"Run"   , @"Yoga"  , @"Exercise"],
+                                                 @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"Sandwiches"],
                                                  @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"],
                                                  @"Dinner"             : @[@"Pasta" , @"Sea", @"Turkey"],
                                                  @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"],
                                                  @"Snack"              : @[@"Chocolate"    , @"Hummus", @"Yogurt"],
                                                  @"Late Night Activity": @[@"Bars"  , @"Clubs"     , @"Entertainment"]
                                                  },
-                            @"Active Day"   : @{ @"Morning Activity"   : @[@"Run"   , @"Meditate"  , @"Excercise"]  },
-                            @"One Activity" : @{ @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"sandwiches"] },
-                            @"Extreme Day"  : @{ @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"] },
-                            @"Relaxed Day"  : @{ @"Dinner"             : @[@"Pasta" , @"Sea"       , @"Turkey"] },
-                            @"Funny Day"    : @{ @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"]},
-                            @"More ..."     : @{ @"Snack"              : @[@"Chocolate"    , @"Hummus", @"Yogurt"]}
+                            @"Active Day"   : @{ @"Breakfast"          : @[@"Fruits", @"Juice"     , @"Eggs"],
+                                                 @"Morning Activity"   : @[@"Run"   , @"Yoga"  , @"Exercise"],
+                                                 @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"Sandwiches"],
+                                                 @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"],
+                                                 @"Dinner"             : @[@"Pasta" , @"Sea", @"Turkey"],
+                                                 @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"],
+                                                 @"Snack"              : @[@"Chocolate"    , @"Hummus", @"Yogurt"],
+                                                 @"Late Night Activity": @[@"Bars"  , @"Clubs"     , @"Entertainment"]
+                                                 },
+                            @"One Activity" : @{ @"Breakfast"          : @[@"Fruits", @"Juice"     , @"Eggs"],
+                                                 @"Morning Activity"   : @[@"Run"   , @"Yoga"  , @"Exercise"],
+                                                 @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"Sandwiches"],
+                                                 @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"],
+                                                 @"Dinner"             : @[@"Pasta" , @"Sea", @"Turkey"],
+                                                 @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"],
+                                                 @"Snack"              : @[@"Chocolate"    , @"Hummus", @"Yogurt"],
+                                                 @"Late Night Activity": @[@"Bars"  , @"Clubs"     , @"Entertainment"]
+                                                 },
+                            @"Extreme Day"  : @{ @"Breakfast"          : @[@"Fruits", @"Juice"     , @"Eggs"],
+                                                 @"Morning Activity"   : @[@"Run"   , @"Yoga"  , @"Exercise"],
+                                                 @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"Sandwiches"],
+                                                 @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"],
+                                                 @"Dinner"             : @[@"Pasta" , @"Sea", @"Turkey"],
+                                                 @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"],
+                                                 @"Snack"              : @[@"Chocolate"    , @"Hummus", @"Yogurt"],
+                                                 @"Late Night Activity": @[@"Bars"  , @"Clubs"     , @"Entertainment"]
+                                                 },
+                            @"Relaxed Day"  : @{ @"Breakfast"          : @[@"Fruits", @"Juice"     , @"Eggs"],
+                                                 @"Morning Activity"   : @[@"Run"   , @"Yoga"  , @"Exercise"],
+                                                 @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"Sandwiches"],
+                                                 @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"],
+                                                 @"Dinner"             : @[@"Pasta" , @"Sea", @"Turkey"],
+                                                 @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"],
+                                                 @"Snack"              : @[@"Chocolate"    , @"Hummus", @"Yogurt"],
+                                                 @"Late Night Activity": @[@"Bars"  , @"Clubs"     , @"Entertainment"]
+                                                 },
+                            @"Funny Day"    : @{ @"Breakfast"          : @[@"Fruits", @"Juice"     , @"Eggs"],
+                                                 @"Morning Activity"   : @[@"Run"   , @"Yoga"  , @"Exercise"],
+                                                 @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"Sandwiches"],
+                                                 @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"],
+                                                 @"Dinner"             : @[@"Pasta" , @"Sea", @"Turkey"],
+                                                 @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"],
+                                                 @"Snack"              : @[@"Chocolate"    , @"Hummus", @"Yogurt"],
+                                                 @"Late Night Activity": @[@"Bars"  , @"Clubs"     , @"Entertainment"]
+                                                 },
+                            @"More ..."     : @{ @"Breakfast"          : @[@"Fruits", @"Juice"     , @"Eggs"],
+                                                 @"Morning Activity"   : @[@"Run"   , @"Yoga"  , @"Exercise"],
+                                                 @"Lunch"              : @[@"Wraps" , @"Muffins"   , @"Sandwiches"],
+                                                 @"Afternoon Activity" : @[@"Picnic", @"Museums"   , @"Sports"],
+                                                 @"Dinner"             : @[@"Pasta" , @"Sea", @"Turkey"],
+                                                 @"Night Activity"     : @[@"Movies", @"Camping"   , @"Bowling"],
+                                                 @"Snack"              : @[@"Chocolate"    , @"Hummus", @"Yogurt"],
+                                                 @"Late Night Activity": @[@"Bars"  , @"Clubs"     , @"Entertainment"]
+                                                 }
                             
                             };
     

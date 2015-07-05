@@ -33,18 +33,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    UIBarButtonItem *commitDay = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(commitDayNow)];
-    self.navigationItem.rightBarButtonItem = commitDay;
     
     
 }
 
-
--(void)commitDayNow
-{
-    DayTrackViewController *dtvc = [[DayTrackViewController alloc] init];
-    [self.navigationController pushViewController:dtvc animated:YES];
-}
 
 
 
@@ -63,7 +55,8 @@
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]];
+    NSString *title = [NSString stringWithFormat:@"%@ : %@",[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]], self.dictDaySuggestions[[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]]] ];
+    return title;//[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -104,15 +97,16 @@
 //        @property (nonatomic, strong) NSString *strActivityCategoryPluralName;
 //        @property (nonatomic, strong) NSString *strActivityCategoryShortName;
         
-        int X = 0;
+//        int X = 0;
         int Y = 0;
         int W = self.view.frame.size.width;
-        int H = self.view.frame.size.height;
+//        int H = self.view.frame.size.height;
         int vH = 180;
         
         UIFont *pier = [UIFont fontWithName:@"Pier Sans" size:10];
-        UIFont *pierB = [UIFont fontWithName:@"Pier Sans" size:16];
-
+        UIFont *pierB = [UIFont fontWithName:@"Pier Sans" size:12];
+        UIFont *pierC = [UIFont fontWithName:@"Pier Sans" size:14];
+        UIFont *pierD = [UIFont fontWithName:@"Pier Sans" size:16];
         
         DayActivity *anActivity = activitiesPart[a];
         UIView *pagina = [[UIView alloc] initWithFrame:CGRectMake(W*a, Y, W, vH)];
@@ -121,40 +115,41 @@
         
         UILabel *etiquetaPagina = [[UILabel alloc] initWithFrame:CGRectMake(10, Y, W,250)];
         [etiquetaPagina setText: anActivity.strActivityName];
-        [etiquetaPagina setFont:[UIFont fontWithName:@"Pier Sans" size:12.0]];
+        [etiquetaPagina setFont:pierC];
         [pagina addSubview:etiquetaPagina];
         
         
-        UILabel *etiquetaLat = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+5,W,70)];
+        UILabel *etiquetaLat = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y-20,W,70)];
         [etiquetaLat setText: anActivity.numActivityLatitude.description];
         [pagina addSubview:etiquetaLat];
         [etiquetaLat setFont:pier];
-        UILabel *etiquetaLng = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+25,W,70)];
+        UILabel *etiquetaLng = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y-10,W,70)];
         [etiquetaLng setText: anActivity.numActivityLongitude.description];
         [pagina addSubview:etiquetaLng];
         [etiquetaLng setFont:pier];
-        UILabel *etiquetaDistance = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+45,W,70)];
-        [etiquetaDistance setText: anActivity.numActivityDistance.description];
+        UILabel *etiquetaDistance = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y,W,70)];
+        [etiquetaDistance setText:[NSString stringWithFormat:@"%@ km", anActivity.numActivityDistance.description
+                                   ]];
         [etiquetaDistance setFont:pier];
         [pagina addSubview:etiquetaDistance];
         
         
-        UILabel *etiquetaAddress = [[UILabel alloc] initWithFrame:CGRectMake(W-150, Y+5,W,70)];
+        UILabel *etiquetaAddress = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+5,W,70)];
         [etiquetaAddress setText: anActivity.strActivityAddress];
-        [etiquetaAddress setFont:pier];
+        [etiquetaAddress setFont:pierB];
         [pagina addSubview:etiquetaAddress];
-        UILabel *etiquetaAddress1 = [[UILabel alloc] initWithFrame:CGRectMake(W-150, Y+25,W,70)];
+        UILabel *etiquetaAddress1 = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+25,W,70)];
         [etiquetaAddress1 setText: anActivity.strActivityCity];
-        [etiquetaAddress1 setFont:pier];
+        [etiquetaAddress1 setFont:pierB];
         [pagina addSubview:etiquetaAddress1];
-        UILabel *etiquetaAddress2 = [[UILabel alloc] initWithFrame:CGRectMake(W-150, Y+45,W,70)];
+        UILabel *etiquetaAddress2 = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+45,W,70)];
         [etiquetaAddress2 setText: anActivity.strActivityState];
-        [etiquetaAddress2 setFont:pier];
+        [etiquetaAddress2 setFont:pierB];
         [pagina addSubview:etiquetaAddress2];
         
         UILabel *etiquetaCategory = [[UILabel alloc] initWithFrame:CGRectMake(10,Y-20,W,70)];
         [etiquetaCategory setText: anActivity.strActivityCategoryName];
-        [etiquetaCategory setFont:pierB];
+        [etiquetaCategory setFont:pierD];
         [pagina addSubview:etiquetaCategory];
         
         
@@ -188,8 +183,10 @@
     NSLog(@"tag : %ld", (long)sView.tag);
     
     if (sView.tag >= 1 && sView.tag < 10)
-        [ssView setContentOffset:CGPointMake(self.view.frame.size.width * sView.tag,0)];
-
+        [UIView animateWithDuration:.5 animations:
+         ^{
+            [ssView setContentOffset:CGPointMake(self.view.frame.size.width * sView.tag,0)];
+        }];
     
 }
 
@@ -203,8 +200,10 @@
      NSLog(@"tag : %ld", (long)sView.tag);
     
     if (sView.tag >= 2)
-        [ssView setContentOffset:CGPointMake(self.view.frame.size.width * (sView.tag-2),0)];
-    
+        [UIView animateWithDuration:.5 animations:
+         ^{
+             [ssView setContentOffset:CGPointMake(self.view.frame.size.width * (sView.tag-2),0)];
+         }];
     
 }
 
@@ -254,15 +253,16 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
 
 
 
