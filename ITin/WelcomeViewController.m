@@ -80,13 +80,7 @@ _locationManager.delegate = self;
     [_agePickerView reloadAllComponents];
 
  NSString *path = [[NSBundle mainBundle] pathForResource:@"userPreferences" ofType:@"plist"];
-    
-    // Load the file content and read the data into arrays J.S.
- //   NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
-    
-    
-   // Save the User Data in /Documents/preferences/userPreferences.plist if the file doesn't exist create it.
-    // ...
+
 
    
 }

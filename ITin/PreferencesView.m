@@ -42,21 +42,7 @@ UIScrollView *scrollView;
     tempArray = [dict objectForKey:@"Late Night Activity"];
     [_arrStuff addObjectsFromArray:tempArray];
 
- //   _arrStuff = [dict objectForKey:@"Preferences"];//objectForKey:@"Morning Activity"];
-//   _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Lunch"];
-//    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Afternoon Activity"];
-//    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Dinner"];
-//    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Night Activity"];
-//    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Snack"];
-//    _arrStuff = [[dict objectForKey:@"Preferences"]objectForKey:@"Late Night Activity"];
-    
-    
-//_arrStuff = @[@"Bike",@"Bed and Breakfast",@"Running",@"Beer",@"Nightclubs",@"Brunch",@"Fribee",@"Bars",@"Movies",@"Shopping"];
-    
-    
-  //  _myScrollView.delegate = self;
-    
-   // scrollView.contentSize = CGSizeMake(800,800);
+
     [_myScrollView setContentSize:CGSizeMake(800, 1000)];
     [self.view addSubview:scrollView];
     
@@ -101,8 +87,6 @@ UIScrollView *scrollView;
             }
             
     }
-    
-    [scrollView setContentOffset:CGPointMake(x, y) animated:YES];
 
 }
 

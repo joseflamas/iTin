@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		042142BC1B4896F000063E36 /* TestList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 042142BB1B4896F000063E36 /* TestList.plist */; };
 		042142BE1B48A8C500063E36 /* PreferencesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042142BD1B48A8C500063E36 /* PreferencesView.m */; };
+		042142C01B48C52400063E36 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 042142BF1B48C52400063E36 /* background.png */; };
 		046490041B44C65A007A01DC /* ItineraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490031B44C65A007A01DC /* ItineraryTableViewController.m */; };
 		046490071B44C67C007A01DC /* ItineraryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490061B44C67C007A01DC /* ItineraryTableViewCell.m */; };
 		0464900A1B44FA03007A01DC /* MenuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490091B44FA03007A01DC /* MenuNavigationController.m */; };
@@ -47,6 +48,7 @@
 		042142461B4518F200063E36 /* PreferencesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesView.h; sourceTree = "<group>"; };
 		042142BB1B4896F000063E36 /* TestList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = TestList.plist; path = ITin/TestList.plist; sourceTree = "<group>"; };
 		042142BD1B48A8C500063E36 /* PreferencesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesView.m; sourceTree = "<group>"; };
+		042142BF1B48C52400063E36 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		046490021B44C65A007A01DC /* ItineraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryTableViewController.h; sourceTree = "<group>"; };
 		046490031B44C65A007A01DC /* ItineraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryTableViewController.m; sourceTree = "<group>"; };
 		046490051B44C67C007A01DC /* ItineraryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryTableViewCell.h; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				04AEA8FD1B439D0700FB7D0F /* Controllers */,
 				04FFCD2F1B47AB2200C4266E /* Fonts */,
 				04AEA8E31B436FC500FB7D0F /* Images.xcassets */,
+				042142BF1B48C52400063E36 /* background.png */,
 				04AEA8D61B436FC400FB7D0F /* Supporting Files */,
 			);
 			path = ITin;
@@ -355,6 +358,7 @@
 				042142BC1B4896F000063E36 /* TestList.plist in Resources */,
 				04AEA8E21B436FC500FB7D0F /* Main.storyboard in Resources */,
 				04AEA8E71B436FC500FB7D0F /* LaunchScreen.xib in Resources */,
+				042142C01B48C52400063E36 /* background.png in Resources */,
 				04AEA8E41B436FC500FB7D0F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
