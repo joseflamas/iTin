@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collection;
 
+@property (strong, nonatomic) NSArray *arrDayActivities;
+
 
 @end

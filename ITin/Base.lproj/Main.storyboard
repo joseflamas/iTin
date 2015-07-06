@@ -11,6 +11,7 @@
             <string>PierSans</string>
             <string>PierSans</string>
             <string>PierSans</string>
+            <string>PierSans</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -410,24 +411,83 @@
                             </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QTA-8f-J0S">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="183" id="QXa-Qz-sff"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3Yg-Ei-wKt">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="3Yg-Ei-wKt">
                                     <size key="itemSize" width="147" height="183"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DCell" id="BV8-KX-e9I">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DCell" id="BV8-KX-e9I" customClass="DayTrackCollectionViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="147" height="183"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K9I-zT-sYY">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                                    <items>
+                                                        <barButtonItem systemItem="save" id="hcU-0V-5PA">
+                                                            <connections>
+                                                                <action selector="btnSave:" destination="4qb-l1-qYu" id="emx-9f-R9C"/>
+                                                            </connections>
+                                                        </barButtonItem>
+                                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="55z-eM-eva"/>
+                                                        <barButtonItem systemItem="action" id="geP-YA-kqH">
+                                                            <connections>
+                                                                <action selector="btnShare:" destination="4qb-l1-qYu" id="Bar-he-Rxo"/>
+                                                            </connections>
+                                                        </barButtonItem>
+                                                    </items>
+                                                    <variation key="widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="0.0" y="139" width="200" height="44"/>
+                                                    </variation>
+                                                </toolbar>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VhZ-yI-A2R">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <variation key="widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="139"/>
+                                                    </variation>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JbF-mr-x76">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" name="PierSans" family="Pier Sans" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="8" y="84" width="184" height="49"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <size key="customSize" width="200" height="200"/>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="K9I-zT-sYY"/>
+                                                <exclude reference="VhZ-yI-A2R"/>
+                                                <exclude reference="JbF-mr-x76"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="subviews">
+                                                <include reference="K9I-zT-sYY"/>
+                                                <include reference="VhZ-yI-A2R"/>
+                                                <include reference="JbF-mr-x76"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <outlet property="btnSave" destination="hcU-0V-5PA" id="kcJ-Gy-4wb"/>
+                                            <outlet property="btnShare" destination="geP-YA-kqH" id="fQ8-3g-HCf"/>
+                                            <outlet property="imgLocation" destination="VhZ-yI-A2R" id="Ri2-SN-aSX"/>
+                                            <outlet property="lblName" destination="JbF-mr-x76" id="R3r-3b-uDD"/>
+                                            <outlet property="toolBar" destination="K9I-zT-sYY" id="Vg1-AP-MMn"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <variation key="default">
@@ -445,39 +505,24 @@
                                     <outlet property="delegate" destination="4qb-l1-qYu" id="XYo-3t-iSW"/>
                                 </connections>
                             </collectionView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJw-bm-G8L">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <items>
-                                    <barButtonItem systemItem="save" id="pdp-J9-HdA"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="7WI-16-ptg"/>
-                                    <barButtonItem systemItem="action" id="RYZ-kr-5vu"/>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="pgU-Ph-bOl" secondAttribute="bottom" id="DnH-8I-Ea2"/>
                             <constraint firstAttribute="trailing" secondItem="QTA-8f-J0S" secondAttribute="trailing" id="Kvo-8F-77L"/>
-                            <constraint firstItem="pgU-Ph-bOl" firstAttribute="top" secondItem="cJw-bm-G8L" secondAttribute="top" id="N7G-xR-3t7"/>
                             <constraint firstItem="QTA-8f-J0S" firstAttribute="leading" secondItem="pgU-Ph-bOl" secondAttribute="leading" id="ZUw-TS-Pnv"/>
-                            <constraint firstItem="cJw-bm-G8L" firstAttribute="trailing" secondItem="pgU-Ph-bOl" secondAttribute="trailing" id="fTD-eu-MVr"/>
                             <constraint firstItem="QTA-8f-J0S" firstAttribute="trailing" secondItem="pgU-Ph-bOl" secondAttribute="trailing" id="fs4-tb-PS2"/>
                             <constraint firstItem="pgU-Ph-bOl" firstAttribute="top" secondItem="ivX-zA-A2k" secondAttribute="bottom" id="ld9-Qv-P3O"/>
                             <constraint firstItem="QTA-8f-J0S" firstAttribute="bottom" secondItem="pgU-Ph-bOl" secondAttribute="bottom" id="nAH-Qp-JXD"/>
                             <constraint firstItem="QTA-8f-J0S" firstAttribute="leading" secondItem="x4y-aS-2kl" secondAttribute="leading" id="t8k-dv-FFq"/>
-                            <constraint firstItem="cJw-bm-G8L" firstAttribute="leading" secondItem="pgU-Ph-bOl" secondAttribute="leading" id="uYt-gD-UPK"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="pgU-Ph-bOl"/>
                                 <exclude reference="QTA-8f-J0S"/>
-                                <exclude reference="cJw-bm-G8L"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="fTD-eu-MVr"/>
-                                <exclude reference="uYt-gD-UPK"/>
                                 <exclude reference="DnH-8I-Ea2"/>
-                                <exclude reference="N7G-xR-3t7"/>
                                 <exclude reference="ld9-Qv-P3O"/>
                                 <exclude reference="Kvo-8F-77L"/>
                                 <exclude reference="ZUw-TS-Pnv"/>
@@ -490,13 +535,9 @@
                             <mask key="subviews">
                                 <include reference="pgU-Ph-bOl"/>
                                 <include reference="QTA-8f-J0S"/>
-                                <include reference="cJw-bm-G8L"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="fTD-eu-MVr"/>
-                                <include reference="uYt-gD-UPK"/>
                                 <include reference="DnH-8I-Ea2"/>
-                                <include reference="N7G-xR-3t7"/>
                                 <include reference="ld9-Qv-P3O"/>
                                 <include reference="Kvo-8F-77L"/>
                                 <include reference="ZUw-TS-Pnv"/>
