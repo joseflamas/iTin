@@ -27,16 +27,19 @@
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.arrUserSelectedActivities = [NSMutableArray new];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+    for (int i = 1; i<= [[self.dictPartsofDay allKeys]count]; i++)
+    {
+        NSNumber *numActivity = [NSNumber numberWithInteger:i];
+        NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
+        NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
+        
+        [self.arrUserSelectedActivities addObject:activitiesPart[0]];
+    }
     
     
 }
-
 
 
 
@@ -68,6 +71,7 @@
 {
     
     ItineraryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ITCell" forIndexPath:indexPath];
+    cell.tag = indexPath.section+1;
     
     NSNumber *numActivity = [NSNumber numberWithInteger:indexPath.section+1];
     NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
@@ -76,34 +80,12 @@
     
     for(int a = 0; a < numActivitiesinPart; a++)
     {
-//        @property (nonatomic, strong) NSString *strActivityId;
-//        @property (nonatomic, strong) NSString *strActivityName; <----------------
-//        @property (nonatomic, strong) NSString *strActivityReferralId;
-//        @property (nonatomic, strong) NSString *strActivityPhone;
-//        @property (nonatomic, strong) NSString *strActivityFormattedPhone;
-//        @property (nonatomic, strong) NSNumber *numActivityLatitude;<-------------
-//        @property (nonatomic, strong) NSNumber *numActivityLongitude;<------------
-//        @property (nonatomic, strong) NSNumber *numActivityDistance;<-------------
-//        @property (nonatomic, strong) NSNumber *numActivityPostalCode;<-----------
-//        @property (nonatomic, strong) NSString *strActivityAddress;
-//        @property (nonatomic, strong) NSString *strActivityAddresscrossStreet;
-//        @property (nonatomic, strong) NSString *strActivityCc;
-//        @property (nonatomic, strong) NSString *strActivityCity;
-//        @property (nonatomic, strong) NSString *strActivityState;
-//        @property (nonatomic, strong) NSString *strActivityCountry;
-//        @property (nonatomic, strong) NSArray  *arrActivityFormattedAddress;<----- [] array
-//        @property (nonatomic, strong) NSString *strActivityCategoryId;
-//        @property (nonatomic, strong) NSString *strActivityCategoryName;<---------
-//        @property (nonatomic, strong) NSString *strActivityCategoryPluralName;
-//        @property (nonatomic, strong) NSString *strActivityCategoryShortName;
         
-//        int X = 0;
         int Y = 0;
         int W = self.view.frame.size.width;
-//        int H = self.view.frame.size.height;
         int vH = 180;
         
-        UIFont *pier = [UIFont fontWithName:@"Pier Sans" size:10];
+        UIFont *pier  = [UIFont fontWithName:@"Pier Sans" size:10];
         UIFont *pierB = [UIFont fontWithName:@"Pier Sans" size:12];
         UIFont *pierC = [UIFont fontWithName:@"Pier Sans" size:14];
         UIFont *pierD = [UIFont fontWithName:@"Pier Sans" size:16];
@@ -112,6 +94,7 @@
         UIView *pagina = [[UIView alloc] initWithFrame:CGRectMake(W*a, Y, W, vH)];
         pagina.tag = a+1;
         [pagina setBackgroundColor:[UIColor colorWithRed:drand48() green:drand48() blue:drand48() alpha:1.0]];
+        
         
         UILabel *etiquetaPagina = [[UILabel alloc] initWithFrame:CGRectMake(10, Y, W,250)];
         [etiquetaPagina setText: anActivity.strActivityName];
@@ -153,7 +136,6 @@
         [pagina addSubview:etiquetaCategory];
         
         
-        
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight:)];
         swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
         UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveLeft:)];
@@ -164,6 +146,7 @@
         [cell.scrollView addSubview:pagina];
     }
     
+    cell.pageControl.tag = indexPath.section+1;
     cell.pageControl.numberOfPages = numActivitiesinPart;
     
     return cell;
@@ -172,15 +155,14 @@
 
 
 
+
 #pragma mark - Swipes Methods
 -(void)moveRight:(UISwipeGestureRecognizer *)sender
 {
-    NSLog(@"MoveRight");
     
     UIView *sView = sender.view;
     UIScrollView *ssView = (UIScrollView*)sView.superview;
-    
-    NSLog(@"tag : %ld", (long)sView.tag);
+
     
     if (sView.tag >= 1 && sView.tag < 10)
         [UIView animateWithDuration:.5 animations:
@@ -192,12 +174,10 @@
 
 -(void)moveLeft:(UISwipeGestureRecognizer *)sender
 {
-    NSLog(@"MoveLeft");
     
     UIView *sView = sender.view;
     UIScrollView *ssView = (UIScrollView*)sView.superview;
-
-     NSLog(@"tag : %ld", (long)sView.tag);
+    
     
     if (sView.tag >= 2)
         [UIView animateWithDuration:.5 animations:
@@ -208,60 +188,27 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
 #pragma mark - Navigation
-
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    DayTrackViewController *dtvc = [segue destinationViewController];
+    [dtvc setArrDayActivities:self.arrUserSelectedActivities];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

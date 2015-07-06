@@ -13,7 +13,9 @@
 		046490071B44C67C007A01DC /* ItineraryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490061B44C67C007A01DC /* ItineraryTableViewCell.m */; };
 		0464900A1B44FA03007A01DC /* MenuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046490091B44FA03007A01DC /* MenuNavigationController.m */; };
 		0479F1C81B47514600D2F8DC /* DayTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0479F1C71B47514600D2F8DC /* DayTrackViewController.m */; };
-		047A1D101B48F52700EC8745 /* ItineraryActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047A1D0F1B48F52700EC8745 /* ItineraryActivityView.m */; };
+		04AC26D01B49C7C3006DD6B0 /* DayTrackCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AC26CF1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.m */; };
+		04AC26D31B49C894006DD6B0 /* DayTrackPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AC26D21B49C894006DD6B0 /* DayTrackPin.m */; };
+		04AC26D51B49D6B1006DD6B0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AC26D41B49D6B1006DD6B0 /* Social.framework */; };
 		04AEA8D91B436FC400FB7D0F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8D81B436FC400FB7D0F /* main.m */; };
 		04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8DB1B436FC500FB7D0F /* AppDelegate.m */; };
 		04AEA8DF1B436FC500FB7D0F /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA8DE1B436FC500FB7D0F /* WelcomeViewController.m */; };
@@ -56,8 +58,11 @@
 		046490091B44FA03007A01DC /* MenuNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuNavigationController.m; sourceTree = "<group>"; };
 		0479F1C61B47514600D2F8DC /* DayTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTrackViewController.h; sourceTree = "<group>"; };
 		0479F1C71B47514600D2F8DC /* DayTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayTrackViewController.m; sourceTree = "<group>"; };
-		047A1D0E1B48F52700EC8745 /* ItineraryActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryActivityView.h; sourceTree = "<group>"; };
-		047A1D0F1B48F52700EC8745 /* ItineraryActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryActivityView.m; sourceTree = "<group>"; };
+		04AC26CE1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTrackCollectionViewCell.h; sourceTree = "<group>"; };
+		04AC26CF1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayTrackCollectionViewCell.m; sourceTree = "<group>"; };
+		04AC26D11B49C894006DD6B0 /* DayTrackPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTrackPin.h; sourceTree = "<group>"; };
+		04AC26D21B49C894006DD6B0 /* DayTrackPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayTrackPin.m; sourceTree = "<group>"; };
+		04AC26D41B49D6B1006DD6B0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		04AEA8D31B436FC400FB7D0F /* ITin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AEA8D71B436FC400FB7D0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04AEA8D81B436FC400FB7D0F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -96,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04AC26D51B49D6B1006DD6B0 /* Social.framework in Frameworks */,
 				04DAF2111B43DF3C00E43703 /* CoreLocation.framework in Frameworks */,
 				04DAF20F1B43DF3600E43703 /* MapKit.framework in Frameworks */,
 			);
@@ -129,8 +135,6 @@
 				046490031B44C65A007A01DC /* ItineraryTableViewController.m */,
 				046490051B44C67C007A01DC /* ItineraryTableViewCell.h */,
 				046490061B44C67C007A01DC /* ItineraryTableViewCell.m */,
-				047A1D0E1B48F52700EC8745 /* ItineraryActivityView.h */,
-				047A1D0F1B48F52700EC8745 /* ItineraryActivityView.m */,
 				04CFB07B1B44557E009911DC /* FourSquare */,
 			);
 			name = Itinerary;
@@ -141,6 +145,10 @@
 			children = (
 				0479F1C61B47514600D2F8DC /* DayTrackViewController.h */,
 				0479F1C71B47514600D2F8DC /* DayTrackViewController.m */,
+				04AC26CE1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.h */,
+				04AC26CF1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.m */,
+				04AC26D11B49C894006DD6B0 /* DayTrackPin.h */,
+				04AC26D21B49C894006DD6B0 /* DayTrackPin.m */,
 			);
 			name = DayTrack;
 			sourceTree = "<group>";
@@ -148,6 +156,7 @@
 		04AEA8CA1B436FC400FB7D0F = {
 			isa = PBXGroup;
 			children = (
+				04AC26D41B49D6B1006DD6B0 /* Social.framework */,
 				04DAF2101B43DF3C00E43703 /* CoreLocation.framework */,
 				04DAF20E1B43DF3600E43703 /* MapKit.framework */,
 				04DAF20A1B43A40A00E43703 /* userPreferences.plist */,
@@ -383,14 +392,15 @@
 				04CFB0791B445544009911DC /* FourSquareVenueHandler.m in Sources */,
 				046490071B44C67C007A01DC /* ItineraryTableViewCell.m in Sources */,
 				04CFB0711B444ED2009911DC /* MenuViewController.m in Sources */,
-				047A1D101B48F52700EC8745 /* ItineraryActivityView.m in Sources */,
 				0479F1C81B47514600D2F8DC /* DayTrackViewController.m in Sources */,
 				042142BE1B48A8C500063E36 /* PreferencesView.m in Sources */,
 				046490041B44C65A007A01DC /* ItineraryTableViewController.m in Sources */,
 				04CFB0741B445464009911DC /* DayActivity.m in Sources */,
+				04AC26D01B49C7C3006DD6B0 /* DayTrackCollectionViewCell.m in Sources */,
 				04CFB0701B444ED2009911DC /* MenuCollectionCell.m in Sources */,
 				04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */,
 				0464900A1B44FA03007A01DC /* MenuNavigationController.m in Sources */,
+				04AC26D31B49C894006DD6B0 /* DayTrackPin.m in Sources */,
 				04AEA8D91B436FC400FB7D0F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
