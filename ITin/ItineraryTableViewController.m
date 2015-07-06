@@ -111,7 +111,7 @@
         [pagina addSubview:etiquetaLng];
         [etiquetaLng setFont:pier];
         UILabel *etiquetaDistance = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y,W,70)];
-        [etiquetaDistance setText:[NSString stringWithFormat:@"%@ km", anActivity.numActivityDistance.description
+        [etiquetaDistance setText:[NSString stringWithFormat:@"%@ meters", anActivity.numActivityDistance.description
                                    ]];
         [etiquetaDistance setFont:pier];
         [pagina addSubview:etiquetaDistance];
