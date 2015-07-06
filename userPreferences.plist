@@ -14,10 +14,17 @@
 	<string></string>
 	<key>UserPreferences</key>
 	<dict>
-		<key>TimeOfDay</key>
-		<string></string>
-		<key>SearchWords</key>
-		<array/>
+		<key>Breakfast</key>
+		<array>
+			<string></string>
+			<string></string>
+		</array>
+		<key>Mornings</key>
+		<array>
+			<string></string>
+			<string></string>
+			<string></string>
+		</array>
 	</dict>
 </dict>
 </plist>

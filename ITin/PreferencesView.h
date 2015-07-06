@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PreferencesView : UIViewController
-
+@property (nonatomic,strong) NSMutableDictionary *myPrefs, *userPrefs;
 @end

@@ -28,7 +28,7 @@
     BOOL userHavePreferences            = [[NSFileManager defaultManager] fileExistsAtPath:self.documentsPreferencesPlistPath];
     
     
-    //If the user doesn't have preferences go the inital Survey.
+  //  If the user doesn't have preferences go the inital Survey.
     if ( !userHavePreferences )
     {
         self.window.rootViewController  = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
@@ -39,8 +39,8 @@
         self.window.rootViewController  = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"MenuNavigationController"];
     }
     
-    
-    return YES;
+//
+return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

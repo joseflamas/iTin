@@ -166,21 +166,22 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="175" y="726" width="47" height="30"/>
+                                            <rect key="frame" x="177" y="143" width="47" height="30"/>
                                         </variation>
                                         <connections>
+                                            <action selector="toMainMenu:" destination="NXM-Zk-Hg6" eventType="touchUpInside" id="d85-f8-ZBa"/>
                                             <segue destination="tfz-gf-4f2" kind="show" id="to5-GE-ys9"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.26212931769999998" green="1" blue="0.17672579329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.99215692281723022" green="0.99215692281723022" blue="0.97647064924240112" alpha="1" colorSpace="deviceRGB"/>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="BrQ-WH-D7a"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="700"/>
+                                    <rect key="frame" x="0.0" y="-125" width="400" height="850"/>
                                     <mask key="subviews">
                                         <include reference="BrQ-WH-D7a"/>
                                     </mask>
@@ -325,7 +326,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="3iO-gk-JOj">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="266" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <items>
                                 <barButtonItem systemItem="play" id="z5p-3x-mif">

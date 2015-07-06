@@ -5,7 +5,7 @@
 //  Created by Mac on 6/30/15.
 //  Copyright (c) 2015 Mac. All rights reserved.
 //
-
+#import "PreferencesView.h"
 #import "WelcomeViewController.h"
 #import "AppDelegate.h"
 
@@ -69,20 +69,20 @@
     }
     
     //To insert the data into the plist
-    [data setObject:@"" forKey:@"UserName"];
-    [data writeToFile:path atomically:YES];
-    
-    [data setObject:@"" forKey:@"UserAge"];
-    [data writeToFile:path atomically:YES];
-    
-    [data setObject:@"" forKey:@"UserGender"];
-    [data writeToFile:path atomically:YES];
-    
-    [data setObject:@"" forKey:@"UserLat"];
-    [data writeToFile:path atomically:YES];
-    
-    [data setObject:@"" forKey:@"UserLong"];
-    [data writeToFile:path atomically:YES];
+//    [data setObject:@"" forKey:@"UserName"];
+//    [data writeToFile:path atomically:YES];
+//    
+//    [data setObject:@"" forKey:@"UserAge"];
+//    [data writeToFile:path atomically:YES];
+//    
+//    [data setObject:@"" forKey:@"UserGender"];
+//    [data writeToFile:path atomically:YES];
+//    
+//    [data setObject:@"" forKey:@"UserLat"];
+//    [data writeToFile:path atomically:YES];
+//    
+//    [data setObject:@"" forKey:@"UserLong"];
+//    [data writeToFile:path atomically:YES];
 
     
     [super viewDidLoad];
@@ -117,7 +117,6 @@ _locationManager.delegate = self;
     
     [_agePickerView reloadAllComponents];
 
-// NSString *path = [[NSBundle mainBundle] pathForResource:@"userPreferences" ofType:@"plist"];
 
 
    
@@ -130,7 +129,7 @@ _locationManager.delegate = self;
 }
 -(void)createPlist
 {
-
+    PreferencesView *pv = [PreferencesView new];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *path = [self.documentsPreferencesPath stringByAppendingPathComponent:@"userPreferences.plist"];
@@ -167,7 +166,11 @@ _locationManager.delegate = self;
     
     [data setObject:_userLongitude forKey:@"UserLong"];
     [data writeToFile:path atomically:YES];
-
+    
+    [data setObject:@"" forKey:@"UserPrefs"];
+    [data writeToFile:path atomically:YES];
+    [self createPlist];
+//
 }
 
 //Prepares user for next view by storing values J.S.
@@ -183,8 +186,7 @@ _locationManager.delegate = self;
     else
         _userGender =@"Female";
     
-    [self createPlist];
-    
+ 
 
     NSLog(@"User Name: %@, Age: %@ Gender: %@ Lat: %@ Long: %@",_userName,_userAge,_userGender,_userLattitude, _userLongitude);
     

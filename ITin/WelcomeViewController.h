@@ -19,6 +19,6 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface WelcomeViewController : UIViewController
-
+-(void)createPlist;
 @end
 
