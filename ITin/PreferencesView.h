@@ -15,4 +15,5 @@
 @property (nonatomic,strong) NSString *userName, *userAge , *userGender;
 @property (nonatomic,strong)NSMutableArray  *userData;
 @property (nonatomic,strong)NSMutableArray *userPrefs;
+@property(nonatomic,strong) UIView *imgView;
 @end

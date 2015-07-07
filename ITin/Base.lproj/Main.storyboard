@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -208,26 +209,26 @@
                                 <exclude reference="Qis-A3-Rlq"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="AMd-LJ-us5"/>
                                 <exclude reference="9yp-fY-bVr"/>
                                 <exclude reference="BQC-oM-QPZ"/>
                                 <exclude reference="D60-hG-GlN"/>
                                 <exclude reference="VcM-OK-nzN"/>
                                 <exclude reference="snF-Q1-O2O"/>
-                                <exclude reference="eOc-5E-iVi"/>
-                                <exclude reference="iNX-ZF-ztD"/>
                                 <exclude reference="rj5-R7-UXE"/>
                                 <exclude reference="1dd-zc-ehw"/>
                                 <exclude reference="ND0-0U-HjB"/>
                                 <exclude reference="OCm-QO-QRK"/>
+                                <exclude reference="eOc-5E-iVi"/>
+                                <exclude reference="iNX-ZF-ztD"/>
+                                <exclude reference="jHj-uR-OIA"/>
+                                <exclude reference="m9f-oH-8br"/>
                                 <exclude reference="5aM-fj-S0N"/>
                                 <exclude reference="WlM-LJ-epv"/>
                                 <exclude reference="glY-sV-ICq"/>
-                                <exclude reference="jHj-uR-OIA"/>
-                                <exclude reference="m9f-oH-8br"/>
+                                <exclude reference="hpX-35-cOK"/>
                                 <exclude reference="PXM-0U-3L7"/>
                                 <exclude reference="rDo-RR-tWR"/>
-                                <exclude reference="hpX-35-cOK"/>
-                                <exclude reference="AMd-LJ-us5"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -242,26 +243,26 @@
                                 <include reference="Qis-A3-Rlq"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="AMd-LJ-us5"/>
                                 <include reference="9yp-fY-bVr"/>
                                 <include reference="BQC-oM-QPZ"/>
                                 <include reference="D60-hG-GlN"/>
                                 <include reference="VcM-OK-nzN"/>
                                 <include reference="snF-Q1-O2O"/>
-                                <include reference="eOc-5E-iVi"/>
-                                <include reference="iNX-ZF-ztD"/>
                                 <include reference="rj5-R7-UXE"/>
                                 <include reference="1dd-zc-ehw"/>
                                 <include reference="ND0-0U-HjB"/>
                                 <include reference="OCm-QO-QRK"/>
+                                <include reference="eOc-5E-iVi"/>
+                                <include reference="iNX-ZF-ztD"/>
+                                <include reference="jHj-uR-OIA"/>
+                                <include reference="m9f-oH-8br"/>
                                 <include reference="5aM-fj-S0N"/>
                                 <include reference="WlM-LJ-epv"/>
                                 <include reference="glY-sV-ICq"/>
-                                <include reference="jHj-uR-OIA"/>
-                                <include reference="m9f-oH-8br"/>
+                                <include reference="hpX-35-cOK"/>
                                 <include reference="PXM-0U-3L7"/>
                                 <include reference="rDo-RR-tWR"/>
-                                <include reference="hpX-35-cOK"/>
-                                <include reference="AMd-LJ-us5"/>
                             </mask>
                         </variation>
                     </view>

@@ -11,12 +11,12 @@
 
 @interface PreferencesView () <UIScrollViewDelegate,UICollisionBehaviorDelegate>
 //uicollision properties
-@property (nonatomic,strong) UIDynamicAnimator *dynamicAnimator;
+@property (nonatomic,strong) UIDynamicAnimator *animator;
 @property (nonatomic,strong) UIGravityBehavior *gravity, *gravity2;
 @property (nonatomic,strong) UICollisionBehavior *collision;
 @property (nonatomic,strong)  UISnapBehavior *snap;
 
-@property(nonatomic,strong) UIImageView *imgView;
+
 @property(nonatomic,strong) UIImageView *imgView2, *imgView3;
 
 
@@ -64,6 +64,11 @@ UIScrollView *scrollView;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    
+    
+    
     _aDictionary = [NSMutableDictionary dictionary];
    
 
@@ -85,11 +90,10 @@ UIScrollView *scrollView;
         // If the file doesn’t exist, create an empty dictionary
         _data = [[NSMutableDictionary alloc] init];
     }
-
     
     
-    [self setUpList];
-    [self setUpScroll];
+  [self setUpList];
+[self setUpScroll];
 
     
 }
@@ -118,70 +122,84 @@ UIScrollView *scrollView;
 }
 
 
-//-(void)alertMe:(id)sender
-//{
-//    UIButton *bpressed = (UIButton*)sender;
-//   
-//    if ([_userPrefs objectForKey:[NSNumber numberWithLong:bpressed.tag]] == nil)
-//    {
-//        NSMutableArray *firstarray = [NSMutableArray new];
-//        [firstarray addObject:bpressed.titleLabel.text];
-//        [_userPrefs setObject:firstarray forKey:[NSNumber numberWithLong:bpressed.tag]];
-//        
-//       
-//    }
-//    else
-//    {
-//        
-//        _tempArray = [_userPrefs objectForKey:[NSNumber numberWithLong:bpressed.tag]];
-//        [_tempArray addObject:bpressed.titleLabel.text];
-//        [_userPrefs setObject:_tempArray forKey:[NSNumber numberWithLong:bpressed.tag]];
-//            }
-//        NSLog(@" %@,%ld", bpressed.titleLabel.text, (long)bpressed.tag );
-//
-//}
 
 -(void)setUpScroll
 {
-    
-    
-for(NSString *myKeyName in [_myPrefs allKeys])
+    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:_myScrollView];
+    for(NSString *myKeyName in [_myPrefs allKeys])
     {
         for (NSArray *myPrefValues in _myPrefs[myKeyName])
-       {
+        {
 
-           
-         UIButton *aButton = [[UIButton alloc] initWithFrame:CGRectMake(arc4random()%800,arc4random()%600,150,50)];
-           
-        [aButton addTarget:self action:@selector(alertMe:) forControlEvents:UIControlEventTouchUpInside];
-        [aButton setTitle:[NSString stringWithFormat:@"%@",myPrefValues] forState:UIControlStateNormal];
-        [aButton setTag:[myKeyName intValue]];
-        [aButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
-          [aButton setBackgroundColor:[UIColor blackColor]];
-         aButton.titleLabel.font = [UIFont systemFontOfSize:14];
-           
-           [_myScrollView addSubview:aButton];
-//           
-//           self.dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
-//           
-//           self.gravity = [[UIGravityBehavior alloc]initWithItems:@[aButton]];
-//           self.gravity.magnitude =  1;
-//           
-//           self.collision = [[UICollisionBehavior alloc]initWithItems:@[aButton]];
-//           [self.collision setTranslatesReferenceBoundsIntoBoundary:YES];
-//           [self.collision setCollisionDelegate:self];
-//           
-//           
-//           
-//          // [self.dynamicAnimator addBehavior:self.gravity];
-//           [self.dynamicAnimator addBehavior:self.collision];
+            UIButton *aButton = [[UIButton alloc] initWithFrame:CGRectMake(arc4random()%700, arc4random()%500, 150, 50)];
 
-           
-              
-        }
-    }
+    [aButton addTarget:self action:@selector(alertMe:) forControlEvents:UIControlEventTouchUpInside];
+    [aButton setTitle:[NSString stringWithFormat:@"%@",myPrefValues] forState:UIControlStateNormal];
+    [aButton setTag:[myKeyName intValue]];
+
     
-}
+    [aButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
+    [aButton setBackgroundColor:[UIColor blackColor]];
+    aButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    [_myScrollView addSubview:aButton];
+            
+            
+  self.imgView = [[UIImageView alloc] initWithFrame:aButton.frame];
+            // [_imgView setAlpha:0];
+            
+            
+            [aButton addSubview:self.imgView];
+            
+            
+            
+            self.gravity = [[UIGravityBehavior alloc]initWithItems:@[aButton]];
+            self.gravity.magnitude =  .009;
+        
+            
+            self.collision = [[UICollisionBehavior alloc]initWithItems:@[aButton]];
+            [self.collision setTranslatesReferenceBoundsIntoBoundary:YES];
+            [self.collision setCollisionDelegate:self];
+            
+            
+            
+            //[self.animator addBehavior:self.gravity];
+            [self.animator addBehavior:self.collision];
+       
+        }
+        
+        
+
+    }
+
+    
+    }
+
+
+    
+
+//
+//         UIButton *aButton = [[UIButton alloc] initWithFrame:CGRectMake(arc4random()%800,arc4random()%600,150,50)];
+//           
+//        [aButton addTarget:self action:@selector(alertMe:) forControlEvents:UIControlEventTouchUpInside];
+//        [aButton setTitle:[NSString stringWithFormat:@"%@",myPrefValues] forState:UIControlStateNormal];
+//        [aButton setTag:[myKeyName intValue]];
+//        [aButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
+//          [aButton setBackgroundColor:[UIColor blackColor]];
+//         aButton.titleLabel.font = [UIFont systemFontOfSize:14];
+//           
+//           [_myScrollView addSubview:aButton];
+//           
+//           _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+//           _gravity = [[UIGravityBehavior alloc]initWithItems:@[aButton]];
+//           
+//              
+//        }
+//        
+//    }
+    
+    
+//}
 
 -(void)setUpList
 {
