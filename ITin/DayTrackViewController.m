@@ -22,13 +22,19 @@
     [super viewDidLoad];
     
     //NSLog(@"%@",self.arrDayActivities);
-    [self prepareMap];
     
-//    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
-//    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-//    [self.collection setCollectionViewLayout:flowLayout];
+    if (self.arrDayActivities.count > 0)
+    {
+        [self prepareMap];
+    }
+    
+    
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    self.arrDayActivities = nil;
+}
 
 
 
@@ -75,7 +81,15 @@
 #pragma mark - collection Methods
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.arrDayActivities.count;
+    if (self.arrDayActivities.count > 0)
+    {
+        return self.arrDayActivities.count;
+        
+    } else {
+        
+        return 0;
+    }
+    
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

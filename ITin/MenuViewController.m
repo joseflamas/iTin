@@ -7,6 +7,7 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
+#import "Reachability.h"
 #import "AppDelegate.h"
 #import "MenuViewController.h"
 #import "MenuCollectionCell.h"
@@ -15,12 +16,21 @@
 #import "FourSquareVenueParser.h"
 #import "DayActivity.h"
 #import "DayTrackViewController.h"
+#import "EventKit/EventKit.h"
 
 
 @interface MenuViewController() <UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate>
 
+//Check Internet
+@property (nonatomic) Reachability *internetReachability;
+@property (nonatomic) Reachability *wifiReachability;
+
 //plist and persistent data
-@property ( nonatomic, strong ) AppDelegate *delegate;
+@property (nonatomic, strong) AppDelegate *delegate;
+
+//User calendar events
+@property (nonatomic,strong) NSArray *userEvents;
+
 //UI
 @property (nonatomic, strong) NSArray *butonColors;
 @property (nonatomic, strong) UIColor *red;
@@ -30,11 +40,12 @@
 @property (nonatomic, weak) IBOutlet UICollectionView *cvTypeofDayMenu;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
-//logic
+//location
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSString *userLattitude;
 @property (nonatomic, strong) NSString *userLongitude;
 
+//logic
 @property (nonatomic, strong) NSArray *arrTypesofDay;
 @property (nonatomic, strong) NSString *strTypeofDay;
 @property (nonatomic, strong) NSDictionary *dictTypeofDay;
@@ -54,6 +65,8 @@
 
 @implementation MenuViewController
 
+BOOL conexion = false;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -68,14 +81,104 @@
     //Get all the data of the preferences
     [self getandSetTypesofActivities];
     
+    //Check Internet Connectivity
+    [self verificarlaConexionaInternet];
+    
     //Get coordinates
     [self startTrackingPosition];
 
     //Notification for the completion of th data Query
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopWaiting) name:@"dataReceived" object:nil];
     
+
+    //Ask permition for calendar
+    EKEventStore *store = [[EKEventStore alloc] init];
+    [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error)
+     {
+         // Get the appropriate calendar
+         NSCalendar *calendar = [NSCalendar currentCalendar];
+         
+         // Create the start date components
+         NSDateComponents *today = [[NSDateComponents alloc] init];
+         today.day = 0;
+         NSDate *fromToday = [calendar dateByAddingComponents:today
+                                                       toDate:[NSDate date]
+                                                      options:0];
+         
+         // Create the end date components
+         NSDateComponents *tomorrow = [[NSDateComponents alloc] init];
+         tomorrow.day = 1;
+         NSDate *toTomorrow = [calendar dateByAddingComponents:tomorrow
+                                                            toDate:[NSDate date]
+                                                           options:0];
+         
+         // Create the predicate from the event store's instance method
+         NSPredicate *predicate = [store predicateForEventsWithStartDate:fromToday
+                                                                 endDate:toTomorrow
+                                                               calendars:nil];
+         
+         // Fetch all events that match the predicate
+         self.userEvents = [store eventsMatchingPredicate:predicate];
+         
+         NSLog(@"User Events Today: %lu",(unsigned long)self.userEvents.count);
+         
+//         for (EKEventStore *event in self.userEvents)
+//         {
+//             NSLog(@"%@",event.description);
+//         }
+         
+     }];
+}
+
+
+
+
+
+#pragma mark - Reachability
+-(void)verificarlaConexionaInternet
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cambioenConectividad:) name:kReachabilityChangedNotification object:nil];
+    self.internetReachability = [Reachability reachabilityForInternetConnection];
+    [self.internetReachability startNotifier];
+    self.wifiReachability = [Reachability reachabilityForLocalWiFi];
+    [self.wifiReachability startNotifier];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kReachabilityChangedNotification object:self.internetReachability];
+}
+
+-(void)cambioenConectividad:(NSNotification *)notification
+{
+    Reachability *reachability = [notification object];
+    NetworkStatus netStatus = [reachability currentReachabilityStatus];
+    
+    switch (netStatus)
+    {
+        case NotReachable:
+        {
+            conexion = false;
+            break;
+        }
+            
+        case ReachableViaWWAN:
+        {
+            conexion = true;
+            break;
+        }
+        case ReachableViaWiFi:
+        {
+            conexion = true;
+            break;
+        }
+        default:
+        {
+            NSLog(@"NETWORK STATUS UNKNOWN");
+        }
+            break;
+    }
     
 }
+
+
+
 
 
 
@@ -89,6 +192,7 @@
     
     //from the preferences or another plist file get the types of days and add them to a cell.
     self.arrTypesofDay = @[@"Balanced Day", @"Active Day", @"One Activity", @"Extreme Day", @"Relaxed Day", @"Funny Day",@"More ..."];
+    
     
     self.dictOrderofParts  = @{ [NSNumber numberWithInt:1] : @"Breakfast",
                                 [NSNumber numberWithInt:2] : @"Morning Activity",
@@ -178,8 +282,9 @@
 {
     NSLog(@"Tenemos info ...");
 
-   
 }
+
+
 
 
 
@@ -208,6 +313,8 @@
 
 
 
+
+
 #pragma mark - Core Location Methods
 -(void)startTrackingPosition
 {
@@ -223,7 +330,6 @@
 
 - (void)locationManager:(CLLocationManager *)locationManager didUpdateLocations:(NSArray *)locations
 {
-    //    NSLog(@"latitude: %f longitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude);
     self.userLattitude  = [[NSString alloc] initWithFormat:@"%6f", locationManager.location.coordinate.latitude];
     self.userLongitude  = [[NSString alloc] initWithFormat:@"%6f", locationManager.location.coordinate.longitude];
     //[self.locationManager stopUpdatingLocation];
@@ -234,50 +340,53 @@
 
 
 
+
+
 #pragma mark - Prepare Segue Method
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if(conexion)
+    {
+    
     UIButton *senderButton = (UIButton *)sender;
     self.dictPartsofDay = [ self.dictTypeofDay objectForKey:senderButton.titleLabel.text];
     if(self.userLattitude == 0 || self.userLongitude == 0)[self startTrackingPosition];
-    
-
-    
-    //[self startSearchingSuggestionsWithLatitude:self.userLattitude andLongitude:self.userLongitude];
     NSArray *keys                     = [self.dictPartsofDay allKeys];
     NSUInteger numofDayParts          = keys.count;
-    
-//    NSLog(@"%lu",(unsigned long)numofDayParts);
+
     
     for (int i = 1; i <= numofDayParts ; i ++ )
     {
         self.part = [self.dictOrderofParts objectForKey:[NSNumber numberWithInt:i]];
-//        NSLog(@"%@", self.part);
         self.selectedPref = [[self.dictPartsofDay objectForKey:self.part] objectAtIndex:(arc4random()%[[self.dictPartsofDay objectForKey:self.part]count])];
-//        NSLog(@"%@", self.selectedPref);
         [self.dictDaySuggestions setObject:self.selectedPref forKey:self.part];
-        NSLog(@"%@",self.dictDaySuggestions);
         
         [FourSquareVenueHandler getDataforLatitude:self.userLattitude andLongitude:self.userLongitude andQuery:self.selectedPref andReturn:^(NSData *data)
          {
+                 
              [FourSquareVenueParser parsearInformaciondelosItems:data alCompletar:^(NSArray *arrayItems)
               {
                   [self.dictActivitiesSuggestions setObject:arrayItems forKey:self.dictOrderofParts[[NSNumber numberWithInt:i]]];
               }];
-             
+         
          }];
     }
     
-    
-//    NSLog(@"%@", self.dictActivitiesSuggestions);
-    
     ItineraryTableViewController *itvc = [segue destinationViewController];
+        
+    [itvc setUserCalendarActivities:self.userEvents];
     [itvc setStrTypeofDay:self.strTypeofDay];
     [itvc setDictTypeofDay:self.dictTypeofDay];
     [itvc setDictPartsofDay:self.dictPartsofDay];
     [itvc setDictOrderofParts:self.dictOrderofParts];
     [itvc setDictDaySuggestions:self.dictDaySuggestions];
     [itvc setDictActivitiesSuggestions:self.dictActivitiesSuggestions];
+        
+    } else {
+        
+        [[[UIAlertView alloc] initWithTitle:@"No Internet, No Fun :(" message:@"Looks like your Internet connection is not working properly, Check it and try again!. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]show];
+        
+    }
     
 }
 

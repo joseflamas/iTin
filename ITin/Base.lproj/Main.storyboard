@@ -462,7 +462,7 @@
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="ouy-Bb-eAE"/>
                                 <barButtonItem systemItem="play" id="z5p-3x-mif">
                                     <connections>
-                                        <segue destination="4qb-l1-qYu" kind="show" id="Zaj-1u-Y8K"/>
+                                        <segue destination="4qb-l1-qYu" kind="show" id="HDl-Bd-4kP"/>
                                     </connections>
                                 </barButtonItem>
                             </items>
@@ -536,7 +536,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pgU-Ph-bOl">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="65" width="400" height="602"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
                                 </variation>
                                 <connections>
                                     <outlet property="delegate" destination="4qb-l1-qYu" id="B0C-y4-rSV"/>
@@ -621,7 +621,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="448" width="400" height="219"/>
+                                    <rect key="frame" x="0.0" y="428" width="400" height="219"/>
                                 </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="4qb-l1-qYu" id="ZGA-x7-gTR"/>

@@ -8,10 +8,14 @@
 
 #import "FourSquareVenueParser.h"
 
+
+
 @implementation FourSquareVenueParser
 
 +(void)parsearInformaciondelosItems:(NSData *)dataItems alCompletar:( void(^)(NSArray* arrayItems))accionCompletar
 {
+    
+    
     NSMutableArray *arrayofPlaces = [NSMutableArray new];
     NSDictionary *JSONresponse = [NSJSONSerialization JSONObjectWithData:dataItems options:NSJSONReadingAllowFragments error:nil];
     

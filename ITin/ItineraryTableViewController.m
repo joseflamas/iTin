@@ -12,11 +12,13 @@
 #import "DayTrackViewController.h"
 
 
+
 @interface ItineraryTableViewController () <UITableViewDataSource, UITableViewDelegate >
 
 
 @property (nonatomic, strong) NSMutableArray *arrCells;
-
+@property (nonatomic, strong) NSMutableDictionary *userSelections;
+@property (nonatomic, strong) NSDictionary *dictPartsofDaySchedule;
 
 @end
 
@@ -30,20 +32,30 @@
 {
     [super viewDidLoad];
     
-    self.arrUserSelectedActivities = [NSMutableArray new];
-    
-    for (int i = 1; i<= [[self.dictPartsofDay allKeys]count]; i++)
-    {
-        NSNumber *numActivity = [NSNumber numberWithInteger:i];
-        NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
-        NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
-        
-        [self.arrUserSelectedActivities addObject:activitiesPart[0]];
-    }
-    
-    
-}
+    self.arrCells = [NSMutableArray new];
 
+    self.userSelections = [NSMutableDictionary new];
+    [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"1"];
+    [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"2"];
+    [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"3"];
+    [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"4"];
+    [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"5"];
+    [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"6"];
+    [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"7"];
+    [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"8"];
+    
+    self.dictPartsofDaySchedule  = @{ [NSNumber numberWithInt:1] : @"8:00 - 10:00",
+                                      [NSNumber numberWithInt:2] : @"10:00 - 12:00",
+                                      [NSNumber numberWithInt:3] : @"12:00 - 14:00",
+                                      [NSNumber numberWithInt:4] : @"14:00 - 16:00",
+                                      [NSNumber numberWithInt:5] : @"16:00 - 18:00",
+                                      [NSNumber numberWithInt:6] : @"18:00 - 20:00",
+                                      [NSNumber numberWithInt:7] : @"20:00 - 22:00",
+                                      [NSNumber numberWithInt:8] : @"22:00 - 24:00",
+                                      };
+
+
+}
 
 
 
@@ -62,7 +74,7 @@
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString *title = [NSString stringWithFormat:@"%@ : %@",[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]], self.dictDaySuggestions[[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]]] ];
-    return title;//[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]];
+    return title;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -75,6 +87,10 @@
     
     ItineraryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ITCell" forIndexPath:indexPath];
     
+    
+    cell.partOftheDay = [NSNumber numberWithLong:indexPath.section+1];
+    
+    //NSLog(@"%@", cell.partOftheDay);
     
     NSNumber *numActivity = [NSNumber numberWithInteger:indexPath.section+1];
     NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
@@ -105,14 +121,6 @@
         [pagina addSubview:etiquetaPagina];
         
         
-//        UILabel *etiquetaLat = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y-20,W,70)];
-//        [etiquetaLat setText: anActivity.numActivityLatitude.description];
-//        [pagina addSubview:etiquetaLat];
-//        [etiquetaLat setFont:pier];
-//        UILabel *etiquetaLng = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y-10,W,70)];
-//        [etiquetaLng setText: anActivity.numActivityLongitude.description];
-//        [pagina addSubview:etiquetaLng];
-//        [etiquetaLng setFont:pier];
         UILabel *etiquetaDistance = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y,W,70)];
         [etiquetaDistance setText:[NSString stringWithFormat:@"%@ meters", anActivity.numActivityDistance.description
                                    ]];
@@ -133,10 +141,10 @@
         [etiquetaAddress2 setFont:pierB];
         [pagina addSubview:etiquetaAddress2];
         
-        UILabel *etiquetaCategory = [[UILabel alloc] initWithFrame:CGRectMake(10,Y-20,W,70)];
+        UILabel *etiquetaCategory = [[UILabel alloc] initWithFrame:CGRectMake(10, Y-20,W,70)];
         [etiquetaCategory setText: anActivity.strActivityCategoryName];
         [etiquetaCategory setFont:pierD];
-        //[pagina addSubview:etiquetaCategory];
+        [pagina addSubview:etiquetaCategory];
         
         
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight:)];
@@ -149,8 +157,14 @@
         [cell.scrollView addSubview:pagina];
     }
     
-    cell.pageControl.tag = indexPath.section+1;
     cell.pageControl.numberOfPages = numActivitiesinPart;
+    
+    if([self.userSelections objectForKey:[NSString stringWithFormat:@"%@",cell.partOftheDay]] != nil)
+    {
+        NSNumber *selection = [self.userSelections objectForKey:[NSString stringWithFormat:@"%@",cell.partOftheDay]];
+        [cell.scrollView setContentOffset:CGPointMake(self.view.frame.size.width * [selection intValue],0)];
+        cell.pageControl.currentPage = [selection intValue];
+    }
     
     return cell;
 }
@@ -166,17 +180,23 @@
     UIView *sView = sender.view;
     UIScrollView *ssView = (UIScrollView*)sView.superview;
     UIPageControl *pC = [[[ssView superview] subviews] objectAtIndex:1];
+    ItineraryTableViewCell *itvc = (ItineraryTableViewCell*)[[ssView superview] superview];
     
     if (sView.tag >= 1 && sView.tag < 10)
-        [UIView animateWithDuration:.5 animations:
+        [UIView animateWithDuration:.3 animations:
          ^{
             [ssView setContentOffset:CGPointMake(self.view.frame.size.width * sView.tag,0)];
+             
         } completion:^(BOOL finished) {
+            
+            itvc.currentSelection = [NSNumber numberWithLong:sView.tag];
             pC.currentPage = sView.tag;
+            
+            [self.userSelections setValue:[NSNumber numberWithLong: sView.tag] forKey:[NSString stringWithFormat:@"%@",itvc.partOftheDay]];
         }];
     
+    
 }
-
 
 -(void)moveLeft:(UISwipeGestureRecognizer *)sender
 {
@@ -184,18 +204,25 @@
     UIView *sView = sender.view;
     UIScrollView *ssView = (UIScrollView*)sView.superview;
     UIPageControl *pC = [[[ssView superview] subviews] objectAtIndex:1];
+    ItineraryTableViewCell *itvc = (ItineraryTableViewCell*)[[ssView superview] superview];
     
     if (sView.tag >= 2)
-        [UIView animateWithDuration:.5 animations:
+        [UIView animateWithDuration:.3 animations:
          ^{
              [ssView setContentOffset:CGPointMake(self.view.frame.size.width * (sView.tag-2),0)];
              
          } completion:^(BOOL finished) {
              
+             itvc.currentSelection = [NSNumber numberWithLong:sView.tag];
              pC.currentPage = sView.tag-2;
+ 
+             [self.userSelections setValue:[NSNumber numberWithLong: sView.tag-2] forKey:[NSString stringWithFormat:@"%@",itvc.partOftheDay]];
          }];
     
+
+    
 }
+
 
 
 
@@ -205,6 +232,21 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    self.arrUserSelectedActivities = [NSMutableArray new];
+    
+    dispatch_sync(dispatch_queue_create("setOpcions", nil),
+    ^{
+        for (int i = 1; i<= [[self.dictPartsofDay allKeys]count]; i++)
+        {
+            NSNumber *numActivity = [NSNumber numberWithInteger:i];
+            NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
+            NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
+            NSNumber *userSelection = [self.userSelections objectForKey:[NSString stringWithFormat:@"%d",i]];
+            
+            [self.arrUserSelectedActivities addObject:activitiesPart[[userSelection intValue]]];
+        }
+    });
+    
     DayTrackViewController *dtvc = [segue destinationViewController];
     [dtvc setArrDayActivities:self.arrUserSelectedActivities];
 }
