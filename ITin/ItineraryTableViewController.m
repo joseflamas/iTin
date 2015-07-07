@@ -15,6 +15,9 @@
 @interface ItineraryTableViewController () <UITableViewDataSource, UITableViewDelegate >
 
 
+@property (nonatomic, strong) NSMutableArray *arrCells;
+
+
 @end
 
 
@@ -71,7 +74,7 @@
 {
     
     ItineraryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ITCell" forIndexPath:indexPath];
-    cell.tag = indexPath.section+1;
+    
     
     NSNumber *numActivity = [NSNumber numberWithInteger:indexPath.section+1];
     NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
@@ -102,14 +105,14 @@
         [pagina addSubview:etiquetaPagina];
         
         
-        UILabel *etiquetaLat = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y-20,W,70)];
-        [etiquetaLat setText: anActivity.numActivityLatitude.description];
-        [pagina addSubview:etiquetaLat];
-        [etiquetaLat setFont:pier];
-        UILabel *etiquetaLng = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y-10,W,70)];
-        [etiquetaLng setText: anActivity.numActivityLongitude.description];
-        [pagina addSubview:etiquetaLng];
-        [etiquetaLng setFont:pier];
+//        UILabel *etiquetaLat = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y-20,W,70)];
+//        [etiquetaLat setText: anActivity.numActivityLatitude.description];
+//        [pagina addSubview:etiquetaLat];
+//        [etiquetaLat setFont:pier];
+//        UILabel *etiquetaLng = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y-10,W,70)];
+//        [etiquetaLng setText: anActivity.numActivityLongitude.description];
+//        [pagina addSubview:etiquetaLng];
+//        [etiquetaLng setFont:pier];
         UILabel *etiquetaDistance = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y,W,70)];
         [etiquetaDistance setText:[NSString stringWithFormat:@"%@ meters", anActivity.numActivityDistance.description
                                    ]];
@@ -133,7 +136,7 @@
         UILabel *etiquetaCategory = [[UILabel alloc] initWithFrame:CGRectMake(10,Y-20,W,70)];
         [etiquetaCategory setText: anActivity.strActivityCategoryName];
         [etiquetaCategory setFont:pierD];
-        [pagina addSubview:etiquetaCategory];
+        //[pagina addSubview:etiquetaCategory];
         
         
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight:)];
@@ -162,30 +165,40 @@
     
     UIView *sView = sender.view;
     UIScrollView *ssView = (UIScrollView*)sView.superview;
-
+    UIPageControl *pC = [[[ssView superview] subviews] objectAtIndex:1];
     
     if (sView.tag >= 1 && sView.tag < 10)
         [UIView animateWithDuration:.5 animations:
          ^{
             [ssView setContentOffset:CGPointMake(self.view.frame.size.width * sView.tag,0)];
+        } completion:^(BOOL finished) {
+            pC.currentPage = sView.tag;
         }];
     
 }
+
 
 -(void)moveLeft:(UISwipeGestureRecognizer *)sender
 {
     
     UIView *sView = sender.view;
     UIScrollView *ssView = (UIScrollView*)sView.superview;
-    
+    UIPageControl *pC = [[[ssView superview] subviews] objectAtIndex:1];
     
     if (sView.tag >= 2)
         [UIView animateWithDuration:.5 animations:
          ^{
              [ssView setContentOffset:CGPointMake(self.view.frame.size.width * (sView.tag-2),0)];
+             
+         } completion:^(BOOL finished) {
+             
+             pC.currentPage = sView.tag-2;
          }];
     
 }
+
+
+
 
 
 #pragma mark - Navigation

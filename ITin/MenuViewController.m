@@ -28,6 +28,7 @@
 @property (nonatomic, strong) UIColor *blue;
 @property (nonatomic, strong) UIColor *yellow;
 @property (nonatomic, weak) IBOutlet UICollectionView *cvTypeofDayMenu;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 //logic
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -176,6 +177,8 @@
 -(void)stopWaiting
 {
     NSLog(@"Tenemos info ...");
+
+   
 }
 
 
@@ -237,6 +240,8 @@
     UIButton *senderButton = (UIButton *)sender;
     self.dictPartsofDay = [ self.dictTypeofDay objectForKey:senderButton.titleLabel.text];
     if(self.userLattitude == 0 || self.userLongitude == 0)[self startTrackingPosition];
+    
+
     
     //[self startSearchingSuggestionsWithLatitude:self.userLattitude andLongitude:self.userLongitude];
     NSArray *keys                     = [self.dictPartsofDay allKeys];
