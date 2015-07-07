@@ -22,9 +22,19 @@
     [super viewDidLoad];
     
     //NSLog(@"%@",self.arrDayActivities);
-    [self prepareMap];
+    
+    if (self.arrDayActivities.count > 0)
+    {
+        [self prepareMap];
+    }
+    
+    
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    self.arrDayActivities = nil;
+}
 
 
 
@@ -71,7 +81,15 @@
 #pragma mark - collection Methods
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.arrDayActivities.count;
+    if (self.arrDayActivities.count > 0)
+    {
+        return self.arrDayActivities.count;
+        
+    } else {
+        
+        return 0;
+    }
+    
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -80,20 +98,21 @@
     
     DayActivity *dayAct = self.arrDayActivities[indexPath.row];
     
-    
     MCCell.lblName.text = dayAct.strActivityName;
     MCCell.imgLocation.image = [UIImage imageNamed:@"Thumb"];
     MCCell.btnSave.tag = indexPath.row;
-    MCCell.btnSave.tag = indexPath.row;
+    MCCell.btnShare.tag = indexPath.row;
     
     
     return MCCell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(self.view.frame.size.width/2, self.view.frame.size.width/2);
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    //return CGSizeMake(self.view.frame.size.width/2, self.view.frame.size.width/2);
+//    return CGSizeMake(180, 215);
+//}
+
 
 
 
@@ -110,7 +129,7 @@
     
     UIBarButtonItem *bbi = (UIBarButtonItem*)sender;
     DayActivity *dayAct = self.arrDayActivities[bbi.tag];
-    
+
     UIActivityViewController *actVC = [[UIActivityViewController alloc] initWithActivityItems:@[dayAct.strActivityName] applicationActivities:nil];
     [self presentViewController:actVC animated:YES completion:nil];
     

@@ -8,6 +8,7 @@
 
 #import "FourSquareVenueHandler.h"
 
+
 static NSString * const FS_CLIENT_ID          = @"&client_id=SPGLWMGNTEMMFSISXC2KLBYFOFGQLXRPEDGIITVJ1ZLRWJ4Z";
 static NSString * const FS_CLIENT_SECRET      = @"&client_secret=EWMHMB5HBAH0LMURC2QCUJB2GEMS5QH24VK2OY3QI0RGSKUG";
 static NSString * const FS_VENUES_SEARCH_URL  = @"https://api.foursquare.com/v2/venues/search?";
@@ -74,8 +75,9 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
                        
                    });
     
-    //Send notification 
+    //Send notification
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dataReceived" object:nil userInfo:nil];
+    
 }
 
 //Lat, Lon, Query and Section

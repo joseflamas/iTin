@@ -13,6 +13,8 @@
 @interface ItineraryTableViewController : UITableViewController
 
 
+@property (nonatomic,strong) NSArray *userCalendarActivities;
+
 @property (nonatomic, strong) NSString *strTypeofDay;
 @property (nonatomic, strong) NSDictionary *dictTypeofDay;
 @property (nonatomic, strong) NSDictionary *dictPartsofDay;
