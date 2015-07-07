@@ -10,6 +10,7 @@
 #import "WelcomeViewController.h"
 
 @interface PreferencesView () <UIScrollViewDelegate,UICollisionBehaviorDelegate>
+//uicollision properties
 @property (nonatomic,strong) UIDynamicAnimator *dynamicAnimator;
 @property (nonatomic,strong) UIGravityBehavior *gravity, *gravity2;
 @property (nonatomic,strong) UICollisionBehavior *collision;
@@ -18,21 +19,44 @@
 @property(nonatomic,strong) UIImageView *imgView;
 @property(nonatomic,strong) UIImageView *imgView2, *imgView3;
 
+
+@property (nonatomic,strong) NSArray *paths;
+@property (nonatomic,strong) NSString *path,*documentsDirectory;
+ @property (nonatomic,strong)NSFileManager *fileManager;
+@property (nonatomic,strong)NSMutableDictionary *aDictionary, *data;
+
+
+
+
+
 @property (strong, nonatomic) IBOutlet UIButton *myButton;
 @property (nonatomic,strong) NSMutableArray *arrStuff, *tempArray;
 //@property (nonatomic,strong) NSMutableDictionary *userPrefs;
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
-@property ( nonatomic, strong ) NSString *documentsPreferencesPath; 
+@property ( nonatomic, strong ) NSString *documentsPreferencesPath;
+
+    
+
+
 @end
 
+
 UIScrollView *scrollView;
+    
+
 
 @implementation PreferencesView
+
+
+    
+
+    
+
 - (IBAction)toMainMenu:(id)sender
 {
 
-    WelcomeViewController *wv = [WelcomeViewController new];
-   // [wv createPlist];
+ 
+   [self createPlist];
     
     
 }
@@ -40,7 +64,28 @@ UIScrollView *scrollView;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _aDictionary = [NSMutableDictionary dictionary];
+   
+
+    _paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    _documentsDirectory = [_paths objectAtIndex:0];
+    _path = [self.documentsPreferencesPath stringByAppendingPathComponent:@"userPreferences.plist"];
+    _fileManager = [NSFileManager defaultManager];
     
+    if (![_fileManager fileExistsAtPath: _path]) {
+        
+        _path = [_documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat:@"userPreferences.plist"] ];
+    }
+    
+    if ([_fileManager fileExistsAtPath: _path]) {
+        
+        _data = [[NSMutableDictionary alloc] initWithContentsOfFile: _path];
+    }
+    else {
+        // If the file doesn’t exist, create an empty dictionary
+        _data = [[NSMutableDictionary alloc] init];
+    }
+
     
     
     [self setUpList];
@@ -52,24 +97,49 @@ UIScrollView *scrollView;
 -(void)alertMe:(id)sender
 {
     UIButton *bpressed = (UIButton*)sender;
-
-    if ([_userPrefs objectForKey:[NSNumber numberWithLong:bpressed.tag]] == nil)
+    
+    if ([_userPrefs  valueForKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]] == nil)
     {
         NSMutableArray *firstarray = [NSMutableArray new];
         [firstarray addObject:bpressed.titleLabel.text];
-        [_userPrefs setObject:firstarray forKey:[NSNumber numberWithLong:bpressed.tag]];
+        [_userPrefs  setValue:firstarray forKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
+        
+        
     }
     else
     {
         
-        _tempArray = [_userPrefs objectForKey:[NSNumber numberWithLong:bpressed.tag]];
+        _tempArray = [_userPrefs valueForKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
         [_tempArray addObject:bpressed.titleLabel.text];
-        [_userPrefs setObject:_tempArray forKey:[NSNumber numberWithLong:bpressed.tag]];
-        
+        [_userPrefs  setValue:_tempArray forKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
     }
-        NSLog(@" %@,%ld", bpressed.titleLabel.text, (long)bpressed.tag );
-
+    NSLog(@" %@,%ld", bpressed.titleLabel.text, (long)bpressed.tag );
+    
 }
+
+
+//-(void)alertMe:(id)sender
+//{
+//    UIButton *bpressed = (UIButton*)sender;
+//   
+//    if ([_userPrefs objectForKey:[NSNumber numberWithLong:bpressed.tag]] == nil)
+//    {
+//        NSMutableArray *firstarray = [NSMutableArray new];
+//        [firstarray addObject:bpressed.titleLabel.text];
+//        [_userPrefs setObject:firstarray forKey:[NSNumber numberWithLong:bpressed.tag]];
+//        
+//       
+//    }
+//    else
+//    {
+//        
+//        _tempArray = [_userPrefs objectForKey:[NSNumber numberWithLong:bpressed.tag]];
+//        [_tempArray addObject:bpressed.titleLabel.text];
+//        [_userPrefs setObject:_tempArray forKey:[NSNumber numberWithLong:bpressed.tag]];
+//            }
+//        NSLog(@" %@,%ld", bpressed.titleLabel.text, (long)bpressed.tag );
+//
+//}
 
 -(void)setUpScroll
 {
@@ -176,6 +246,55 @@ for(NSString *myKeyName in [_myPrefs allKeys])
     
     
     theRightGravity.gravityDirection = CGVectorMake(xMod, yMod);
+}
+
+-(void)createPlist
+{
+   
+    
+//    NSMutableDictionary *data;
+//    
+//    if ([_fileManager fileExistsAtPath: _path]) {
+//        
+//        data = [[NSMutableDictionary alloc] initWithContentsOfFile: _path];
+//    }
+//    else {
+//        // If the file doesn’t exist, create an empty dictionary
+//        data = [[NSMutableDictionary alloc] init];
+//    }
+    
+    
+    UserPreferences *up = [UserPreferences sharedManager];
+    up.userPrefs = _userPrefs;
+    
+    //To insert the data into the plist
+    [_data setObject:up.userName forKey:@"UserName"];
+    [_data writeToFile:_path atomically:YES];
+    
+    [_data setObject:up.userAge forKey:@"UserAge"];
+    [_data writeToFile:_path atomically:YES];
+    
+    [_data setObject:up.userGender forKey:@"UserGender"];
+    [_data writeToFile:_path atomically:YES];
+    
+    [_data setObject:up.userLattitude forKey:@"UserLat"];
+    [_data writeToFile:_path atomically:YES];
+    
+    [_data setObject:up.userLongitude forKey:@"UserLong"];
+    [_data writeToFile:_path atomically:YES];
+    
+    
+    
+    [_data setObject:up.userPrefs forKey:@"UserPrefs"];
+    [_data writeToFile:_path atomically:YES];
+
+    
+    
+    NSLog(@"User Name: %@, Age: %@ Gender: %@ Lat: %@ Long: %@",up.userName, up.userAge,up.userGender,up.userLattitude, up.userLongitude);
+    NSLog(@"Preferences:%@", _userPrefs );
+    
+    
+
 }
 
 

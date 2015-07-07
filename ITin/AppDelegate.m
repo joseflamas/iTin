@@ -29,16 +29,16 @@
     
     
   //  If the user doesn't have preferences go the inital Survey.
-    if ( !userHavePreferences )
-    {
-        self.window.rootViewController  = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
-
-    //If we found user preferencesshow go to the menu view.
-    } else {
-        
-        self.window.rootViewController  = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"MenuNavigationController"];
-    }
-    
+//    if ( !userHavePreferences )
+//    {
+//        self.window.rootViewController  = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
+//
+//    //If we found user preferencesshow go to the menu view.
+//    } else {
+//        
+//        self.window.rootViewController  = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"MenuNavigationController"];
+//    }
+//    
 //
 return YES;
 }

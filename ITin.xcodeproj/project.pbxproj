@@ -31,6 +31,7 @@
 		04CFB07A1B445544009911DC /* FourSquareVenueParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CFB0781B445544009911DC /* FourSquareVenueParser.m */; };
 		04DAF20F1B43DF3600E43703 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF20E1B43DF3600E43703 /* MapKit.framework */; };
 		04DAF2111B43DF3C00E43703 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF2101B43DF3C00E43703 /* CoreLocation.framework */; };
+		04F94F5E1B4B62D6004B4C41 /* UserPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F94F5D1B4B62D6004B4C41 /* UserPreferences.m */; };
 		04FFCD341B47ABCB00C4266E /* pier-bd-italic-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04FFCD301B47AB3700C4266E /* pier-bd-italic-bold.otf */; };
 		04FFCD351B47ABCB00C4266E /* pier-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04FFCD311B47AB3700C4266E /* pier-bold.otf */; };
 		04FFCD361B47ABCB00C4266E /* pier-italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 04FFCD321B47AB3700C4266E /* pier-italic.otf */; };
@@ -92,6 +93,8 @@
 		04DAF20C1B43A76B00E43703 /* fullPreferenceList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fullPreferenceList.plist; sourceTree = "<group>"; };
 		04DAF20E1B43DF3600E43703 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		04DAF2101B43DF3C00E43703 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		04F94F5C1B4B62D6004B4C41 /* UserPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPreferences.h; sourceTree = "<group>"; };
+		04F94F5D1B4B62D6004B4C41 /* UserPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPreferences.m; sourceTree = "<group>"; };
 		04FFCD301B47AB3700C4266E /* pier-bd-italic-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pier-bd-italic-bold.otf"; sourceTree = "<group>"; };
 		04FFCD311B47AB3700C4266E /* pier-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pier-bold.otf"; sourceTree = "<group>"; };
 		04FFCD321B47AB3700C4266E /* pier-italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pier-italic.otf"; sourceTree = "<group>"; };
@@ -235,6 +238,8 @@
 		04AEA8FE1B439DB100FB7D0F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				04F94F5C1B4B62D6004B4C41 /* UserPreferences.h */,
+				04F94F5D1B4B62D6004B4C41 /* UserPreferences.m */,
 				04CFB0721B445464009911DC /* DayActivity.h */,
 				04CFB0731B445464009911DC /* DayActivity.m */,
 			);
@@ -404,6 +409,7 @@
 				04CFB0701B444ED2009911DC /* MenuCollectionCell.m in Sources */,
 				04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */,
 				0464900A1B44FA03007A01DC /* MenuNavigationController.m in Sources */,
+				04F94F5E1B4B62D6004B4C41 /* UserPreferences.m in Sources */,
 				04AC26D31B49C894006DD6B0 /* DayTrackPin.m in Sources */,
 				04AEA8D91B436FC400FB7D0F /* main.m in Sources */,
 			);

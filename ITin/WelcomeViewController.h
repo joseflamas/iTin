@@ -17,6 +17,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "UserPreferences.h"
 
 @interface WelcomeViewController : UIViewController
 -(void)createPlist;

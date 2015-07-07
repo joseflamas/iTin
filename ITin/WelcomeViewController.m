@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 
 
+
 @interface WelcomeViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CLLocationManagerDelegate>
 //View Properties J.S.
 @property (strong, nonatomic) IBOutlet UITextField *nameTextField;
@@ -127,69 +128,31 @@ _locationManager.delegate = self;
     [super didReceiveMemoryWarning];
     
 }
--(void)createPlist
-{
-    PreferencesView *pv = [PreferencesView new];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *path = [self.documentsPreferencesPath stringByAppendingPathComponent:@"userPreferences.plist"];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    if (![fileManager fileExistsAtPath: path]) {
-        
-        path = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat:@"userPreferences.plist"] ];
-    }
-    
-    NSMutableDictionary *data;
-    
-    if ([fileManager fileExistsAtPath: path]) {
-        
-        data = [[NSMutableDictionary alloc] initWithContentsOfFile: path];
-    }
-    else {
-        // If the file doesn’t exist, create an empty dictionary
-        data = [[NSMutableDictionary alloc] init];
-    }
-    
-    //To insert the data into the plist
-    [data setObject:_userName forKey:@"UserName"];
-    [data writeToFile:path atomically:YES];
-    
-    [data setObject:_userAge forKey:@"UserAge"];
-    [data writeToFile:path atomically:YES];
-    
-    [data setObject:_userGender forKey:@"UserGender"];
-    [data writeToFile:path atomically:YES];
-    
-    [data setObject:_userLattitude forKey:@"UserLat"];
-    [data writeToFile:path atomically:YES];
-    
-    [data setObject:_userLongitude forKey:@"UserLong"];
-    [data writeToFile:path atomically:YES];
-    
-    [data setObject:@"" forKey:@"UserPrefs"];
-    [data writeToFile:path atomically:YES];
-    [self createPlist];
-//
-}
 
 //Prepares user for next view by storing values J.S.
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    _userName = _nameTextField.text;
-    _userAge =[NSString stringWithFormat:@"%@",_ageNumber];
+   // PreferencesView *pv = [PreferencesView new];
+    UserPreferences *up =  [UserPreferences sharedManager];
+    
+    up.userName = _nameTextField.text;
+    up.userAge =[NSString stringWithFormat:@"%@",_ageNumber];
     
     NSInteger selectedIndex = (NSInteger)_genderControl.selectedSegmentIndex;
     if (selectedIndex == 0)
-        _userGender = @"Male";
+        up.userGender = @"Male";
     else
-        _userGender =@"Female";
+        up.userGender =@"Female";
     
- 
+    up.userLattitude = _userLattitude;
+    up.userLongitude = _userLongitude;
+     // Pass any objects to the view controller here, like...
+   // [wvc setUserAge:up.userName];
 
-    NSLog(@"User Name: %@, Age: %@ Gender: %@ Lat: %@ Long: %@",_userName,_userAge,_userGender,_userLattitude, _userLongitude);
     
+
+    NSLog(@"User Name: %@, Age: %@ Gender: %@ Lat: %@ Long: %@",up.userName, up.userAge,up.userGender,up.userLattitude, up.userLongitude);
 }
 //Dismisses keyboard J.S.
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

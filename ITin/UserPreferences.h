@@ -1,18 +1,24 @@
 //
-//  PreferencesView.h
+//  UserPreferences.h
 //  ITin
 //
-//  Created by Mac on 7/2/15.
+//  Created by Mac on 7/6/15.
 //  Copyright (c) 2015 Mac. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface PreferencesView : UIViewController
-@property (nonatomic,strong) NSMutableDictionary *myPrefs;// *userPrefs;
+@interface UserPreferences : NSObject {
+    NSString *someProperty;
+}
+
+@property (nonatomic, retain) NSString *someProperty;
+
++ (id)sharedManager;
+
 @property (nonatomic, strong) NSString *userLattitude;
 @property (nonatomic, strong) NSString *userLongitude;
 @property (nonatomic,strong) NSString *userName, *userAge , *userGender;
 @property (nonatomic,strong)NSMutableArray  *userData;
-@property (nonatomic,strong)NSMutableArray *userPrefs;
+@property (nonatomic,strong) NSMutableArray *userPrefs;
 @end
