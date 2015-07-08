@@ -17,25 +17,32 @@
 @interface ItineraryTableViewController () <UITableViewDataSource, UITableViewDelegate >
 
 
-@property (nonatomic, strong) NSMutableArray *arrCells;
-@property (nonatomic, strong) NSMutableDictionary *userSelections;
-@property (nonatomic, strong) NSDictionary *dictPartsofDaySchedule;
-
 @end
 
 
 @implementation ItineraryTableViewController
 
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-
+    //Prepare the array of cells.
     self.arrCells = [NSMutableArray new];
 
+    //Set the first state.
+    [self setFirstState];
+    
+    //Check if the user has already activities in the IOS calendar.
+    [self matchUserActivities];
+    
+}
+
+
+#pragma mark - Helper Methods
+-(void)setFirstState
+{
+    //First state of the cells
     self.userSelections = [NSMutableDictionary new];
     [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"1"];
     [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"2"];
@@ -46,12 +53,8 @@
     [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"7"];
     [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"8"];
     
-    
+    //Time intervals for the current structured day.
     self.dictPartsofDaySchedule  = [self todayIntervalsforPartsofTheDay:[self.dictOrderofParts allKeys]];
-    //NSLog(@"%@", self.dictPartsofDaySchedule.description);
-    
-    [self matchUserActivities];
-    
 }
 
 
@@ -59,7 +62,6 @@
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return [[self.dictPartsofDay allKeys]count];
 }
 
@@ -184,7 +186,11 @@
     UIPageControl *pC = [[[ssView superview] subviews] objectAtIndex:1];
     ItineraryTableViewCell *itvc = (ItineraryTableViewCell*)[[ssView superview] superview];
     
-    if (sView.tag >= 1 && sView.tag < 10)
+    NSString *namePart = [self.dictOrderofParts objectForKey:itvc.partOftheDay];
+    NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
+    NSUInteger numActivitiesinPart = [activitiesPart count];
+    
+    if (sView.tag >= 1 && sView.tag < numActivitiesinPart)
         [UIView animateWithDuration:.3 animations:
          ^{
             [ssView setContentOffset:CGPointMake(self.view.frame.size.width * sView.tag,0)];
@@ -193,7 +199,6 @@
             
             itvc.currentSelection = [NSNumber numberWithLong:sView.tag];
             pC.currentPage = sView.tag;
-            
             [self.userSelections setValue:[NSNumber numberWithLong: sView.tag] forKey:[NSString stringWithFormat:@"%@",itvc.partOftheDay]];
         }];
     
@@ -337,7 +342,7 @@
          
          for (EKEvent *event in self.userCalendarActivities)
          {
-             NSLog(@"%@", event.description);
+//             NSLog(@"%@", event.description);
              
              for(int k = 1; k<=[[self.dictPartsofDay allKeys]count]; k++ )
              {
@@ -354,14 +359,12 @@
 
                      da.strActivityName = event.title;
                      da.strActivityAddress = event.location;
-                     EKStructuredLocation *location = (EKStructuredLocation *)[event valueForKey:@"structuredLocation"];
-
-                     
+                     //EKStructuredLocation *location = (EKStructuredLocation *)[event valueForKey:@"structuredLocation"];
                      //da.
                      
                      NSString *part = [self.dictOrderofParts objectForKey:[NSNumber numberWithInt:[key intValue]]];
                      [self.dictActivitiesSuggestions setObject:@[da] forKey:part];
-                     NSLog(@"user has activity at that time: %@ fromPart %@", event.startDate, eventRange[0] );
+//                     NSLog(@"user has activity at that time: %@ fromPart %@", event.startDate, eventRange[0] );
                  }
                  
              }
