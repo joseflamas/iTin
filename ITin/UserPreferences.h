@@ -20,5 +20,5 @@
 @property (nonatomic, strong) NSString *userLongitude;
 @property (nonatomic,strong) NSString *userName, *userAge , *userGender;
 @property (nonatomic,strong)NSMutableArray  *userData;
-@property (nonatomic,strong) NSMutableArray *userPrefs;
+@property (nonatomic,strong) NSMutableDictionary *userPrefs;
 @end

@@ -20,6 +20,6 @@
 #import "UserPreferences.h"
 
 @interface WelcomeViewController : UIViewController
--(void)createPlist;
+
 @end
 
