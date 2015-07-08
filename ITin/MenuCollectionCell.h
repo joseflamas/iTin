@@ -10,6 +10,9 @@
 
 @interface MenuCollectionCell : UICollectionViewCell
 
+
+//The collection view only holds a button.
 @property ( nonatomic, weak ) IBOutlet UIButton *btnMCCell;
+
 
 @end

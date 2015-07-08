@@ -10,6 +10,7 @@
 #import "ItineraryTableViewCell.h"
 #import "DayActivity.h"
 #import "DayTrackViewController.h"
+#import "EventKit/EventKit.h"
 
 
 
@@ -32,6 +33,7 @@
 {
     [super viewDidLoad];
     
+
     self.arrCells = [NSMutableArray new];
 
     self.userSelections = [NSMutableDictionary new];
@@ -44,17 +46,12 @@
     [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"7"];
     [self.userSelections setObject:[NSNumber numberWithInt:0] forKey:@"8"];
     
-    self.dictPartsofDaySchedule  = @{ [NSNumber numberWithInt:1] : @"8:00 - 10:00",
-                                      [NSNumber numberWithInt:2] : @"10:00 - 12:00",
-                                      [NSNumber numberWithInt:3] : @"12:00 - 14:00",
-                                      [NSNumber numberWithInt:4] : @"14:00 - 16:00",
-                                      [NSNumber numberWithInt:5] : @"16:00 - 18:00",
-                                      [NSNumber numberWithInt:6] : @"18:00 - 20:00",
-                                      [NSNumber numberWithInt:7] : @"20:00 - 22:00",
-                                      [NSNumber numberWithInt:8] : @"22:00 - 24:00",
-                                      };
-
-
+    
+    self.dictPartsofDaySchedule  = [self todayIntervalsforPartsofTheDay:[self.dictOrderofParts allKeys]];
+    //NSLog(@"%@", self.dictPartsofDaySchedule.description);
+    
+    [self matchUserActivities];
+    
 }
 
 
@@ -86,12 +83,8 @@
 {
     
     ItineraryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ITCell" forIndexPath:indexPath];
-    
-    
+
     cell.partOftheDay = [NSNumber numberWithLong:indexPath.section+1];
-    
-    //NSLog(@"%@", cell.partOftheDay);
-    
     NSNumber *numActivity = [NSNumber numberWithInteger:indexPath.section+1];
     NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
     NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
@@ -110,6 +103,9 @@
         UIFont *pierD = [UIFont fontWithName:@"Pier Sans" size:16];
         
         DayActivity *anActivity = activitiesPart[a];
+        
+        anActivity.arrTimeDateIntervals = [self.dictPartsofDaySchedule objectForKey:[NSString stringWithFormat:@"%@",[NSNumber numberWithLong:indexPath.section+1]]];
+        
         UIView *pagina = [[UIView alloc] initWithFrame:CGRectMake(W*a, Y, W, vH)];
         pagina.tag = a+1;
         [pagina setBackgroundColor:[UIColor colorWithRed:drand48() green:drand48() blue:drand48() alpha:1.0]];
@@ -121,9 +117,15 @@
         [pagina addSubview:etiquetaPagina];
         
         
-        UILabel *etiquetaDistance = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y,W,70)];
-        [etiquetaDistance setText:[NSString stringWithFormat:@"%@ meters", anActivity.numActivityDistance.description
-                                   ]];
+        UILabel *etiquetaHora = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y,W,70)];
+        NSDate *dtAct = anActivity.arrTimeDateIntervals[0];
+        NSArray *hours = [[dtAct.description componentsSeparatedByString:@" "][1] componentsSeparatedByString:@":"];
+        [etiquetaHora setText:[NSString stringWithFormat:@"%@:%@", hours[0],hours[1]]];
+        [etiquetaHora setFont:pier];
+        [pagina addSubview:etiquetaHora];
+        
+        UILabel *etiquetaDistance = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y+15,W,70)];
+        [etiquetaDistance setText:[NSString stringWithFormat:@"%@ meters", anActivity.numActivityDistance.description]];
         [etiquetaDistance setFont:pier];
         [pagina addSubview:etiquetaDistance];
         
@@ -232,8 +234,8 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    self.arrUserSelectedActivities = [NSMutableArray new];
     
+    self.arrUserSelectedActivities = [NSMutableArray new];
     dispatch_sync(dispatch_queue_create("setOpcions", nil),
     ^{
         for (int i = 1; i<= [[self.dictPartsofDay allKeys]count]; i++)
@@ -255,10 +257,121 @@
 
 
 
+#pragma mark - Dates Intervals 
+-(NSDictionary *)todayIntervalsforPartsofTheDay:(NSArray *)partsoftheDay
+{
+    NSDate *today = [NSDate date];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    [calendar setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    NSDateComponents *dateComponents = [calendar components: NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:today];
+    [dateComponents setHour:0];
+    [dateComponents setMinute:0];
+    [dateComponents setSecond:0];
+    NSDate *todaymidnightUTC = [calendar dateFromComponents:dateComponents];
+    //NSLog(@"%@",todaymidnightUTC.description);
+    
+    
+    NSDictionary *ranges = [NSMutableDictionary new];
+    int rfrom = 8;
+    int rto = 10;
+    for (int r = 1; r <= partsoftheDay.count; r++)
+    {
+        NSDateComponents *dateComponentsFrom = [calendar components: NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:todaymidnightUTC];
+        [dateComponentsFrom setHour:rfrom];
+        [dateComponentsFrom setMinute:0];
+        [dateComponentsFrom setSecond:0];
+        
+        NSDateComponents *dateComponentsTo = [calendar components: NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:todaymidnightUTC];
+        [dateComponentsTo setHour:rto];
+        [dateComponentsTo setMinute:0];
+        [dateComponentsTo setSecond:0];
+        
+        NSDate *todayFrom = [calendar dateFromComponents:dateComponentsFrom];
+        NSDate *todayTo   = [calendar dateFromComponents:dateComponentsTo];
+        
+        rfrom+=2;
+        rto+=2;
+        
+//        NSLog(@"%@",todayFrom.description);
+//        NSLog(@"%@",todayTo.description);
+        
+        [ranges setValue:@[todayFrom,todayTo] forKey:[NSString stringWithFormat:@"%@",[NSNumber numberWithInt:r]]];
+    }
+    
+    return ranges;
+}
 
 
+-(void)matchUserActivities
+{
+    //Ask permition for calendar
+    EKEventStore *store = [[EKEventStore alloc] init];
+    [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error)
+     {
+         // Get the appropriate calendar
+         NSCalendar *calendar = [NSCalendar currentCalendar];
+         
+         // Create the start date components
+         NSDateComponents *today = [[NSDateComponents alloc] init];
+         today.day = -1;
+         NSDate *fromToday = [calendar dateByAddingComponents:today
+                                                       toDate:[NSDate date]
+                                                      options:0];
+         
+         // Create the end date components
+         NSDateComponents *tomorrow = [[NSDateComponents alloc] init];
+         tomorrow.day = 1;
+         NSDate *toTomorrow = [calendar dateByAddingComponents:tomorrow
+                                                        toDate:[NSDate date]
+                                                       options:0];
+         
+         // Create the predicate from the event store's instance method
+         NSPredicate *predicate = [store predicateForEventsWithStartDate:fromToday
+                                                                 endDate:toTomorrow
+                                                               calendars:nil];
+         
+         // Fetch all events that match the predicate
+         self.userCalendarActivities = [store eventsMatchingPredicate:predicate];
+         
+         //NSLog(@"User Events Today: %lu",(unsigned long)self.userCalendarActivities.count);
+         
+         for (EKEvent *event in self.userCalendarActivities)
+         {
+             NSLog(@"%@", event.description);
+             
+             for(int k = 1; k<=[[self.dictPartsofDay allKeys]count]; k++ )
+             {
+                 
+                 NSString *key = [NSString stringWithFormat:@"%@", [NSNumber numberWithInt:k]];
+                 NSArray *eventRange = [self.dictPartsofDaySchedule objectForKey:key];
+                 
+//                 NSLog(@"start part %@", eventRange[0]);
+//                 NSLog(@"end part %@", eventRange[1]);
+                 
+                 if( event.startDate >= eventRange[0] && event.startDate <= eventRange[1] )
+                 {
+                     DayActivity *da = [DayActivity new];
 
+                     da.strActivityName = event.title;
+                     da.strActivityAddress = event.location;
+                     EKStructuredLocation *location = (EKStructuredLocation *)[event valueForKey:@"structuredLocation"];
 
+                     
+                     //da.
+                     
+                     NSString *part = [self.dictOrderofParts objectForKey:[NSNumber numberWithInt:[key intValue]]];
+                     [self.dictActivitiesSuggestions setObject:@[da] forKey:part];
+                     NSLog(@"user has activity at that time: %@ fromPart %@", event.startDate, eventRange[0] );
+                 }
+                 
+             }
+             
+             
+         }
+         
+     }];
+
+}
 
 
 

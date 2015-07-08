@@ -144,20 +144,18 @@
 			children = (
 				046490021B44C65A007A01DC /* ItineraryTableViewController.h */,
 				046490031B44C65A007A01DC /* ItineraryTableViewController.m */,
-				046490051B44C67C007A01DC /* ItineraryTableViewCell.h */,
-				046490061B44C67C007A01DC /* ItineraryTableViewCell.m */,
 				04CFB07B1B44557E009911DC /* FourSquare */,
 			);
 			name = Itinerary;
 			sourceTree = "<group>";
 		};
-		046516401B4B78F800BB983A /* Helpers */ = {
+		046516401B4B78F800BB983A /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
 				0465163D1B4B78F300BB983A /* Reachability.h */,
 				0465163E1B4B78F300BB983A /* Reachability.m */,
 			);
-			name = Helpers;
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 		0479F1C51B47512300D2F8DC /* DayTrack */ = {
@@ -165,10 +163,6 @@
 			children = (
 				0479F1C61B47514600D2F8DC /* DayTrackViewController.h */,
 				0479F1C71B47514600D2F8DC /* DayTrackViewController.m */,
-				04AC26CE1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.h */,
-				04AC26CF1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.m */,
-				04AC26D11B49C894006DD6B0 /* DayTrackPin.h */,
-				04AC26D21B49C894006DD6B0 /* DayTrackPin.m */,
 			);
 			name = DayTrack;
 			sourceTree = "<group>";
@@ -206,7 +200,6 @@
 				04AEA8FE1B439DB100FB7D0F /* Models */,
 				04AEA8FF1B439DBB00FB7D0F /* Views */,
 				04AEA8FD1B439D0700FB7D0F /* Controllers */,
-				046516401B4B78F800BB983A /* Helpers */,
 				04FFCD2F1B47AB2200C4266E /* Fonts */,
 				04AEA8E31B436FC500FB7D0F /* Images.xcassets */,
 				042142BF1B48C52400063E36 /* background.png */,
@@ -259,6 +252,14 @@
 				04F94F5D1B4B62D6004B4C41 /* UserPreferences.m */,
 				04CFB0721B445464009911DC /* DayActivity.h */,
 				04CFB0731B445464009911DC /* DayActivity.m */,
+				04CFB06C1B444ED2009911DC /* MenuCollectionCell.h */,
+				04CFB06D1B444ED2009911DC /* MenuCollectionCell.m */,
+				046490051B44C67C007A01DC /* ItineraryTableViewCell.h */,
+				046490061B44C67C007A01DC /* ItineraryTableViewCell.m */,
+				04AC26CE1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.h */,
+				04AC26CF1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.m */,
+				04AC26D11B49C894006DD6B0 /* DayTrackPin.h */,
+				04AC26D21B49C894006DD6B0 /* DayTrackPin.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -279,8 +280,7 @@
 				046490091B44FA03007A01DC /* MenuNavigationController.m */,
 				04CFB06E1B444ED2009911DC /* MenuViewController.h */,
 				04CFB06F1B444ED2009911DC /* MenuViewController.m */,
-				04CFB06C1B444ED2009911DC /* MenuCollectionCell.h */,
-				04CFB06D1B444ED2009911DC /* MenuCollectionCell.m */,
+				046516401B4B78F800BB983A /* Reachability */,
 			);
 			name = Menu;
 			sourceTree = "<group>";

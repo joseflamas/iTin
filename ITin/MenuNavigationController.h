@@ -10,4 +10,6 @@
 
 @interface MenuNavigationController : UINavigationController
 
+//Navigation controller called by the Delegate when the user has already a preferences.plist
+
 @end

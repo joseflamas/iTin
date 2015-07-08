@@ -91,44 +91,7 @@ BOOL conexion = false;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopWaiting) name:@"dataReceived" object:nil];
     
 
-    //Ask permition for calendar
-    EKEventStore *store = [[EKEventStore alloc] init];
-    [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error)
-     {
-         // Get the appropriate calendar
-         NSCalendar *calendar = [NSCalendar currentCalendar];
-         
-         // Create the start date components
-         NSDateComponents *today = [[NSDateComponents alloc] init];
-         today.day = 0;
-         NSDate *fromToday = [calendar dateByAddingComponents:today
-                                                       toDate:[NSDate date]
-                                                      options:0];
-         
-         // Create the end date components
-         NSDateComponents *tomorrow = [[NSDateComponents alloc] init];
-         tomorrow.day = 1;
-         NSDate *toTomorrow = [calendar dateByAddingComponents:tomorrow
-                                                            toDate:[NSDate date]
-                                                           options:0];
-         
-         // Create the predicate from the event store's instance method
-         NSPredicate *predicate = [store predicateForEventsWithStartDate:fromToday
-                                                                 endDate:toTomorrow
-                                                               calendars:nil];
-         
-         // Fetch all events that match the predicate
-         self.userEvents = [store eventsMatchingPredicate:predicate];
-         
-         NSLog(@"User Events Today: %lu",(unsigned long)self.userEvents.count);
-         
-//         for (EKEventStore *event in self.userEvents)
-//         {
-//             NSLog(@"%@",event.description);
-//         }
-         
-     }];
-}
+  }
 
 
 
@@ -280,7 +243,7 @@ BOOL conexion = false;
 
 -(void)stopWaiting
 {
-    NSLog(@"Tenemos info ...");
+    //NSLog(@"Tenemos info ...");
 
 }
 
@@ -374,7 +337,6 @@ BOOL conexion = false;
     
     ItineraryTableViewController *itvc = [segue destinationViewController];
         
-    [itvc setUserCalendarActivities:self.userEvents];
     [itvc setStrTypeofDay:self.strTypeofDay];
     [itvc setDictTypeofDay:self.dictTypeofDay];
     [itvc setDictPartsofDay:self.dictPartsofDay];

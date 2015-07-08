@@ -11,6 +11,10 @@
 @interface DayActivity : NSObject
 
 
+//Poperties
+@property (nonatomic, strong) NSArray  *arrTimeDateIntervals;
+
+
 //Properties based on the FourSquareApi
 @property (nonatomic, strong) NSString *strActivityId;
 @property (nonatomic, strong) NSString *strActivityName;
