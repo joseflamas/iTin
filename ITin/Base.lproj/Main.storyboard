@@ -6,8 +6,11 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="pier-bold.otf">
+            <string>PierSans-Bold</string>
+            <string>PierSans-Bold</string>
+        </mutableArray>
         <mutableArray key="pier-regular.otf">
-            <string>PierSans</string>
             <string>PierSans</string>
             <string>PierSans</string>
             <string>PierSans</string>
@@ -34,10 +37,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="aik-y9-ISs"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="PierSans" family="Pier Sans" pointSize="21"/>
+                                <fontDescription key="fontDescription" name="PierSans-Bold" family="Pier Sans" pointSize="21"/>
+                                <size key="titleShadowOffset" width="1" height="1"/>
                                 <state key="normal" title="NEXT">
                                     <color key="titleColor" red="0.99215692281723022" green="0.9960784912109375" blue="0.9960784912109375" alpha="1" colorSpace="deviceRGB"/>
-                                    <color key="titleShadowColor" red="0.99215692281723022" green="0.9960784912109375" blue="0.9960784912109375" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -53,7 +57,7 @@
                                     <segue destination="NXM-Zk-Hg6" kind="show" id="bAv-vX-x6k"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tra-hh-eMH">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tra-hh-eMH">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -75,8 +79,10 @@
                                     <constraint firstAttribute="width" constant="42" id="7cV-10-1lO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PierSans" family="Pier Sans" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="2" height="1"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="383-sa-BDJ"/>
@@ -97,8 +103,10 @@
                                     <constraint firstAttribute="width" constant="75" id="tGE-mv-YHd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PierSans" family="Pier Sans" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.95574301859999999" green="0.95574301859999999" blue="0.95574301859999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.062745101750000004" green="0.050980396570000003" blue="0.011764707040000001" alpha="1" colorSpace="deviceRGB"/>
+                                <size key="shadowOffset" width="2" height="1"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="l6g-JD-L5F"/>
@@ -112,7 +120,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sNC-ZS-3Pz">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="sNC-ZS-3Pz">
                                 <rect key="frame" x="-61" y="-14" width="123" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="123" id="8A6-zM-YJo"/>
@@ -121,7 +129,7 @@
                                     <segment title="Male"/>
                                     <segment title="Female"/>
                                 </segments>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.9803922176361084" green="0.98431378602981567" blue="0.9490196704864502" alpha="1" colorSpace="deviceRGB"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="8A6-zM-YJo"/>
@@ -139,7 +147,10 @@
                                     <constraint firstAttribute="height" constant="61" id="d9h-O4-5X2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PierSans" family="Pier Sans" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.062745101749897003" green="0.050980396568775177" blue="0.011764707043766975" alpha="1" colorSpace="deviceRGB"/>
+                                <size key="shadowOffset" width="2" height="1"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="d9h-O4-5X2"/>
@@ -158,8 +169,10 @@
                                     <constraint firstAttribute="height" constant="21" id="ruy-bI-kQE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PierSans" family="Pier Sans" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.062745101750000004" green="0.050980396570000003" blue="0.011764707040000001" alpha="1" colorSpace="deviceRGB"/>
+                                <size key="shadowOffset" width="2" height="1"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="Nsy-mj-A0k"/>
@@ -174,7 +187,7 @@
                                 </variation>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.3411764705882353" green="0.792156862745098" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="TJl-KC-axt" firstAttribute="trailing" secondItem="Tra-hh-eMH" secondAttribute="trailing" id="1dd-zc-ehw"/>
                             <constraint firstItem="p94-UZ-Lei" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="5aM-fj-S0N"/>
@@ -209,26 +222,26 @@
                                 <exclude reference="Qis-A3-Rlq"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="AMd-LJ-us5"/>
                                 <exclude reference="9yp-fY-bVr"/>
                                 <exclude reference="BQC-oM-QPZ"/>
                                 <exclude reference="D60-hG-GlN"/>
                                 <exclude reference="VcM-OK-nzN"/>
                                 <exclude reference="snF-Q1-O2O"/>
+                                <exclude reference="eOc-5E-iVi"/>
+                                <exclude reference="iNX-ZF-ztD"/>
                                 <exclude reference="rj5-R7-UXE"/>
                                 <exclude reference="1dd-zc-ehw"/>
                                 <exclude reference="ND0-0U-HjB"/>
                                 <exclude reference="OCm-QO-QRK"/>
-                                <exclude reference="eOc-5E-iVi"/>
-                                <exclude reference="iNX-ZF-ztD"/>
-                                <exclude reference="jHj-uR-OIA"/>
-                                <exclude reference="m9f-oH-8br"/>
                                 <exclude reference="5aM-fj-S0N"/>
                                 <exclude reference="WlM-LJ-epv"/>
                                 <exclude reference="glY-sV-ICq"/>
-                                <exclude reference="hpX-35-cOK"/>
+                                <exclude reference="jHj-uR-OIA"/>
+                                <exclude reference="m9f-oH-8br"/>
                                 <exclude reference="PXM-0U-3L7"/>
                                 <exclude reference="rDo-RR-tWR"/>
+                                <exclude reference="hpX-35-cOK"/>
+                                <exclude reference="AMd-LJ-us5"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -243,26 +256,26 @@
                                 <include reference="Qis-A3-Rlq"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="AMd-LJ-us5"/>
                                 <include reference="9yp-fY-bVr"/>
                                 <include reference="BQC-oM-QPZ"/>
                                 <include reference="D60-hG-GlN"/>
                                 <include reference="VcM-OK-nzN"/>
                                 <include reference="snF-Q1-O2O"/>
+                                <include reference="eOc-5E-iVi"/>
+                                <include reference="iNX-ZF-ztD"/>
                                 <include reference="rj5-R7-UXE"/>
                                 <include reference="1dd-zc-ehw"/>
                                 <include reference="ND0-0U-HjB"/>
                                 <include reference="OCm-QO-QRK"/>
-                                <include reference="eOc-5E-iVi"/>
-                                <include reference="iNX-ZF-ztD"/>
-                                <include reference="jHj-uR-OIA"/>
-                                <include reference="m9f-oH-8br"/>
                                 <include reference="5aM-fj-S0N"/>
                                 <include reference="WlM-LJ-epv"/>
                                 <include reference="glY-sV-ICq"/>
-                                <include reference="hpX-35-cOK"/>
+                                <include reference="jHj-uR-OIA"/>
+                                <include reference="m9f-oH-8br"/>
                                 <include reference="PXM-0U-3L7"/>
                                 <include reference="rDo-RR-tWR"/>
+                                <include reference="hpX-35-cOK"/>
+                                <include reference="AMd-LJ-us5"/>
                             </mask>
                         </variation>
                     </view>
@@ -289,50 +302,67 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJf-qr-uQt">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJf-qr-uQt">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BrQ-WH-D7a">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <state key="normal" title="START">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="177" y="143" width="47" height="30"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="toMainMenu:" destination="NXM-Zk-Hg6" eventType="touchUpInside" id="d85-f8-ZBa"/>
-                                            <segue destination="tfz-gf-4f2" kind="show" id="to5-GE-ys9"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.99215692281723022" green="0.99215692281723022" blue="0.97647064924240112" alpha="1" colorSpace="deviceRGB"/>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="BrQ-WH-D7a"/>
-                                    </mask>
-                                </variation>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="-125" width="400" height="850"/>
-                                    <mask key="subviews">
-                                        <include reference="BrQ-WH-D7a"/>
-                                    </mask>
+                                    <rect key="frame" x="0.0" y="-62" width="400" height="725"/>
                                 </variation>
                                 <connections>
                                     <outlet property="delegate" destination="NXM-Zk-Hg6" id="c1y-GJ-Jdc"/>
                                 </connections>
                             </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your preferences. Choose as many as you like!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKU-Dd-osw">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" name="PierSans-Bold" family="Pier Sans" pointSize="18"/>
+                                <color key="textColor" red="0.99215692280000001" green="0.99215692280000001" blue="0.97647064920000004" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.062745101750000004" green="0.050980396570000003" blue="0.011764707040000001" alpha="1" colorSpace="deviceRGB"/>
+                                <size key="shadowOffset" width="2" height="1"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="90" y="11" width="245" height="48"/>
+                                </variation>
+                            </label>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s3h-ar-6je">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="82" y="0.0" width="264" height="87"/>
+                                </variation>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BrQ-WH-D7a">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="16"/>
+                                <size key="titleShadowOffset" width="2" height="1"/>
+                                <state key="normal" title="Press me to continue!">
+                                    <color key="titleColor" red="0.26212931769999998" green="1" blue="0.17672579329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="74" y="54" width="272" height="27"/>
+                                </variation>
+                                <connections>
+                                    <action selector="toMainMenu:" destination="NXM-Zk-Hg6" eventType="touchUpInside" id="d85-f8-ZBa"/>
+                                    <segue destination="tfz-gf-4f2" kind="show" id="to5-GE-ys9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <accessibility key="accessibilityConfiguration" label=""/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="fJf-qr-uQt"/>
+                                <exclude reference="XKU-Dd-osw"/>
+                                <exclude reference="s3h-ar-6je"/>
+                                <exclude reference="BrQ-WH-D7a"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="fJf-qr-uQt"/>
+                                <include reference="XKU-Dd-osw"/>
+                                <include reference="s3h-ar-6je"/>
+                                <include reference="BrQ-WH-D7a"/>
                             </mask>
                         </variation>
                     </view>
@@ -342,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5xu-zi-kiw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="267" y="52"/>
+            <point key="canvasLocation" x="267" y="63"/>
         </scene>
         <!--Choose your day-->
         <scene sceneID="6Q6-sO-zJm">

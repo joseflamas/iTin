@@ -16,18 +16,13 @@
 @property (nonatomic,strong) UICollisionBehavior *collision;
 @property (nonatomic,strong)  UISnapBehavior *snap;
 
-
 @property(nonatomic,strong) UIImageView *imgView2, *imgView3;
-
+@property(nonatomic,strong) UIButton *aButton;
 
 @property (nonatomic,strong) NSArray *paths;
 @property (nonatomic,strong) NSString *path,*documentsDirectory;
  @property (nonatomic,strong)NSFileManager *fileManager;
 @property (nonatomic,strong)NSMutableDictionary *aDictionary, *data;
-
-
-
-
 
 @property (strong, nonatomic) IBOutlet UIButton *myButton;
 @property (nonatomic,strong) NSMutableArray *arrStuff, *tempArray;
@@ -42,32 +37,26 @@
 
 
 UIScrollView *scrollView;
-    
+CGPoint firstTouchPoint;
+
+//xd,yd destance between imge center and my touch center
+float xd;
+float yd;
+int width = 150;
+int height = 50;
+CGFloat x = 20, y =150;
 
 
 @implementation PreferencesView
 
-
-    
-
-    
-
 - (IBAction)toMainMenu:(id)sender
 {
-
- 
    [self createPlist];
-    
-    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
-    
-    
     
     _aDictionary = [NSMutableDictionary dictionary];
    
@@ -91,6 +80,7 @@ UIScrollView *scrollView;
         _data = [[NSMutableDictionary alloc] init];
     }
     
+  //  [[self aButton]setUserInteractionEnabled:YES];
     
   [self setUpList];
 [self setUpScroll];
@@ -107,15 +97,29 @@ UIScrollView *scrollView;
         NSMutableArray *firstarray = [NSMutableArray new];
         [firstarray addObject:bpressed.titleLabel.text];
         [_userPrefs  setValue:firstarray forKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
+        [sender setBackgroundColor:[UIColor whiteColor]];
+        
+        
         
         
     }
     else
     {
         
-        _tempArray = [_userPrefs valueForKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
-        [_tempArray addObject:bpressed.titleLabel.text];
-        [_userPrefs  setValue:_tempArray forKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
+        
+        if ([_aButton.backgroundColor isEqual:[UIColor whiteColor]])
+        {
+            [sender setBackgroundColor:[UIColor lightGrayColor]];
+            [_userPrefs removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
+        }
+        else
+        {
+            [sender setBackgroundColor:[UIColor whiteColor]];
+            
+            _tempArray = [_userPrefs valueForKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
+            [_tempArray addObject:bpressed.titleLabel.text];
+            [_userPrefs  setValue:_tempArray forKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
+        }
     }
     NSLog(@" %@,%ld", bpressed.titleLabel.text, (long)bpressed.tag );
     
@@ -125,82 +129,60 @@ UIScrollView *scrollView;
 
 -(void)setUpScroll
 {
-    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:_myScrollView];
+    
+    
+   // self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:_myScrollView];
+   // self.gravity = [[UIGravityBehavior alloc]init];
+    //            self.gravity.magnitude =  .009;
     for(NSString *myKeyName in [_myPrefs allKeys])
     {
         for (NSArray *myPrefValues in _myPrefs[myKeyName])
         {
 
-            UIButton *aButton = [[UIButton alloc] initWithFrame:CGRectMake(arc4random()%700, arc4random()%500, 150, 50)];
+           _aButton = [[UIButton alloc] initWithFrame:CGRectMake(x,y,width, height)];
 
-    [aButton addTarget:self action:@selector(alertMe:) forControlEvents:UIControlEventTouchUpInside];
-    [aButton setTitle:[NSString stringWithFormat:@"%@",myPrefValues] forState:UIControlStateNormal];
-    [aButton setTag:[myKeyName intValue]];
+    [_aButton addTarget:self action:@selector(alertMe:) forControlEvents:UIControlEventTouchUpInside];
+    [_aButton setTitle:[NSString stringWithFormat:@"%@",myPrefValues] forState:UIControlStateNormal];
+    [_aButton setTag:[myKeyName intValue]];
 
-    
-    [aButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
-    [aButton setBackgroundColor:[UIColor blackColor]];
-    aButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    
-    [_myScrollView addSubview:aButton];
-            
-            
-  self.imgView = [[UIImageView alloc] initWithFrame:aButton.frame];
-            // [_imgView setAlpha:0];
-            
-            
-            [aButton addSubview:self.imgView];
-            
-            
-            
-            self.gravity = [[UIGravityBehavior alloc]initWithItems:@[aButton]];
-            self.gravity.magnitude =  .009;
-        
-            
-            self.collision = [[UICollisionBehavior alloc]initWithItems:@[aButton]];
-            [self.collision setTranslatesReferenceBoundsIntoBoundary:YES];
-            [self.collision setCollisionDelegate:self];
-            
-            
-            
-            //[self.animator addBehavior:self.gravity];
-            [self.animator addBehavior:self.collision];
-       
-        }
-        
-        
-
-    }
+    _aButton.layer.cornerRadius = 10;
+    _aButton.layer.borderWidth = 1;
+    _aButton.layer.borderColor = [UIColor blueColor].CGColor;
+    [_aButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [_aButton setBackgroundColor:[UIColor blackColor]];
+    _aButton.titleLabel.font = [UIFont systemFontOfSize:14];
 
     
-    }
-
-
-    
-
+    [_myScrollView addSubview:_aButton];
+            
+//            CGPoint rightEdge = CGPointMake(_aButton.frame.origin.x +
+//                                            _aButton.frame.size.width,_aButton.frame.origin.y);
+//        [_collision addBoundaryWithIdentifier:@"aButton"
+//                                       fromPoint:_aButton.frame.origin
+//                                          toPoint:rightEdge];
+//            
+//            
+//            self.gravity = [[UIGravityBehavior alloc]initWithItems:@[_aButton]];
+//            self.gravity.magnitude =  0;
 //
-//         UIButton *aButton = [[UIButton alloc] initWithFrame:CGRectMake(arc4random()%800,arc4random()%600,150,50)];
-//           
-//        [aButton addTarget:self action:@selector(alertMe:) forControlEvents:UIControlEventTouchUpInside];
-//        [aButton setTitle:[NSString stringWithFormat:@"%@",myPrefValues] forState:UIControlStateNormal];
-//        [aButton setTag:[myKeyName intValue]];
-//        [aButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
-//          [aButton setBackgroundColor:[UIColor blackColor]];
-//         aButton.titleLabel.font = [UIFont systemFontOfSize:14];
-//           
-//           [_myScrollView addSubview:aButton];
-//           
-//           _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
-//           _gravity = [[UIGravityBehavior alloc]initWithItems:@[aButton]];
-//           
-//              
-//        }
-//        
-//    }
-    
-    
-//}
-
+//            
+//            self.collision = [[UICollisionBehavior alloc]initWithItems:@[_aButton]];
+//            [self.collision setTranslatesReferenceBoundsIntoBoundary:YES];
+//            [self.collision setCollisionDelegate:self];
+//            
+            
+            
+      //  [self.animator addBehavior:self.gravity];
+     //   [self.animator addBehavior:self.collision];
+            x += _aButton.frame.size.width+30;
+            if ( x >= _myScrollView.contentSize.width - _aButton.frame.size.width)
+            {
+                x = 20;
+                y += _aButton.frame.size.height+30;
+            }
+        }
+    }
+}
 -(void)setUpList
 {
     _arrStuff = [NSMutableArray new];
@@ -246,44 +228,18 @@ UIScrollView *scrollView;
     [_myPrefs setObject:tempArray forKey:[NSNumber numberWithInt:8]];
     
     
-    [_myScrollView setContentSize:CGSizeMake(800, 1000)];
-    [self.view addSubview:scrollView];
+[_myScrollView setContentSize:CGSizeMake(800, 1000)];
+[self.view addSubview:scrollView];
     
 
     
 }
 
--(void)collisionBehavior:(UICollisionBehavior *)behavior beganContactForItem:(id<UIDynamicItem>)item withBoundaryIdentifier:(id<NSCopying>)identifier atPoint:(CGPoint)p{
-    UIGravityBehavior *theRightGravity = item == self.imgView ? self.gravity :self.gravity2;
-    
-    float ySign =self.gravity.gravityDirection.dy < 0 == 0 ? -1 : 1;
-    float yMod = ySign * (arc4random()%100)/100;
-    
-    float xSign =self.gravity.gravityDirection.dy < 0 == 0 ? -1 : 1;
-    float xMod = xSign * (arc4random()%100)/100;
-    
-    
-    theRightGravity.gravityDirection = CGVectorMake(xMod, yMod);
-}
 
 -(void)createPlist
 {
-   
-    
-//    NSMutableDictionary *data;
-//    
-//    if ([_fileManager fileExistsAtPath: _path]) {
-//        
-//        data = [[NSMutableDictionary alloc] initWithContentsOfFile: _path];
-//    }
-//    else {
-//        // If the file doesn’t exist, create an empty dictionary
-//        data = [[NSMutableDictionary alloc] init];
-//    }
-    
-    
-    UserPreferences *up = [UserPreferences sharedManager];
-    up.userPrefs = _userPrefs;
+   UserPreferences *up = [UserPreferences sharedManager];
+    up.userPrefs = [NSMutableDictionary dictionaryWithDictionary:_userPrefs];
     
     //To insert the data into the plist
     [_data setObject:up.userName forKey:@"UserName"];
@@ -315,5 +271,24 @@ UIScrollView *scrollView;
 
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch* bTouch = [touches anyObject];
+    if ([bTouch.view isEqual:[self aButton]]) {
+        firstTouchPoint = [bTouch locationInView:[self myScrollView]];
+        xd = firstTouchPoint.x - [[bTouch view]center].x;
+        yd = firstTouchPoint.y - [[bTouch view]center].y;
+    }
+}
+
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch* mTouch = [touches anyObject];
+    if (mTouch.view == [self aButton]) {
+        CGPoint cp = [mTouch locationInView:[self myScrollView]];
+        [[mTouch view]setCenter:CGPointMake(cp.x-xd, cp.y-yd)];
+    }
+}
 
 @end
