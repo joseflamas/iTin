@@ -51,6 +51,12 @@ CGFloat x = 20, y =150;
 
 - (IBAction)toMainMenu:(id)sender
 {
+    if (_userPrefs.count == 0)
+    
+    {
+        NSArray *somearray = [[NSArray alloc]initWithObjects:@"fun", nil];
+        [_userPrefs  setValue:somearray forKey:@"4"];
+    }
    [self createPlist];
 }
 
@@ -91,37 +97,36 @@ CGFloat x = 20, y =150;
 -(void)alertMe:(id)sender
 {
     UIButton *bpressed = (UIButton*)sender;
-    
+     //if tag is empty create new array and add to _userPrefs
     if ([_userPrefs  valueForKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]] == nil)
     {
         NSMutableArray *firstarray = [NSMutableArray new];
         [firstarray addObject:bpressed.titleLabel.text];
         [_userPrefs  setValue:firstarray forKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
         [sender setBackgroundColor:[UIColor whiteColor]];
-        
-        
-        
-        
+        NSLog(@"Added: %@,%ld", bpressed.titleLabel.text, (long)bpressed.tag );
     }
     else
     {
-        
-        
-        if ([_aButton.backgroundColor isEqual:[UIColor whiteColor]])
+        //if tag exists and button is selected, unselect preference and remove from _userPrefs
+        if ([[sender backgroundColor] isEqual:[UIColor whiteColor]])
         {
-            [sender setBackgroundColor:[UIColor lightGrayColor]];
+            [sender setBackgroundColor:[UIColor blackColor]];
             [_userPrefs removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
+            NSLog(@"Removed: %@,%ld", bpressed.titleLabel.text, (long)bpressed.tag );
+
         }
         else
-        {
+        {   //if tag exists and color is unselected, select preference and add to _userPrefs
             [sender setBackgroundColor:[UIColor whiteColor]];
             
             _tempArray = [_userPrefs valueForKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
             [_tempArray addObject:bpressed.titleLabel.text];
             [_userPrefs  setValue:_tempArray forKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
+            NSLog(@"Added: %@,%ld", bpressed.titleLabel.text, (long)bpressed.tag );
+
         }
     }
-    NSLog(@" %@,%ld", bpressed.titleLabel.text, (long)bpressed.tag );
     
 }
 
