@@ -17,6 +17,7 @@
 #import "DayActivity.h"
 #import "DayTrackViewController.h"
 #import "EventKit/EventKit.h"
+//#import "MBProgressHUD.h"
 
 
 
@@ -45,6 +46,7 @@
 @property (nonatomic, strong) UIColor *blue;
 @property (nonatomic, strong) UIColor *yellow;
 @property (nonatomic, weak) IBOutlet UICollectionView *cvTypeofDayMenu;
+//@property (nonatomic, strong) MBProgressHUD *HUD;
 
 //location
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -52,7 +54,6 @@
 @property (nonatomic, strong) NSString *userLongitude;
 
 //logic
-
 @property (nonatomic, strong) NSString             *strTypeofDay;
 @property (nonatomic, strong) NSString             *part;
 @property (nonatomic, strong) NSString             *selectedPref;
@@ -69,6 +70,8 @@
 
 
 @implementation MenuViewController
+
+
 
 BOOL conexion = false;
 
@@ -168,6 +171,7 @@ BOOL conexion = false;
 #pragma mark - Menu Helpers
 -(void)prepareMenu
 {
+    //Colors, buttons and stuff
     self.red    = [UIColor colorWithRed:(193/255.0f) green:(45/255.0f)  blue:(47/255.0f) alpha:1];
     self.purple = [UIColor colorWithRed:(67/255.0f)  green:(76/255.0f)  blue:(115/255.0f)alpha:1];
     self.blue   = [UIColor colorWithRed:(37/255.0f)  green:(56/255.0f)  blue:(83/255.0f) alpha:1];
@@ -175,10 +179,6 @@ BOOL conexion = false;
     self.butonColors = @[self.red,self.purple,self.blue,self.yellow];
 }
 
--(void)stopWaiting
-{
-    //NSLog(@"Tenemos info ...");
-}
 
 
 
@@ -243,6 +243,7 @@ BOOL conexion = false;
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MenuCollectionCell *MCCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MCCell" forIndexPath:indexPath];
+    //[MCCell.btnMCCell addTarget:self action:@selector(startSearching:) forControlEvents:UIControlEventTouchUpInside];
     [MCCell.btnMCCell setTitle:self.arrTypesofDay[indexPath.row]forState:UIControlStateNormal];
     [MCCell.btnMCCell setBackgroundColor:self.butonColors[arc4random()%4]];
     return MCCell;
@@ -295,45 +296,61 @@ BOOL conexion = false;
 
 
 
+
+-(void)startSearching:(id)sender
+{
+    
+    //Search info for button pressed.
+    UIButton *senderButton = (UIButton *)sender;
+    self.dictPartsofDay = [self.dictTypeofDay objectForKey:senderButton.titleLabel.text];
+    
+    //:: TODO :: Reachability support + Check that we have coordinnates and resolve when not.
+    if(self.userLattitude == 0 || self.userLongitude == 0)[self startTrackingPosition];
+    
+    //Search all the info for the user.
+    NSArray *keys                     = [self.dictPartsofDay allKeys];
+    NSUInteger numofDayParts          = keys.count;
+    for (int i = 1; i <= numofDayParts ; i ++ )
+    {
+        //Search the part of the day that we are looking to program.
+        self.part = [self.dictOrderofParts objectForKey:[NSNumber numberWithInt:i]];
+        
+        //Select one random preference from the user preferences for that part of the day.
+        self.selectedPref = [[self.dictPartsofDay objectForKey:self.part] objectAtIndex:(arc4random()%[[self.dictPartsofDay objectForKey:self.part]count])];
+        
+        //Set the dictionary of activity suggestions.
+        [self.dictDaySuggestions setObject:self.selectedPref forKey:self.part];
+        
+        //Prepare suggestion for html query and check for non nil suggestions.
+        [FourSquareVenueHandler getDataforLatitude:self.userLattitude andLongitude:self.userLongitude andQuery:[self.selectedPref stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] andReturn:^(NSData *data)
+         {
+             //Parse information received.
+             [FourSquareVenueParser parsearInformaciondelosItems:data alCompletar:^(NSArray *arrayItems)
+              {
+                  //Add Suggestions for each part of the day.
+                  [self.dictActivitiesSuggestions setObject:arrayItems forKey:self.dictOrderofParts[[NSNumber numberWithInt:i]]];
+              }];
+             
+         }];
+    }
+    
+}
+
+-(void)stopWaiting
+{
+    //NSLog(@"Tenemos info ...");
+}
+
+
+
 #pragma mark - Prepare Segue Method
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    
     if(conexion)
     {
-    
-        //Search info for button pressed.
-        UIButton *senderButton = (UIButton *)sender;
-        self.dictPartsofDay = [self.dictTypeofDay objectForKey:senderButton.titleLabel.text];
         
-        //:: TODO :: Reachability support + Check that we have coordinnates and resolve when not.
-        if(self.userLattitude == 0 || self.userLongitude == 0)[self startTrackingPosition];
-        
-        //Search all the info for the user.
-        NSArray *keys                     = [self.dictPartsofDay allKeys];
-        NSUInteger numofDayParts          = keys.count;
-        for (int i = 1; i <= numofDayParts ; i ++ )
-        {
-            //Search the part of the day that we are looking to program.
-            self.part = [self.dictOrderofParts objectForKey:[NSNumber numberWithInt:i]];
-            
-            //Select one random preference from the user preferences for that part of the day.
-            self.selectedPref = [[self.dictPartsofDay objectForKey:self.part] objectAtIndex:(arc4random()%[[self.dictPartsofDay objectForKey:self.part]count])];
-            
-            //Set the dictionary of activity suggestions.
-            [self.dictDaySuggestions setObject:self.selectedPref forKey:self.part];
-            
-            //Prepare suggestion for html query and check for non nil suggestions.
-            [FourSquareVenueHandler getDataforLatitude:self.userLattitude andLongitude:self.userLongitude andQuery:[self.selectedPref stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] andReturn:^(NSData *data)
-             {
-                 //Parse information received.
-                 [FourSquareVenueParser parsearInformaciondelosItems:data alCompletar:^(NSArray *arrayItems)
-                  {
-                      //Add Suggestions for each part of the day.
-                      [self.dictActivitiesSuggestions setObject:arrayItems forKey:self.dictOrderofParts[[NSNumber numberWithInt:i]]];
-                  }];
-             
-             }];
-        }
+        [self startSearching:sender];
         
         //Prepare the next view with the suggestions for the day.
         ItineraryTableViewController *itvc = [segue destinationViewController];
@@ -350,6 +367,7 @@ BOOL conexion = false;
         [[[UIAlertView alloc] initWithTitle:@"No Internet, No Fun :(" message:@"Looks like your Internet connection is not working properly, Check it and try again!. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil]show];
         
     }
+    
     
 }
 

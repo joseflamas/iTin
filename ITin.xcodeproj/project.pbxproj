@@ -104,6 +104,7 @@
 		04FFCD311B47AB3700C4266E /* pier-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pier-bold.otf"; sourceTree = "<group>"; };
 		04FFCD321B47AB3700C4266E /* pier-italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pier-italic.otf"; sourceTree = "<group>"; };
 		04FFCD331B47AB3700C4266E /* pier-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pier-regular.otf"; sourceTree = "<group>"; };
+		95C4A1FE374D084BBBBEDC81 /* libPods-ITin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ITin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +184,7 @@
 				04AEA8D51B436FC400FB7D0F /* ITin */,
 				04AEA8EF1B436FC500FB7D0F /* ITinTests */,
 				04AEA8D41B436FC400FB7D0F /* Products */,
+				F861AFC080CA68865A6DF417 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -305,6 +307,14 @@
 				04FFCD331B47AB3700C4266E /* pier-regular.otf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		F861AFC080CA68865A6DF417 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				95C4A1FE374D084BBBBEDC81 /* libPods-ITin.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
