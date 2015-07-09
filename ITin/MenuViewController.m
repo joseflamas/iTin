@@ -126,6 +126,10 @@ BOOL conexion = false;
     //                  } ...
     NSDictionary *dicPreferencesPlist = [NSDictionary dictionaryWithContentsOfFile:self.delegate.documentsPreferencesPlistPath];
     
+    NSLog(self.delegate.documentsPreferencesPlistPath);
+    
+    
+    
     //:: TODO :: Temporarily hardcoded. + Different kind of structures for the day.
     self.arrTypesofDay = @[@"Balanced Day", @"Active Day", @"One Activity", @"Extreme Day", @"Relaxed Day", @"Funny Day", @"More"];
     

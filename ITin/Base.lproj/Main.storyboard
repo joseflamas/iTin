@@ -585,6 +585,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pgU-Ph-bOl">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="4qb-l1-qYu" id="B0C-y4-rSV"/>
                                 </connections>
@@ -669,6 +672,9 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="451" width="400" height="149"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="4qb-l1-qYu" id="ZGA-x7-gTR"/>
                                     <outlet property="delegate" destination="4qb-l1-qYu" id="XYo-3t-iSW"/>
@@ -676,46 +682,16 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="pgU-Ph-bOl" firstAttribute="top" secondItem="x4y-aS-2kl" secondAttribute="top" id="C1H-1O-eib"/>
-                            <constraint firstAttribute="trailing" secondItem="pgU-Ph-bOl" secondAttribute="trailing" id="LRd-vs-08y"/>
-                            <constraint firstItem="pgU-Ph-bOl" firstAttribute="leading" secondItem="QTA-8f-J0S" secondAttribute="leading" id="MdE-8Y-7Jw"/>
-                            <constraint firstItem="pgU-Ph-bOl" firstAttribute="leading" secondItem="x4y-aS-2kl" secondAttribute="leading" id="Znm-57-6Xf"/>
-                            <constraint firstItem="pgU-Ph-bOl" firstAttribute="trailing" secondItem="QTA-8f-J0S" secondAttribute="trailing" id="cvr-As-4le"/>
-                            <constraint firstItem="QTA-8f-J0S" firstAttribute="bottom" secondItem="pgU-Ph-bOl" secondAttribute="bottom" id="imi-x7-axI"/>
-                            <constraint firstItem="QTA-8f-J0S" firstAttribute="top" secondItem="ivX-zA-A2k" secondAttribute="bottom" constant="387" id="xxW-ez-5ey"/>
-                            <constraint firstAttribute="bottom" secondItem="pgU-Ph-bOl" secondAttribute="bottom" id="yuG-X5-3ku"/>
-                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="pgU-Ph-bOl"/>
                                 <exclude reference="QTA-8f-J0S"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="C1H-1O-eib"/>
-                                <exclude reference="LRd-vs-08y"/>
-                                <exclude reference="MdE-8Y-7Jw"/>
-                                <exclude reference="Znm-57-6Xf"/>
-                                <exclude reference="cvr-As-4le"/>
-                                <exclude reference="yuG-X5-3ku"/>
-                                <exclude reference="imi-x7-axI"/>
-                                <exclude reference="xxW-ez-5ey"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="pgU-Ph-bOl"/>
                                 <include reference="QTA-8f-J0S"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="C1H-1O-eib"/>
-                                <include reference="LRd-vs-08y"/>
-                                <include reference="MdE-8Y-7Jw"/>
-                                <include reference="Znm-57-6Xf"/>
-                                <include reference="cvr-As-4le"/>
-                                <include reference="yuG-X5-3ku"/>
-                                <include reference="imi-x7-axI"/>
-                                <include reference="xxW-ez-5ey"/>
                             </mask>
                         </variation>
                     </view>
