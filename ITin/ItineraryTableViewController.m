@@ -278,13 +278,27 @@
     self.arrUserSelectedActivities = [NSMutableArray new];
     dispatch_sync(dispatch_queue_create("setOptions", nil),
       ^{
-
+          NSString *namePart;
+          NSArray  *activitiesPart;
+          NSNumber *userSelection;
+          
           for (int i = 1; i<= [[self.dictPartsofDay allKeys]count]; i++)
           {
               NSNumber *numActivity = [NSNumber numberWithInteger:i];
-              NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
-              NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
-              NSNumber *userSelection = [self.userSelections objectForKey:[NSString stringWithFormat:@"%d",i]];
+              
+              if([self.dictOrderofParts objectForKey:numActivity] !=nil )
+              {
+                  namePart = [self.dictOrderofParts objectForKey:numActivity];
+              }
+              if([self.dictActivitiesSuggestions objectForKey:namePart] != nil)
+              {
+                  activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
+              }
+              
+              if([self.userSelections objectForKey:[NSString stringWithFormat:@"%d",i]] != nil)
+              {
+                   userSelection = [self.userSelections objectForKey:[NSString stringWithFormat:@"%d",i]];
+              }
               
               if(userSelection != nil && userSelection != 0 && activitiesPart != nil && activitiesPart != 0)
               {

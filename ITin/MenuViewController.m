@@ -321,7 +321,7 @@ BOOL conexion = false;
         self.userLongitude  = @"-84.353967";
     }
     
-    [self.locationManager stopUpdatingLocation];
+    //[self.locationManager stopUpdatingLocation];
 }
 
 
