@@ -29,6 +29,7 @@
 //@property (nonatomic,strong) NSMutableDictionary *userPrefs;
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property ( nonatomic, strong ) NSString *documentsPreferencesPath;
+@property (strong, nonatomic) NSArray *someArray;
 
 
 
@@ -52,34 +53,60 @@ int xx=100, yy=200;
 
 - (IBAction)toMainMenu:(id)sender
 {    //if user selects no preference set default list
-    if (_userPrefs.count == 0)
+   // if (_userPrefs.count == 0)
         
         
+       if([_userPrefs objectForKey:@"1" ] == nil)
+       {
+        _someArray = [[NSArray alloc]initWithObjects:@"breakfast", nil];
+        [_userPrefs  setValue:_someArray forKey:@"1"];
+       }
+    
+    if([_userPrefs objectForKey:@"2" ] == nil)
     {
-        NSArray *somearray = [[NSArray alloc]initWithObjects:@"breakfast", nil];
-        [_userPrefs  setValue:somearray forKey:@"1"];
-        
-         somearray = [[NSArray alloc]initWithObjects:@"jog", nil];
-        [_userPrefs  setValue:somearray forKey:@"2"];
-        
-        somearray = [[NSArray alloc]initWithObjects:@"burger",nil];
-        [_userPrefs  setValue:somearray forKey:@"3"];
-        
-        somearray = [[NSArray alloc]initWithObjects:@"fun", nil];
-        [_userPrefs  setValue:somearray forKey:@"4"];
-        
-        somearray = [[NSArray alloc]initWithObjects:@"steak", nil];
-        [_userPrefs  setValue:somearray forKey:@"5"];
-        
-        somearray = [[NSArray alloc]initWithObjects:@"events", nil];
-        [_userPrefs  setValue:somearray forKey:@"6"];
-        
-        somearray = [[NSArray alloc]initWithObjects:@"cocktail", nil];
-        [_userPrefs  setValue:somearray forKey:@"7"];
-        
-       somearray = [[NSArray alloc]initWithObjects:@"nightclub", nil];
-        [_userPrefs  setValue:somearray forKey:@"8"];
+         _someArray = [[NSArray alloc]initWithObjects:@"jog", nil];
+        [_userPrefs  setValue:_someArray forKey:@"2"];
     }
+    
+    if([_userPrefs objectForKey:@"3" ] == nil)
+    {
+        _someArray = [[NSArray alloc]initWithObjects:@"burger",nil];
+        [_userPrefs  setValue:_someArray forKey:@"3"];
+    }
+    
+    if([_userPrefs objectForKey:@"4" ] == nil)
+    {
+
+        _someArray = [[NSArray alloc]initWithObjects:@"bowling", nil];
+        [_userPrefs  setValue:_someArray forKey:@"4"];
+    }
+    
+    if([_userPrefs objectForKey:@"5" ] == nil)
+    {
+        _someArray = [[NSArray alloc]initWithObjects:@"steak", nil];
+        [_userPrefs  setValue:_someArray forKey:@"5"];
+    }
+    
+    if([_userPrefs objectForKey:@"6" ] == nil)
+
+    {
+        _someArray = [[NSArray alloc]initWithObjects:@"shows", nil];
+        [_userPrefs  setValue:_someArray forKey:@"6"];
+    }
+    
+    if([_userPrefs objectForKey:@"7" ] == nil)
+    {
+        _someArray = [[NSArray alloc]initWithObjects:@"cocktail", nil];
+        [_userPrefs  setValue:_someArray forKey:@"7"];
+    }
+    
+    
+    if([_userPrefs objectForKey:@"8" ] == nil)
+    {
+       _someArray = [[NSArray alloc]initWithObjects:@"nightclub", nil];
+        [_userPrefs  setValue:_someArray forKey:@"8"];
+    }
+    
     [self createPlist];
 }
 
