@@ -13,13 +13,11 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgLocation;
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
-
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnSave;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnShare;
-
 @property (weak, nonatomic) NSString *strName;
 @property (weak, nonatomic) NSString *strAddress;
-@property (weak, nonatomic) UIImage *imgLoc;
+@property (weak, nonatomic) UIImage  *imgLoc;
 
 @end

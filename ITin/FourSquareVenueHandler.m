@@ -29,6 +29,9 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
 {
     
     NSString *strLatLon = [NSString stringWithFormat:@"&ll=%@,%@", latitude, longitude ];
+    
+    //Send notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"searchingData" object:nil userInfo:nil];
     dispatch_sync(dispatch_queue_create("FSJSONData", nil),
                    ^{
                        
@@ -56,9 +59,12 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
 {
     NSString *strLatLon   = [NSString stringWithFormat:@"&ll=%@,%@", latitude, longitude ];
     NSString *strQuery    = [NSString stringWithFormat:@"&query=%@", query ];
-    dispatch_sync(dispatch_queue_create("FSJSONData", nil),
-                   ^{
-                       
+    
+    //Send notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"searchingData" object:nil userInfo:nil];
+//    dispatch_sync(dispatch_queue_create("FSJSONData", nil),
+//                   ^{
+    
                        NSString *queryString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@",
                                                 FS_VENUES_SEARCH_URL,
                                                 FS_VERSION_PARAMETER,
@@ -73,7 +79,7 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
                        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:queryString]];
                        complete(data);
                        
-                   });
+//                   });
     
     //Send notification
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dataReceived" object:nil userInfo:nil];
@@ -86,6 +92,9 @@ static NSString * const FS_NEAR_PARAMETER     = @"&near=";       //&near=Chicago
     NSString *strLatLon   = [NSString stringWithFormat:@"&ll=%@,%@", latitude, longitude ];
     NSString *strQuery    = [NSString stringWithFormat:@"&query=%@", query ];
     NSString *strSection  = [NSString stringWithFormat:@"&section=%@", section ];
+    
+    //Send notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"searchingData" object:nil userInfo:nil];
     dispatch_sync(dispatch_queue_create("FSJSONData", nil),
                    ^{
                        

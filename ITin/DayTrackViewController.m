@@ -99,7 +99,7 @@
     DayActivity *dayAct = self.arrDayActivities[indexPath.row];
     
     MCCell.lblName.text = dayAct.strActivityName;
-    MCCell.imgLocation.image = [UIImage imageNamed:@"Thumb"];
+    //MCCell.imgLocation.image = [UIImage imageNamed:@"WT"];
     MCCell.btnSave.tag = indexPath.row;
     MCCell.btnShare.tag = indexPath.row;
     

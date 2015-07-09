@@ -13,8 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-@property (weak, nonatomic)  NSNumber *partOftheDay;
-@property (weak, nonatomic)  NSNumber *currentSelection;
+@property (weak, nonatomic) NSNumber *partOftheDay;
+@property (weak, nonatomic) NSNumber *currentSelection;
 
 
 @end
