@@ -42,8 +42,8 @@ CGPoint firstTouchPoint;
 //xd,yd destance between imge center and my touch center
 float xd;
 float yd;
-int width = 150;
-int height = 50;
+int width = 120;
+int height = 40;
 CGFloat x = 20, y =150;
 int xx=100, yy=200;
 
@@ -54,9 +54,31 @@ int xx=100, yy=200;
 {
     if (_userPrefs.count == 0)
         
+        
     {
-        NSArray *somearray = [[NSArray alloc]initWithObjects:@"fun", nil];
+        NSArray *somearray = [[NSArray alloc]initWithObjects:@"breakfast", nil];
+        [_userPrefs  setValue:somearray forKey:@"1"];
+        
+         somearray = [[NSArray alloc]initWithObjects:@"jog", nil];
+        [_userPrefs  setValue:somearray forKey:@"2"];
+        
+        somearray = [[NSArray alloc]initWithObjects:@"burger",nil];
+        [_userPrefs  setValue:somearray forKey:@"3"];
+        
+        somearray = [[NSArray alloc]initWithObjects:@"fun", nil];
         [_userPrefs  setValue:somearray forKey:@"4"];
+        
+        somearray = [[NSArray alloc]initWithObjects:@"steak", nil];
+        [_userPrefs  setValue:somearray forKey:@"5"];
+        
+        somearray = [[NSArray alloc]initWithObjects:@"events", nil];
+        [_userPrefs  setValue:somearray forKey:@"6"];
+        
+        somearray = [[NSArray alloc]initWithObjects:@"cocktail", nil];
+        [_userPrefs  setValue:somearray forKey:@"7"];
+        
+       somearray = [[NSArray alloc]initWithObjects:@"nightclub", nil];
+        [_userPrefs  setValue:somearray forKey:@"8"];
     }
     [self createPlist];
 }
