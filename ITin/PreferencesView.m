@@ -42,16 +42,16 @@ CGPoint firstTouchPoint;
 //xd,yd destance between imge center and my touch center
 float xd;
 float yd;
-int width = 120;
-int height = 40;
-CGFloat x = 20, y =150;
+int width = 125;
+int height = 50;
+CGFloat x = 0, y =0;
 int xx=100, yy=200;
 
 
 @implementation PreferencesView
 
 - (IBAction)toMainMenu:(id)sender
-{
+{    //if user selects no preference set default list
     if (_userPrefs.count == 0)
         
         
@@ -86,6 +86,13 @@ int xx=100, yy=200;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    self.gravity = [[UIGravityBehavior alloc]init];
+    self.collision = [[UICollisionBehavior alloc] init];
+    // [self.collision setTranslatesReferenceBoundsIntoBoundary:YES];
+    [self.collision setCollisionDelegate:self];
+
        _aDictionary = [NSMutableDictionary dictionary];
     
     
@@ -119,12 +126,36 @@ int xx=100, yy=200;
 -(void)alertMe:(id)sender
 {
     UIButton *bpressed = (UIButton*)sender;
-    CGFloat currentLocationx = bpressed.frame.origin.x;
-    CGFloat currentLocationy = bpressed.frame.origin.y;
+    
+//  [self.animator removeAllBehaviors];
+    
+    _animator = [[UIDynamicAnimator alloc] initWithReferenceView:_myScrollView];
+    
+    
+   UIDynamicItemBehavior *dynamicItemBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[bpressed]];
+    dynamicItemBehavior.resistance = 50; // This makes the snapping SLOWER
+    dynamicItemBehavior.allowsRotation = NO;
+   
+   
+    [_collision addBoundaryWithIdentifier:@"bottom"
+                                fromPoint:CGPointMake(0, _myScrollView.contentSize.height)
+                                  toPoint:CGPointMake(_myScrollView.contentSize.width, _myScrollView.contentSize.height)];
+
+    [_collision addBoundaryWithIdentifier:@"left"
+                                fromPoint:CGPointMake(0, 0)
+                                  toPoint:CGPointMake(0, _myScrollView.contentSize.height)];
+    
+    
+    [_collision addBoundaryWithIdentifier:@"right"
+                                fromPoint:CGPointMake(_myScrollView.contentSize.width, 0)
+                                  toPoint:CGPointMake(_myScrollView.contentSize.width, _myScrollView.contentSize.height)];
+    
+    [_collision addBoundaryWithIdentifier:@"top"
+                                fromPoint:CGPointMake(0, 0)
+                                  toPoint:CGPointMake(_myScrollView.contentSize.width,0)];
     
     
     
-    //if tag is empty create new array and add to _userPrefs
     if ([_userPrefs  valueForKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]] == nil)
     {
         NSMutableArray *firstarray = [NSMutableArray new];
@@ -152,64 +183,10 @@ int xx=100, yy=200;
             [_userPrefs  setValue:_tempArray forKey:[NSString stringWithFormat:@"%ld",(long)bpressed.tag]];
             NSLog(@"Added: %@,%ld", bpressed.titleLabel.text, (long)bpressed.tag );
             
+            
         }
     }
     
- //   [self.animator removeAllBehaviors];
-    
-    
-    _animator = [[UIDynamicAnimator alloc] initWithReferenceView:_myScrollView];
-  UISnapBehavior *snap = [[UISnapBehavior alloc] initWithItem:bpressed snapToPoint:CGPointMake(xx, yy)];
-  [snap setDamping:0];
-    
-    UIDynamicItemBehavior *dynamicItemBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[bpressed]];
-    dynamicItemBehavior.resistance = 200; // This makes the snapping SLOWER
-    dynamicItemBehavior.allowsRotation = NO;
-    UISnapBehavior *snapBehavior = [[UISnapBehavior alloc] initWithItem:bpressed snapToPoint:CGPointMake(xx, yy)];
-   [self.animator addBehavior:dynamicItemBehavior];
-    [self.animator addBehavior:snapBehavior];
-    
-  //  [self.animator addBehavior:dynamicItemBehavior];
-   [self.animator addBehavior:snapBehavior];
-   
-
-   
-//    [self.animator addBehavior:self.gravity];
-//    [_collision addBoundaryWithIdentifier:@"bottom"
-//                                fromPoint:CGPointMake(0, _myScrollView.contentSize.height)
-//                                  toPoint:CGPointMake(_myScrollView.contentSize.width, _myScrollView.contentSize.height)];
-//    
-//    [_collision addBoundaryWithIdentifier:@"left"
-//                                fromPoint:CGPointMake(0, 0)
-//                                  toPoint:CGPointMake(0, _myScrollView.contentSize.height)];
-//    
-//    
-//    [_collision addBoundaryWithIdentifier:@"right"
-//                                fromPoint:CGPointMake(_myScrollView.contentSize.width, 0)
-//                                  toPoint:CGPointMake(_myScrollView.contentSize.width, _myScrollView.contentSize.height)];
-//    
-//    [_collision addBoundaryWithIdentifier:@"top"
-//                                fromPoint:CGPointMake(0, 0)
-//                                  toPoint:CGPointMake(_myScrollView.contentSize.width,0)];
-//    
-//    [self.animator addBehavior:self.collision];
-    
-    if (![[sender backgroundColor] isEqual:[UIColor whiteColor]])
-        {
-            bpressed.frame = CGRectMake(currentLocationx,currentLocationy ,width,height);
-        }
-    else
-        {
-            xx += bpressed.frame.size.width+30;
-        }
-    
-    
-    if ( xx >= _myScrollView.contentSize.width - bpressed.frame.size.width)
-    {
-        xx = 20;
-        yy += bpressed.frame.size.height+30;
-    }
-
 
 }
 
@@ -217,11 +194,8 @@ int xx=100, yy=200;
 
 -(void)setUpScroll
 {
-    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:_myScrollView];
-    self.gravity = [[UIGravityBehavior alloc]init];
-    self.collision = [[UICollisionBehavior alloc] init];
-    // [self.collision setTranslatesReferenceBoundsIntoBoundary:YES];
-    [self.collision setCollisionDelegate:self];
+   self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:_myScrollView];
+   //[self.collision setTranslatesReferenceBoundsIntoBoundary:YES];
     
     [_collision addBoundaryWithIdentifier:@"bottom"
                                 fromPoint:CGPointMake(0, _myScrollView.contentSize.height)
@@ -237,7 +211,7 @@ int xx=100, yy=200;
                                   toPoint:CGPointMake(_myScrollView.contentSize.width, _myScrollView.contentSize.height)];
     
     
-    [self.animator addBehavior:self.gravity];
+   [self.animator addBehavior:self.gravity];
     [self.animator addBehavior:self.collision];
     
     for(NSString *myKeyName in [_myPrefs allKeys])
@@ -253,36 +227,31 @@ int xx=100, yy=200;
             
             _aButton.layer.cornerRadius = 10;
             _aButton.layer.borderWidth = 1;
-            _aButton.layer.borderColor = [UIColor blueColor].CGColor;
+            _aButton.layer.borderColor = [UIColor yellowColor].CGColor;
             [_aButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
             [_aButton setBackgroundColor:[UIColor blackColor]];
-            _aButton.titleLabel.font = [UIFont systemFontOfSize:14];
+            _aButton.titleLabel.font = [UIFont systemFontOfSize:16];
             
             
             [_myScrollView addSubview:_aButton];
             
             
-            // CGPoint rightEdge = CGPointMake(_aButton.frame.origin.x +
-            //                                _aButton.frame.size.width,_aButton.frame.origin.y);
-            // [_collision addBoundaryWithIdentifier:@"aButton"
-            //                             fromPoint:_aButton.frame.origin
-            //                               toPoint:rightEdge];
+            
+           // self.gravity = [[UIGravityBehavior alloc]initWithItems:@[_aButton]];
+           self.gravity.magnitude = .4;
+          [self.gravity addItem:_aButton];
             
             
-            // self.gravity = [[UIGravityBehavior alloc]initWithItems:@[_aButton]];
-          //  self.gravity.magnitude = 1;
-           // [self.gravity addItem:_aButton];
+            //self.collision = [[UICollisionBehavior alloc]initWithItems:@[_aButton]];
+            [self.collision addItem:_aButton];
             
             
-            // self.collision = [[UICollisionBehavior alloc]initWithItems:@[_aButton]];
-           // [self.collision addItem:_aButton];
-            
-            
-            x += _aButton.frame.size.width+30;
+            x += _aButton.frame.size.width;
             if ( x >= _myScrollView.contentSize.width - _aButton.frame.size.width)
             {
                 x = 20;
-                y += _aButton.frame.size.height+30;
+               y -= _aButton.frame.size.height+30;
+            
             }
         }
     }
@@ -332,9 +301,10 @@ int xx=100, yy=200;
     [_myPrefs setObject:tempArray forKey:[NSNumber numberWithInt:8]];
     
     
-    [_myScrollView setContentSize:CGSizeMake(800, 1000)];
+    [_myScrollView setContentSize:CGSizeMake(600, 800)];
     [self.view addSubview:scrollView];
     
+    y = _myScrollView.contentSize.height;
     
     
 }

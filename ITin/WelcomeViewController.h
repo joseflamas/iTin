@@ -20,6 +20,8 @@
 #import "UserPreferences.h"
 
 @interface WelcomeViewController : UIViewController
+- (IBAction)nxtButton:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *errorLbl;
 
 @end
 

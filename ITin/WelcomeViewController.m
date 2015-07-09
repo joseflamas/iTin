@@ -12,6 +12,7 @@
 
 
 @interface WelcomeViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CLLocationManagerDelegate>
+@property (strong, nonatomic) IBOutlet UILabel *errTxT;
 //View Properties J.S.
 @property (strong, nonatomic) IBOutlet UITextField *nameTextField;
 @property (strong, nonatomic) IBOutlet UIPickerView *agePickerView;
@@ -35,20 +36,17 @@
 
 
 @implementation WelcomeViewController
-
-
-
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    _errTxT.text = @"";
+}
 - (void)viewDidLoad
 {
     self.delegate = [[UIApplication sharedApplication] delegate];
     
-    //    //paths for convenience
-    //    self.documentsDirectoryPath         = self.delegate.documentsDirectoryPath;
+   
     self.documentsPreferencesPath       = self.delegate.documentsPreferencesPath;
-    //    self.documentsPreferencesPlistPath  = self.delegate.documentsPreferencesPlistPath;
-    //  BOOL userHavePreferences             = [[NSFileManager defaultManager] fileExistsAtPath:self.documentsPreferencesPlistPath];
-
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+      NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *path = [self.documentsPreferencesPath stringByAppendingPathComponent:@"userPreferences.plist"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -69,28 +67,13 @@
         data = [[NSMutableDictionary alloc] init];
     }
     
-    //To insert the data into the plist
-//    [data setObject:@"" forKey:@"UserName"];
-//    [data writeToFile:path atomically:YES];
-//    
-//    [data setObject:@"" forKey:@"UserAge"];
-//    [data writeToFile:path atomically:YES];
-//    
-//    [data setObject:@"" forKey:@"UserGender"];
-//    [data writeToFile:path atomically:YES];
-//    
-//    [data setObject:@"" forKey:@"UserLat"];
-//    [data writeToFile:path atomically:YES];
-//    
-//    [data setObject:@"" forKey:@"UserLong"];
-//    [data writeToFile:path atomically:YES];
-
     
     [super viewDidLoad];
+
     
-//    //get the delegate SharedInstance for retrieving paths
-    
-  
+    [_genderControl addTarget:self
+                         action:@selector(action)
+               forControlEvents:UIControlEventValueChanged];
 //get user location J.S.
   _locationManager = [CLLocationManager new];
     if([_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
@@ -101,12 +84,7 @@ _locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
 _locationManager.delegate = self;
 [_locationManager startUpdatingLocation];
 
-    
-    
-    
-    
-    
-    
+
     //set default age to 18 J.S.
     _ageNumber = [NSNumber numberWithInt:18];
     _age = [[NSMutableArray alloc] init];
@@ -117,10 +95,11 @@ _locationManager.delegate = self;
     }
     
     [_agePickerView reloadAllComponents];
+}
 
-
-
-   
+-(void)action
+{
+    _errorLbl.text = @"";
 }
 
 - (void)didReceiveMemoryWarning
@@ -134,13 +113,16 @@ _locationManager.delegate = self;
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
    // PreferencesView *pv = [PreferencesView new];
+    
+    
     UserPreferences *up =  [UserPreferences sharedManager];
     
     up.userName = _nameTextField.text;
     up.userAge =[NSString stringWithFormat:@"%@",_ageNumber];
     
     NSInteger selectedIndex = (NSInteger)_genderControl.selectedSegmentIndex;
-    if (selectedIndex == 0)
+    
+        if (selectedIndex == 0)
         up.userGender = @"Male";
     else
         up.userGender =@"Female";
@@ -162,6 +144,8 @@ _locationManager.delegate = self;
 }
 
 
+
+
 - (void)locationManager:(CLLocationManager *)locationManager didUpdateLocations:(NSArray *)locations
 {
     NSLog(@"latitude: %f longitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude);
@@ -171,12 +155,21 @@ _locationManager.delegate = self;
    
 }
 
-
-
-
-
-
-
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    NSInteger selectedIndex = (NSInteger)_genderControl.selectedSegmentIndex;
+    if ([_nameTextField.text  isEqual: @""])
+    {
+        _errTxT.text = @"Please enter your name!";
+    }
+    
+    if (selectedIndex != 0 && selectedIndex != 1)
+    {
+        _errorLbl.text = @"Please enter gender!";
+        return NO;
+    }
+    return YES;
+}
 
 #pragma mark - Picker View Methods J.S.
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView
@@ -196,5 +189,10 @@ _locationManager.delegate = self;
 {
     _ageNumber  = [_age objectAtIndex:row];
     
+}
+- (IBAction)nxtButton:(id)sender {
+    
+    
+
 }
 @end
