@@ -16,6 +16,7 @@
 		0465163F1B4B78F300BB983A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0465163E1B4B78F300BB983A /* Reachability.m */; };
 		046516421B4B887200BB983A /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 046516411B4B887200BB983A /* EventKit.framework */; };
 		0479F1C81B47514600D2F8DC /* DayTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0479F1C71B47514600D2F8DC /* DayTrackViewController.m */; };
+		04A922921B4DAEB10040E046 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A922911B4DAEB10040E046 /* MBProgressHUD.m */; };
 		04AC26D01B49C7C3006DD6B0 /* DayTrackCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AC26CF1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.m */; };
 		04AC26D31B49C894006DD6B0 /* DayTrackPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AC26D21B49C894006DD6B0 /* DayTrackPin.m */; };
 		04AC26D51B49D6B1006DD6B0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AC26D41B49D6B1006DD6B0 /* Social.framework */; };
@@ -66,6 +67,8 @@
 		046516411B4B887200BB983A /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		0479F1C61B47514600D2F8DC /* DayTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTrackViewController.h; sourceTree = "<group>"; };
 		0479F1C71B47514600D2F8DC /* DayTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayTrackViewController.m; sourceTree = "<group>"; };
+		04A922901B4DAEB10040E046 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		04A922911B4DAEB10040E046 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		04AC26CE1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTrackCollectionViewCell.h; sourceTree = "<group>"; };
 		04AC26CF1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayTrackCollectionViewCell.m; sourceTree = "<group>"; };
 		04AC26D11B49C894006DD6B0 /* DayTrackPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTrackPin.h; sourceTree = "<group>"; };
@@ -169,6 +172,15 @@
 				04AC26CF1B49C7C3006DD6B0 /* DayTrackCollectionViewCell.m */,
 			);
 			name = DayTrack;
+			sourceTree = "<group>";
+		};
+		04A922931B4DAEBA0040E046 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				04A922901B4DAEB10040E046 /* MBProgressHUD.h */,
+				04A922911B4DAEB10040E046 /* MBProgressHUD.m */,
+			);
+			name = HUD;
 			sourceTree = "<group>";
 		};
 		04AEA8CA1B436FC400FB7D0F = {
@@ -281,6 +293,7 @@
 				04CFB06F1B444ED2009911DC /* MenuViewController.m */,
 				04CFB06C1B444ED2009911DC /* MenuCollectionCell.h */,
 				04CFB06D1B444ED2009911DC /* MenuCollectionCell.m */,
+				04A922931B4DAEBA0040E046 /* HUD */,
 				046516401B4B78F800BB983A /* Reachability */,
 				04CFB07B1B44557E009911DC /* FourSquare */,
 			);
@@ -436,6 +449,7 @@
 				0465163F1B4B78F300BB983A /* Reachability.m in Sources */,
 				04CFB0701B444ED2009911DC /* MenuCollectionCell.m in Sources */,
 				04AEA8DC1B436FC500FB7D0F /* AppDelegate.m in Sources */,
+				04A922921B4DAEB10040E046 /* MBProgressHUD.m in Sources */,
 				0464900A1B44FA03007A01DC /* MenuNavigationController.m in Sources */,
 				04F94F5E1B4B62D6004B4C41 /* UserPreferences.m in Sources */,
 				04AC26D31B49C894006DD6B0 /* DayTrackPin.m in Sources */,

@@ -36,6 +36,7 @@
     //Check if the user has already activities in the IOS calendar.
     [self matchUserActivities];
     
+
 }
 
 
@@ -86,6 +87,7 @@
     
     ItineraryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ITCell" forIndexPath:indexPath];
 
+    
     cell.partOftheDay = [NSNumber numberWithLong:indexPath.section+1];
     NSNumber *numActivity = [NSNumber numberWithInteger:indexPath.section+1];
     NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
@@ -110,7 +112,7 @@
         
         UIView *pagina = [[UIView alloc] initWithFrame:CGRectMake(W*a, Y, W, vH)];
         pagina.tag = a+1;
-        [pagina setBackgroundColor:[UIColor colorWithRed:drand48() green:drand48() blue:drand48() alpha:1.0]];
+        [pagina setBackgroundColor:[UIColor whiteColor]];//[UIColor colorWithRed:drand48() green:drand48() blue:drand48() alpha:1.0]];
         
         
         UILabel *etiquetaPagina = [[UILabel alloc] initWithFrame:CGRectMake(10, Y, W,250)];
@@ -185,7 +187,6 @@
     UIScrollView *ssView = (UIScrollView*)sView.superview;
     UIPageControl *pC = [[[ssView superview] subviews] objectAtIndex:1];
     ItineraryTableViewCell *itvc = (ItineraryTableViewCell*)[[ssView superview] superview];
-    
     NSString *namePart = [self.dictOrderofParts objectForKey:itvc.partOftheDay];
     NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
     NSUInteger numActivitiesinPart = [activitiesPart count];
@@ -231,6 +232,30 @@
 }
 
 
+-(IBAction)prepareActivityList:(id)sender
+{
+    self.arrUserSelectedActivities = [NSMutableArray new];
+    dispatch_sync(dispatch_queue_create("setOptions", nil),
+      ^{
+
+          for (int i = 1; i<= [[self.dictPartsofDay allKeys]count]; i++)
+          {
+              NSNumber *numActivity = [NSNumber numberWithInteger:i];
+              NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
+              NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
+              NSNumber *userSelection = [self.userSelections objectForKey:[NSString stringWithFormat:@"%d",i]];
+              
+              if(userSelection != nil && userSelection != 0 && activitiesPart != nil && activitiesPart != 0)
+              {
+                  [self.arrUserSelectedActivities addObject:activitiesPart[[userSelection intValue]]];
+              }
+
+          }
+
+      });
+    
+    [self performSegueWithIdentifier:@"gotoDetail" sender:sender];
+}
 
 
 
@@ -239,20 +264,6 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
-    self.arrUserSelectedActivities = [NSMutableArray new];
-    dispatch_sync(dispatch_queue_create("setOpcions", nil),
-    ^{
-        for (int i = 1; i<= [[self.dictPartsofDay allKeys]count]; i++)
-        {
-            NSNumber *numActivity = [NSNumber numberWithInteger:i];
-            NSString *namePart = [self.dictOrderofParts objectForKey:numActivity];
-            NSArray  *activitiesPart = [self.dictActivitiesSuggestions objectForKey:namePart];
-            NSNumber *userSelection = [self.userSelections objectForKey:[NSString stringWithFormat:@"%d",i]];
-            
-            [self.arrUserSelectedActivities addObject:activitiesPart[[userSelection intValue]]];
-        }
-    });
     
     DayTrackViewController *dtvc = [segue destinationViewController];
     [dtvc setArrDayActivities:self.arrUserSelectedActivities];
@@ -273,8 +284,6 @@
     [dateComponents setMinute:0];
     [dateComponents setSecond:0];
     NSDate *todaymidnightUTC = [calendar dateFromComponents:dateComponents];
-    //NSLog(@"%@",todaymidnightUTC.description);
-    
     
     NSDictionary *ranges = [NSMutableDictionary new];
     int rfrom = 8;
@@ -296,10 +305,7 @@
         
         rfrom+=2;
         rto+=2;
-        
-//        NSLog(@"%@",todayFrom.description);
-//        NSLog(@"%@",todayTo.description);
-        
+ 
         [ranges setValue:@[todayFrom,todayTo] forKey:[NSString stringWithFormat:@"%@",[NSNumber numberWithInt:r]]];
     }
     
@@ -318,7 +324,7 @@
          
          // Create the start date components
          NSDateComponents *today = [[NSDateComponents alloc] init];
-         today.day = -1;
+         today.day = 0;
          NSDate *fromToday = [calendar dateByAddingComponents:today
                                                        toDate:[NSDate date]
                                                       options:0];
@@ -337,12 +343,9 @@
          
          // Fetch all events that match the predicate
          self.userCalendarActivities = [store eventsMatchingPredicate:predicate];
-         
-         //NSLog(@"User Events Today: %lu",(unsigned long)self.userCalendarActivities.count);
-         
          for (EKEvent *event in self.userCalendarActivities)
          {
-//             NSLog(@"%@", event.description);
+
              
              for(int k = 1; k<=[[self.dictPartsofDay allKeys]count]; k++ )
              {
@@ -350,10 +353,10 @@
                  NSString *key = [NSString stringWithFormat:@"%@", [NSNumber numberWithInt:k]];
                  NSArray *eventRange = [self.dictPartsofDaySchedule objectForKey:key];
                  
-//                 NSLog(@"start part %@", eventRange[0]);
-//                 NSLog(@"end part %@", eventRange[1]);
+                 //Fix hour to the user calendar
+                 NSDate *fromDeviceFixed = [NSDate dateWithTimeInterval:[[NSTimeZone defaultTimeZone] secondsFromGMTForDate:event.startDate] sinceDate:event.startDate];
                  
-                 if( event.startDate >= eventRange[0] && event.startDate <= eventRange[1] )
+                 if( fromDeviceFixed >= eventRange[0] && fromDeviceFixed < eventRange[1] )
                  {
                      DayActivity *da = [DayActivity new];
 
@@ -364,7 +367,7 @@
                      
                      NSString *part = [self.dictOrderofParts objectForKey:[NSNumber numberWithInt:[key intValue]]];
                      [self.dictActivitiesSuggestions setObject:@[da] forKey:part];
-//                     NSLog(@"user has activity at that time: %@ fromPart %@", event.startDate, eventRange[0] );
+                     
                  }
                  
              }
@@ -373,7 +376,8 @@
          }
          
      }];
-
+    
+    [self.tableView reloadData];
 }
 
 

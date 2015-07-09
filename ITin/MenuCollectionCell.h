@@ -12,6 +12,7 @@
 
 
 //The collection view only holds a button.
+@property (weak, nonatomic) IBOutlet UIImageView *imgMCCell;
 @property ( nonatomic, weak ) IBOutlet UIButton *btnMCCell;
 
 
