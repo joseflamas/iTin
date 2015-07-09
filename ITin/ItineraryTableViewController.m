@@ -82,6 +82,15 @@
     return title;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    // Background color
+    view.tintColor = [UIColor blackColor];
+    
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    [header.textLabel setTextColor:[UIColor whiteColor]];
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 35;
@@ -106,10 +115,11 @@
         int W = self.view.frame.size.width;
         int vH = 180;
         
-        UIFont *pier  = [UIFont fontWithName:@"Pier Sans" size:10];
-        UIFont *pierB = [UIFont fontWithName:@"Pier Sans" size:12];
-        UIFont *pierC = [UIFont fontWithName:@"Pier Sans" size:14];
-        UIFont *pierD = [UIFont fontWithName:@"Pier Sans" size:16];
+        UIFont *pierName      = [UIFont fontWithName:@"Pier Sans" size:20];
+        UIFont *pierCategory  = [UIFont italicSystemFontOfSize:10];//fontWithName:@"Pier Sans" size:10];
+        UIFont *pierDistance  = [UIFont fontWithName:@"Pier Sans" size:10];
+        UIFont *pierTime      = [UIFont fontWithName:@"Pier Sans" size:40];
+        UIFont *pierDirection = [UIFont fontWithName:@"Pier Sans" size:14];
         
         DayActivity *anActivity = activitiesPart[a];
         
@@ -120,52 +130,69 @@
         
         if(anActivity.isFromUserCalendar)
         {
-            [pagina setBackgroundColor:[UIColor colorWithRed:210.0/255.0 green:210.0/255.0 blue:210.0/255.0 alpha:1.0]];
-            pierC = [UIFont fontWithName:@"Pier Sans" size:24];
+            [pagina setBackgroundColor:[UIColor colorWithRed:0.631 green:0.094 blue:0.271 alpha:1]];
+            pierName = [UIFont fontWithName:@"Pier Sans" size:24];
             //[UIColor colorWithRed:85.0/255.0 green:143.0/255.0 blue:220.0/255.0 alpha:1.0]
         } else {
             
             [pagina setBackgroundColor:[UIColor whiteColor]];
         }
         
-        
-        UILabel *etiquetaPagina = [[UILabel alloc] initWithFrame:CGRectMake(10, Y, W,250)];
+        //NAME
+        UILabel *etiquetaPagina = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, W, 25)];
         [etiquetaPagina setText: anActivity.strActivityName];
-        [etiquetaPagina setFont:pierC];
+        [etiquetaPagina setFont:pierName];
         [pagina addSubview:etiquetaPagina];
         
+        //CATEGORY
+        UILabel *etiquetaCategory = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, W,20)];
+        [etiquetaCategory setText: anActivity.strActivityCategoryName];
+        [etiquetaCategory setFont:pierCategory];
+        if(anActivity.isFromUserCalendar)
+        {
+            [etiquetaCategory setTextColor:[UIColor blackColor]];
+        }else{
+            [etiquetaCategory setTextColor:[UIColor colorWithRed:0.631 green:0.094 blue:0.271 alpha:1]];
+        }
         
-        UILabel *etiquetaHora = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y,W,70)];
+        [pagina addSubview:etiquetaCategory];
+        
+        
+        //TIME
+        UILabel *etiquetaHora = [[UILabel alloc] initWithFrame:CGRectMake(W-190, 45, 190,100)];
         NSDate *dtAct = anActivity.arrTimeDateIntervals[0];
         NSArray *hours = [[dtAct.description componentsSeparatedByString:@" "][1] componentsSeparatedByString:@":"];
         [etiquetaHora setText:[NSString stringWithFormat:@"%@:%@", hours[0],hours[1]]];
-        [etiquetaHora setFont:pier];
+        etiquetaHora.textAlignment = NSTextAlignmentRight;
+        [etiquetaHora setFont:pierTime];
+        [etiquetaHora setTextColor:[UIColor colorWithRed:0.165 green:0.165 blue:0.165 alpha:1]];
         [pagina addSubview:etiquetaHora];
         
-        UILabel *etiquetaDistance = [[UILabel alloc] initWithFrame:CGRectMake(W-105, Y+15,W,70)];
-        [etiquetaDistance setText:[NSString stringWithFormat:@"%@ meters", anActivity.numActivityDistance.description]];
-        [etiquetaDistance setFont:pier];
+        //DISTANCE
+        UILabel *etiquetaDistance = [[UILabel alloc] initWithFrame:CGRectMake(W-125, 95, 120,70)];
+        [etiquetaDistance setText:[NSString stringWithFormat:@"Distance: %@ mts", anActivity.numActivityDistance.description]];
+        etiquetaDistance.textAlignment = NSTextAlignmentRight;
+        [etiquetaDistance setFont:pierDistance];
         [pagina addSubview:etiquetaDistance];
         
-        
-        UILabel *etiquetaAddress = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+5,W,70)];
+        //ADDRESS
+        UILabel *etiquetaAddress = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, W-125,20)];
         [etiquetaAddress setText: anActivity.strActivityAddress];
-        [etiquetaAddress setFont:pierB];
+        [etiquetaAddress setFont:pierDirection];
+        [etiquetaAddress setTextColor:[UIColor colorWithRed:0.165 green:0.165 blue:0.165 alpha:1]];
         [pagina addSubview:etiquetaAddress];
-        UILabel *etiquetaAddress1 = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+25,W,70)];
+        UILabel *etiquetaAddress1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, W-125,20)];
         [etiquetaAddress1 setText: anActivity.strActivityCity];
-        [etiquetaAddress1 setFont:pierB];
+        [etiquetaAddress1 setFont:pierDirection];
+        [etiquetaAddress1 setTextColor:[UIColor colorWithRed:0.165 green:0.165 blue:0.165 alpha:1]];
         [pagina addSubview:etiquetaAddress1];
-        UILabel *etiquetaAddress2 = [[UILabel alloc] initWithFrame:CGRectMake(10, Y+45,W,70)];
+        UILabel *etiquetaAddress2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 110, W-125,20)];
         [etiquetaAddress2 setText: anActivity.strActivityState];
-        [etiquetaAddress2 setFont:pierB];
+        [etiquetaAddress2 setTextColor:[UIColor colorWithRed:0.165 green:0.165 blue:0.165 alpha:1]];
+        [etiquetaAddress2 setFont:pierDirection];
         [pagina addSubview:etiquetaAddress2];
         
-        UILabel *etiquetaCategory = [[UILabel alloc] initWithFrame:CGRectMake(10, Y-20,W,70)];
-        [etiquetaCategory setText: anActivity.strActivityCategoryName];
-        [etiquetaCategory setFont:pierD];
-        [pagina addSubview:etiquetaCategory];
-        
+
         
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight:)];
         swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -375,11 +402,16 @@
                      DayActivity *da = [DayActivity new];
 
                      da.strActivityName = event.title;
-                     da.strActivityCategoryName = @"Already in the calendar";
-                     da.strActivityAddress = event.location;
+                     da.strActivityCategoryName = @"Already something in the calendar";
                      da.isFromUserCalendar = TRUE;
-                     //EKStructuredLocation *location = (EKStructuredLocation *)[event valueForKey:@"structuredLocation"];
-                     //da.
+                     da.numActivityDistance = [NSNumber numberWithInt:0];
+                     EKStructuredLocation *location = (EKStructuredLocation *)[event valueForKey:@"structuredLocation"];
+  
+                     //NSLog(@"%@",location);
+
+                     da.strActivityAddress = [location valueForKey:@"address"];
+                     
+                     //NSLog(@"%@",[location valueForKey:@"geo"]);
                      
                      NSString *part = [self.dictOrderofParts objectForKey:[NSNumber numberWithInt:[key intValue]]];
                      [self.dictActivitiesSuggestions setObject:@[da] forKey:part];
