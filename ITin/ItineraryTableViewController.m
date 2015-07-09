@@ -73,13 +73,18 @@
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSString *title = [NSString stringWithFormat:@"%@ : %@",[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]], self.dictDaySuggestions[[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]]] ];
+    
+    NSString *partOD = [[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]] uppercaseString];
+    NSString *activity = [self.dictDaySuggestions[[self.dictOrderofParts objectForKey:[NSNumber  numberWithInt:(int)section+1]]] capitalizedString];
+    
+    
+    NSString *title = [NSString stringWithFormat:@"%@ :: %@ ", partOD, activity];
     return title;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    return 35;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,7 +117,16 @@
         
         UIView *pagina = [[UIView alloc] initWithFrame:CGRectMake(W*a, Y, W, vH)];
         pagina.tag = a+1;
-        [pagina setBackgroundColor:[UIColor whiteColor]];//[UIColor colorWithRed:drand48() green:drand48() blue:drand48() alpha:1.0]];
+        
+        if(anActivity.isFromUserCalendar)
+        {
+            [pagina setBackgroundColor:[UIColor colorWithRed:210.0/255.0 green:210.0/255.0 blue:210.0/255.0 alpha:1.0]];
+            pierC = [UIFont fontWithName:@"Pier Sans" size:24];
+            //[UIColor colorWithRed:85.0/255.0 green:143.0/255.0 blue:220.0/255.0 alpha:1.0]
+        } else {
+            
+            [pagina setBackgroundColor:[UIColor whiteColor]];
+        }
         
         
         UILabel *etiquetaPagina = [[UILabel alloc] initWithFrame:CGRectMake(10, Y, W,250)];
@@ -361,7 +375,9 @@
                      DayActivity *da = [DayActivity new];
 
                      da.strActivityName = event.title;
+                     da.strActivityCategoryName = @"Already in the calendar";
                      da.strActivityAddress = event.location;
+                     da.isFromUserCalendar = TRUE;
                      //EKStructuredLocation *location = (EKStructuredLocation *)[event valueForKey:@"structuredLocation"];
                      //da.
                      

@@ -12,6 +12,7 @@
 
 
 //Poperties
+@property (nonatomic) _Bool isFromUserCalendar;
 @property (nonatomic, strong) NSArray  *arrTimeDateIntervals;
 
 
