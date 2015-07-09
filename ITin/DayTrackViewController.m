@@ -134,8 +134,18 @@ double lon = 0.0;
     UIBarButtonItem *bbi = (UIBarButtonItem*)sender;
     DayActivity *dayAct = self.arrDayActivities[bbi.tag];
 
-    UIActivityViewController *actVC = [[UIActivityViewController alloc] initWithActivityItems:@[dayAct.strActivityName] applicationActivities:nil];
-    [self presentViewController:actVC animated:YES completion:nil];
+    if(dayAct.strActivityName != nil )
+    {
+        UIActivityViewController *actVC = [[UIActivityViewController alloc] initWithActivityItems:@[dayAct.strActivityName] applicationActivities:nil];
+        [self presentViewController:actVC animated:YES completion:nil];
+    
+    } else {
+        
+        UIActivityViewController *actVC = [[UIActivityViewController alloc] initWithActivityItems:@[@"Having fun! XD."] applicationActivities:nil];
+        [self presentViewController:actVC animated:YES completion:nil];
+    }
+    
+    
     
 }
 
