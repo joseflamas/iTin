@@ -7,16 +7,20 @@
 		<string>cereal</string>
 		<string>eggs</string>
 		<string>toast</string>
-		<string>hashbrowns</string>
+		<string>waffles</string>
+		<string>sausage</string>
+		<string>coffee</string>
+		<string>muffins</string>
 		<string>pancakes</string>
 	</array>
 	<key>Morning Activity</key>
 	<array>
-		<string>yoga</string>
-		<string>pilates</string>
-		<string>running</string>
 		<string>hiking</string>
+		<string>yoga</string>
 		<string>walking</string>
+		<string>swimming</string>
+		<string>pilates</string>
+		<string>jogging</string>
 	</array>
 	<key>Lunch</key>
 	<array>
@@ -30,9 +34,14 @@
 	</array>
 	<key>Afternoon Activity</key>
 	<array>
+		<string>go karts</string>
+		<string>tours</string>
+		<string>bowling</string>
 		<string>mountain bike</string>
 		<string>theme park</string>
 		<string>theater</string>
+		<string>sports</string>
+		<string>golf</string>
 		<string>museum</string>
 		<string>zoo </string>
 		<string>shopping</string>
@@ -56,12 +65,14 @@
 		<string>oprea</string>
 		<string>movies</string>
 		<string>nightclubs</string>
-		<string>bars</string>
 		<string>parties</string>
 	</array>
 	<key>Snack</key>
 	<array>
+		<string>cookies</string>
 		<string>chips</string>
+		<string>donuts</string>
+		<string>desserts</string>
 		<string>soda</string>
 		<string>sweets</string>
 		<string>burrito</string>
@@ -69,6 +80,7 @@
 	<key>Late Night Activity</key>
 	<array>
 		<string>after party</string>
+		<string>cafes</string>
 		<string>bars</string>
 		<string>gentlemen clubs</string>
 		<string>lounges</string>
