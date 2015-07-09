@@ -176,17 +176,17 @@
         [pagina addSubview:etiquetaDistance];
         
         //ADDRESS
-        UILabel *etiquetaAddress = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, W-125,20)];
+        UILabel *etiquetaAddress = [[UILabel alloc] initWithFrame:CGRectMake(10, 75, W-125,20)];
         [etiquetaAddress setText: anActivity.strActivityAddress];
         [etiquetaAddress setFont:pierDirection];
         [etiquetaAddress setTextColor:[UIColor colorWithRed:0.165 green:0.165 blue:0.165 alpha:1]];
         [pagina addSubview:etiquetaAddress];
-        UILabel *etiquetaAddress1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, W-125,20)];
+        UILabel *etiquetaAddress1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 95, W-125,20)];
         [etiquetaAddress1 setText: anActivity.strActivityCity];
         [etiquetaAddress1 setFont:pierDirection];
         [etiquetaAddress1 setTextColor:[UIColor colorWithRed:0.165 green:0.165 blue:0.165 alpha:1]];
         [pagina addSubview:etiquetaAddress1];
-        UILabel *etiquetaAddress2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 110, W-125,20)];
+        UILabel *etiquetaAddress2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 115, W-125,20)];
         [etiquetaAddress2 setText: anActivity.strActivityState];
         [etiquetaAddress2 setTextColor:[UIColor colorWithRed:0.165 green:0.165 blue:0.165 alpha:1]];
         [etiquetaAddress2 setFont:pierDirection];
@@ -365,7 +365,7 @@
          
          // Create the start date components
          NSDateComponents *today = [[NSDateComponents alloc] init];
-         today.day = 0;
+         today.day = -1;
          NSDate *fromToday = [calendar dateByAddingComponents:today
                                                        toDate:[NSDate date]
                                                       options:0];
