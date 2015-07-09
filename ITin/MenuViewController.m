@@ -125,7 +125,7 @@ BOOL conexion = false;
     //                         );
     //                  } ...
     NSDictionary *dicPreferencesPlist = [NSDictionary dictionaryWithContentsOfFile:self.delegate.documentsPreferencesPlistPath];
-    
+
     //:: TODO :: Temporarily hardcoded. + Different kind of structures for the day.
     self.arrTypesofDay = @[@"Balanced Day", @"Active Day", @"One Activity", @"Extreme Day", @"Relaxed Day", @"Funny Day", @"More"];
     
@@ -194,6 +194,7 @@ BOOL conexion = false;
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
     //set back button arrow color
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
     
     //Progress HUD
     _HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
@@ -320,7 +321,7 @@ BOOL conexion = false;
         self.userLongitude  = @"-84.353967";
     }
     
-    [self.locationManager stopUpdatingLocation];
+    //[self.locationManager stopUpdatingLocation];
 }
 
 

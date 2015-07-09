@@ -17,11 +17,12 @@
 
 @implementation DayTrackViewController
 
+double lat = 0.0;
+double lon = 0.0;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //NSLog(@"%@",self.arrDayActivities);
     
     if (self.arrDayActivities.count > 0)
     {
@@ -42,10 +43,10 @@
 #pragma mark - Map Methods
 -(void)prepareMap
 {
+
     if (self.mapView.annotations.count <= 0)
     {
-        double lat = 0.0;
-        double lon = 0.0;
+        
         for(DayActivity *activity in self.arrDayActivities)
         {
             DayTrackPin *pin = [DayTrackPin new];
@@ -60,11 +61,16 @@
         DayActivity *act = self.arrDayActivities[0];
         lat = [act.numActivityLatitude doubleValue];
         lon = [act.numActivityLongitude doubleValue];
-        [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(lat,lon), MKCoordinateSpanMake(.02,.02)) animated:YES];
+        [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(lat,lon), MKCoordinateSpanMake(.08,.08)) animated:YES];
     }
     
+    [NSTimer scheduledTimerWithTimeInterval:3.0
+                                     target:self
+                                   selector:@selector(zoom)
+                                   userInfo:nil
+                                    repeats:NO];
     
-    
+
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
@@ -76,6 +82,10 @@
 }
 
 
+-(void)zoom
+{
+     [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(lat,lon), MKCoordinateSpanMake(.055,.055)) animated:YES];
+}
 
 
 #pragma mark - collection Methods
@@ -99,7 +109,6 @@
     DayActivity *dayAct = self.arrDayActivities[indexPath.row];
     
     MCCell.lblName.text = dayAct.strActivityName;
-    //MCCell.imgLocation.image = [UIImage imageNamed:@"WT"];
     MCCell.btnSave.tag = indexPath.row;
     MCCell.btnShare.tag = indexPath.row;
     
@@ -107,11 +116,6 @@
     return MCCell;
 }
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    //return CGSizeMake(self.view.frame.size.width/2, self.view.frame.size.width/2);
-//    return CGSizeMake(180, 215);
-//}
 
 
 
@@ -151,14 +155,6 @@
 
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
